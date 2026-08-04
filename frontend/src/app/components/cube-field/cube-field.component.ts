@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import { ProjectService, Project } from '../../services/project.service';
 import { Subscription } from 'rxjs';
 
@@ -14,6 +15,7 @@ interface FloatingCube {
   phase: number;
   project?: Project;
   baseScale: THREE.Vector3;
+  baseRotation: THREE.Euler;
 }
 
 @Component({
@@ -43,6 +45,16 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
   private renderer!: THREE.WebGLRenderer;
   private controls!: OrbitControls;
   private animationFrameId?: number;
+
+  // Track created materials and textures for cleanup
+  private materialsToDispose = new Set<THREE.Material>();
+  private texturesToDispose = new Set<THREE.Texture>();
+
+  // Dynamic FPS Fallback properties
+  private fpsFrames = 0;
+  private fpsStartTime = 0;
+  private isDynamicLowEnd = false;
+  private hasAttemptedFallback = false;
 
   // Interactivity
   private raycaster = new THREE.Raycaster();
@@ -91,18 +103,14 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
     // Clean up Three.js resources
     this.cubes.forEach(c => {
       c.mesh.geometry.dispose();
-      if (Array.isArray(c.mesh.material)) {
-        c.mesh.material.forEach(m => m.dispose());
-      } else {
-        c.mesh.material.dispose();
-      }
       c.line.geometry.dispose();
-      if (Array.isArray(c.line.material)) {
-        c.line.material.forEach(m => m.dispose());
-      } else {
-        c.line.material.dispose();
-      }
     });
+
+    this.materialsToDispose.forEach(m => m.dispose());
+    this.materialsToDispose.clear();
+
+    this.texturesToDispose.forEach(t => t.dispose());
+    this.texturesToDispose.clear();
 
     if (this.controls) {
       this.controls.dispose();
@@ -133,11 +141,20 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
     this.renderer = new THREE.WebGLRenderer({
       canvas: canvas,
       antialias: true,
-      alpha: false,
+      alpha: true,
       powerPreference: 'high-performance'
     });
     this.renderer.setSize(width, height);
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    this.renderer.toneMappingExposure = 1.0;
+
+    // Add environment map using RoomEnvironment
+    const pmremGenerator = new THREE.PMREMGenerator(this.renderer);
+    const roomEnv = new RoomEnvironment();
+    this.scene.environment = pmremGenerator.fromScene(roomEnv, 0.04).texture;
+    roomEnv.dispose();
+    pmremGenerator.dispose();
 
     // OrbitControls
     this.controls = new OrbitControls(this.camera, canvas);
@@ -148,12 +165,121 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
     this.controls.maxDistance = 50;
 
     // Add subtle lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
     this.scene.add(ambientLight);
 
-    const dirLight = new THREE.DirectionalLight(0xffffff, 0.5);
-    dirLight.position.set(10, 20, 10);
-    this.scene.add(dirLight);
+    // Two directional lights from opposite corners to create glare/highlights on the edges
+    const dirLight1 = new THREE.DirectionalLight(0xffffff, 0.8);
+    dirLight1.position.set(15, 25, 15);
+    this.scene.add(dirLight1);
+
+    const dirLight2 = new THREE.DirectionalLight(0xffffff, 0.5);
+    dirLight2.position.set(-15, -25, -15);
+    this.scene.add(dirLight2);
+  }
+
+  private createGlassPaneGeometry(width: number, height: number, thickness: number): THREE.BoxGeometry {
+    return new THREE.BoxGeometry(width, height, thickness);
+  }
+
+  private createGlassPaneMaterials(isLowEnd: boolean): THREE.Material[] {
+    const materials: THREE.Material[] = [];
+    let faceMaterial: THREE.Material;
+    let edgeMaterial: THREE.Material;
+
+    if (isLowEnd) {
+      faceMaterial = new THREE.MeshPhysicalMaterial({
+        color: 0xffffff,
+        roughness: 0.1,
+        metalness: 0.1,
+        transparent: true,
+        opacity: 0.35,
+        transmission: 0,
+        ior: 1.5,
+        side: THREE.DoubleSide
+      });
+
+      edgeMaterial = new THREE.MeshStandardMaterial({
+        color: 0x8fc4ab,
+        emissive: 0x8fc4ab,
+        emissiveIntensity: 0.15,
+        transparent: true,
+        opacity: 0.7,
+        roughness: 0.2,
+        metalness: 0.1,
+        side: THREE.DoubleSide
+      });
+    } else {
+      faceMaterial = new THREE.MeshPhysicalMaterial({
+        color: 0xffffff,
+        transmission: 0.98,
+        roughness: 0.04,
+        metalness: 0.0,
+        thickness: 0.05,
+        ior: 1.5,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.05,
+        transparent: true,
+        opacity: 0.4,
+        side: THREE.DoubleSide
+      });
+
+      edgeMaterial = new THREE.MeshPhysicalMaterial({
+        color: 0x8fc4ab,
+        roughness: 0.15,
+        metalness: 0.1,
+        transmission: 0.2,
+        ior: 1.5,
+        transparent: true,
+        opacity: 0.75,
+        side: THREE.DoubleSide
+      });
+    }
+
+    this.materialsToDispose.add(faceMaterial);
+    this.materialsToDispose.add(edgeMaterial);
+
+    // BoxGeometry order: Right, Left, Top, Bottom, Front, Back
+    materials.push(edgeMaterial); // Right (0)
+    materials.push(edgeMaterial); // Left (1)
+    materials.push(edgeMaterial); // Top (2)
+    materials.push(edgeMaterial); // Bottom (3)
+    materials.push(faceMaterial); // Front (4)
+    materials.push(faceMaterial); // Back (5)
+
+    return materials;
+  }
+
+  private createProjectFaceMaterial(imageUrl: string): THREE.Material {
+    const loader = new THREE.TextureLoader();
+    const texture = loader.load(imageUrl);
+    texture.colorSpace = THREE.SRGBColorSpace;
+    this.texturesToDispose.add(texture);
+
+    const material = new THREE.MeshStandardMaterial({
+      map: texture,
+      side: THREE.DoubleSide,
+      roughness: 0.2,
+      metalness: 0.1
+    });
+    this.materialsToDispose.add(material);
+    return material;
+  }
+
+  private checkIsLowEnd(totalCubes: number): boolean {
+    if (totalCubes > 50) {
+      console.log('Low-end mode enabled: total cubes count > 50.');
+      return true;
+    }
+    if (typeof window !== 'undefined' && window.navigator) {
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      const lowConcurrency = (navigator.hardwareConcurrency || 4) <= 4;
+      if (isMobile || lowConcurrency) {
+        console.log(`Low-end mode enabled: mobile device or low hardware concurrency detected.`);
+        return true;
+      }
+    }
+    return false;
   }
 
   private buildCubeField() {
@@ -165,8 +291,15 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     this.cubes = [];
 
-    // Total cubes in the field
-    const totalCubes = 55;
+    // Clear previously disposed materials/textures if rebuilding to avoid leak
+    this.materialsToDispose.forEach(m => m.dispose());
+    this.materialsToDispose.clear();
+    this.texturesToDispose.forEach(t => t.dispose());
+    this.texturesToDispose.clear();
+
+    // Total cubes in the field (limited to max 40 objects)
+    const totalCubes = 40;
+    const isLowEnd = this.isDynamicLowEnd || this.checkIsLowEnd(totalCubes);
     
     // Let's pre-generate random index positions for projects, ensuring spread
     const projectCount = this.projects.length;
@@ -178,9 +311,6 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
     const projectIndicesArr = Array.from(projectIndices);
 
     // Grid bounds & dimensions
-    // We want a loose, broken grid look.
-    // Let's create virtual grid slots and randomly select which ones to populate
-    const gridDim = 5; // 5x5x5 virtual grid
     const spacing = 5; // space between grid columns
     const slots: {x: number, y: number, z: number}[] = [];
 
@@ -198,9 +328,6 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
       [slots[i], slots[j]] = [slots[j], slots[i]];
     }
 
-    const loader = new THREE.TextureLoader();
-
-    // Create the cubes
     for (let i = 0; i < totalCubes; i++) {
       if (i >= slots.length) break;
 
@@ -215,77 +342,55 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
       const y = slot.y + jitterY;
       const z = slot.z + jitterZ;
 
-      // Random sizes (BoxGeometry)
-      const scaleX = 1 + Math.random() * 1.5;
-      const scaleY = 1 + Math.random() * 1.5;
-      const scaleZ = 1 + Math.random() * 1.5;
-      const geometry = new THREE.BoxGeometry(scaleX, scaleY, scaleZ);
+      // Random sizes (BoxGeometry) - Glass sheets/panes
+      const scaleX = 1.5 + Math.random() * 1.5;
+      const scaleY = 1.5 + Math.random() * 1.5;
+      // depth (ketebalan): SANGAT TIPIS, sekitar 3-5% dari width/height
+      const thickness = ((scaleX + scaleY) / 2) * (0.03 + Math.random() * 0.02);
+      const geometry = this.createGlassPaneGeometry(scaleX, scaleY, thickness);
 
       // Check if this cube holds project data
       const projectIndex = projectIndicesArr.indexOf(i);
       const isProjectCube = projectIndex !== -1;
       const project = isProjectCube ? this.projects[projectIndex] : undefined;
 
-      // Create materials
-      // We want transparent solid faces (so raycasting works beautifully) and visible wireframe lines.
-      // If it is a project cube, and it has a thumbnailUrl, we load it on the top face (material index 2).
-      const materials: THREE.Material[] = [];
-      let topFaceMaterial: THREE.MeshBasicMaterial;
+      const materials = this.createGlassPaneMaterials(isLowEnd);
 
       if (project && project.thumbnailUrl) {
-        // Top face has a solid texture, other faces are transparent
-        const texture = loader.load(project.thumbnailUrl);
-        texture.colorSpace = THREE.SRGBColorSpace;
-        topFaceMaterial = new THREE.MeshBasicMaterial({
-          map: texture,
-          side: THREE.DoubleSide
-        });
-      } else {
-        // Top face is transparent as well (or has a very subtle light gray tint for project cubes)
-        topFaceMaterial = new THREE.MeshBasicMaterial({
-          color: project ? 0xf5f5f5 : 0xffffff,
-          transparent: true,
-          opacity: project ? 0.05 : 0.01 // very slightly visible to give depth
-        });
+        // Terapkan texture gambar HANYA pada satu sisi konsisten (Front face: indeks 4)
+        const projectFaceMat = this.createProjectFaceMaterial(project.thumbnailUrl);
+        materials[4] = projectFaceMat;
       }
-
-      // Default transparent materials for the other faces
-      const transMaterial = new THREE.MeshBasicMaterial({
-        color: 0xffffff,
-        transparent: true,
-        opacity: project ? 0.03 : 0.01
-      });
-
-      // Materials array: order is: right, left, top, bottom, front, back
-      materials.push(transMaterial); // Right
-      materials.push(transMaterial); // Left
-      materials.push(topFaceMaterial); // Top (texture face)
-      materials.push(transMaterial); // Bottom
-      materials.push(transMaterial); // Front
-      materials.push(transMaterial); // Back
 
       const mesh = new THREE.Mesh(geometry, materials);
       mesh.position.set(x, y, z);
 
-      // Slight random initial rotation
-      mesh.rotation.x = Math.random() * Math.PI * 0.15;
-      mesh.rotation.y = Math.random() * Math.PI * 0.15;
-      mesh.rotation.z = Math.random() * Math.PI * 0.15;
+      // Randomize rotation across all 3 axes independently with full range
+      const rx = Math.random() * Math.PI * 2;
+      const ry = Math.random() * Math.PI * 2;
+      const rz = Math.random() * Math.PI * 2;
+      mesh.rotation.set(rx, ry, rz);
 
-      // Save custom user data for raycasting
+      // Save custom user data for raycasting and store base rotation
       mesh.userData = {
         project: project,
-        isProjectCube: isProjectCube
+        isProjectCube: isProjectCube,
+        baseRotation: { x: rx, y: ry, z: rz }
       };
 
-      // Create wireframe edges geometry
+      // Create wireframe edges geometry (outline tipis)
       const edges = new THREE.EdgesGeometry(geometry);
-      // Project cubes have slightly darker lines by default, normal ones are very faint
-      const lineColor = isProjectCube ? 0x999999 : 0xdddddd;
+      // Rim light / highlight tipis di sepanjang tepi lempengan: putih terang, opacity rendah
+      const lineColor = 0xffffff;
+      const lineOpacity = isProjectCube ? 0.6 : 0.3;
       const lineMaterial = new THREE.LineBasicMaterial({
         color: lineColor,
-        linewidth: 1 // note: WebGL ignores linewidth > 1 on most systems, but it sets the styling intent
+        transparent: true,
+        opacity: lineOpacity,
+        linewidth: 1
       });
+      this.materialsToDispose.add(lineMaterial);
+
       const line = new THREE.LineSegments(edges, lineMaterial);
       mesh.add(line); // Add as child so it moves/rotates/scales with the parent mesh
 
@@ -299,7 +404,8 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
         speed: 0.2 + Math.random() * 0.3,
         phase: Math.random() * Math.PI * 2,
         project: project,
-        baseScale: new THREE.Vector3(1, 1, 1)
+        baseScale: new THREE.Vector3(1, 1, 1),
+        baseRotation: new THREE.Euler(rx, ry, rz)
       });
     }
   }
@@ -309,14 +415,46 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
 
     const time = Date.now() * 0.001;
 
-    // Subtle idle animation: cubes move up and down slowly (floating effect) and rotate slightly
+    // Measure FPS for dynamic low-end fallback
+    if (!this.hasAttemptedFallback) {
+      this.fpsFrames++;
+      const now = performance.now();
+      if (this.fpsStartTime === 0) {
+        this.fpsStartTime = now;
+      } else {
+        const elapsed = now - this.fpsStartTime;
+        if (elapsed >= 2000) { // check every 2 seconds
+          const fps = (this.fpsFrames * 1000) / elapsed;
+          console.log(`Current FPS: ${fps.toFixed(1)}`);
+          if (fps < 30) {
+            console.warn('FPS dropped below 30. Activating dynamic low-end fallback...');
+            this.isDynamicLowEnd = true;
+            this.hasAttemptedFallback = true;
+            this.buildCubeField();
+          } else {
+            // Reset for next period
+            this.fpsFrames = 0;
+            this.fpsStartTime = now;
+          }
+        }
+      }
+    }
+
+    // Subtle idle animation: cubes move up and down slowly (floating effect) and wobble around base rotation
     this.cubes.forEach(cube => {
       // Y-axis float
-      cube.mesh.position.y = cube.mesh.position.y = cube.initialY + Math.sin(time * cube.speed + cube.phase) * 0.4;
+      cube.mesh.position.y = cube.initialY + Math.sin(time * cube.speed + cube.phase) * 0.4;
       
-      // Slight continuous slow rotation
-      cube.mesh.rotation.y += 0.0003;
-      cube.mesh.rotation.x += 0.0001;
+      // Subtle wobble offset around the base random rotation
+      const wobbleX = Math.sin(time * (cube.speed * 0.5) + cube.phase) * 0.02;
+      const wobbleY = Math.cos(time * (cube.speed * 0.5) + cube.phase) * 0.02;
+      const wobbleZ = Math.sin(time * (cube.speed * 0.3) + cube.phase) * 0.015;
+
+      cube.mesh.rotation.set(
+        cube.baseRotation.x + wobbleX,
+        cube.baseRotation.y + wobbleY,
+        cube.baseRotation.z + wobbleZ
+      );
 
       // Smoothly interpolate scale for hover highlights
       let targetScale = 1.0;
@@ -400,16 +538,18 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
             // Restore previous hovered line color
             if (this.hoveredCube) {
               const prevLineMat = this.hoveredCube.line.material as THREE.LineBasicMaterial;
-              prevLineMat.color.setHex(0x999999);
+              prevLineMat.color.setHex(0xffffff);
+              prevLineMat.opacity = 0.6;
             }
 
             // Set new hovered cube
             this.hoveredCube = cubeObj;
             this.hoveredProject.set(cubeObj.project);
 
-            // Highlight line color (black)
+            // Highlight line color (bright glow)
             const lineMat = cubeObj.line.material as THREE.LineBasicMaterial;
-            lineMat.color.setHex(0x000000);
+            lineMat.color.setHex(0x00f3ff); // Cyan glow
+            lineMat.opacity = 1.0;
             
             // Set cursor
             document.body.style.cursor = 'pointer';
@@ -422,7 +562,8 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
     // No project cube intersected
     if (this.hoveredCube) {
       const lineMat = this.hoveredCube.line.material as THREE.LineBasicMaterial;
-      lineMat.color.setHex(0x999999);
+      lineMat.color.setHex(0xffffff);
+      lineMat.opacity = 0.6;
       this.hoveredCube = null;
       this.hoveredProject.set(null);
       document.body.style.cursor = 'default';
