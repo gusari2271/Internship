@@ -1,0 +1,72 @@
+<div class="page-overlay">
+  <div class="content-container">
+    <div class="back-link-container">
+      <a routerLink="/" class="back-link">
+        <span class="arrow">←</span> {{ lang.translate('project.back') }}
+      </a>
+    </div>
+
+    @if (isLoading()) {
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <p>loading coordinates...</p>
+      </div>
+    }
+
+    @if (!isLoading() && errorMsg()) {
+      <div class="error-state">
+        <p>{{ errorMsg() }}</p>
+        <a routerLink="/" class="btn-home">Return to Field</a>
+      </div>
+    }
+
+    @if (!isLoading() && !errorMsg() && project()) {
+      <article class="project-details">
+        <header class="project-header">
+          <span class="category">{{ project()!.category || 'Architecture' }}</span>
+          <h1 class="title">{{ project()!.title }}</h1>
+        </header>
+
+        <div class="metadata-grid">
+          <div class="meta-item">
+            <span class="label">{{ lang.translate('project.location') }}</span>
+            <span class="val">{{ project()!.location || 'Concept Studio' }}</span>
+          </div>
+          <div class="meta-item">
+            <span class="label">{{ lang.translate('project.year') }}</span>
+            <span class="val">{{ project()!.year || '2026' }}</span>
+          </div>
+          <div class="meta-item">
+            <span class="label">{{ lang.translate('project.category') }}</span>
+            <span class="val">{{ project()!.category || 'Theoretical' }}</span>
+          </div>
+        </div>
+
+        <div class="project-body">
+          <div class="desc-text">
+            <p>{{ project()!.description || 'No detailed description available. Project details are currently kept in draft state.' }}</p>
+          </div>
+
+          <div class="gallery-section">
+            <h3 class="gallery-title">Visual Documentation</h3>
+            <div class="gallery-grid">
+              <!-- Placeholder drawing slots representing future gallery images -->
+              <div class="gallery-item placeholder">
+                <div class="crosshair"></div>
+                <span class="slot-label">Elevation Drawing Slot</span>
+              </div>
+              <div class="gallery-item placeholder">
+                <div class="crosshair"></div>
+                <span class="slot-label">Render Perspective Slot</span>
+              </div>
+              <div class="gallery-item placeholder">
+                <div class="crosshair"></div>
+                <span class="slot-label">Section Detail Slot</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    }
+  </div>
+</div>

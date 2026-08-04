@@ -1,0 +1,14 @@
+{
+  "name": "radar-architecture-portfolio",
+  "version": "1.0.0",
+  "description": "Monorepo for RADAR - Spatial Architecture Studio Portfolio. Contains Angular frontend and NestJS backend.",
+  "scripts": {
+    "postinstall": "npm install --prefix frontend && npm install --prefix backend",
+    "dev": "concurrently -n \"frontend,backend\" -c \"blue,green\" \"npm run start --prefix frontend\" \"npm run start:dev --prefix backend\"",
+    "start:frontend": "npm run start --prefix frontend",
+    "start:backend": "npm run start:dev --prefix backend"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

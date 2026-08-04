@@ -1,0 +1,30 @@
+<div class="cube-field-container" #canvasContainer>
+  <canvas 
+    #canvas 
+    (mousemove)="onMouseMove($event)" 
+    (touchstart)="onTouchStart($event)"
+    (click)="onCanvasClick()">
+  </canvas>
+
+  @if (isLoading()) {
+    <div class="loader-overlay">
+      <div class="spinner"></div>
+      <p class="loader-text">loading spatial coordinate grid...</p>
+    </div>
+  }
+
+  @if (hoveredProject(); as project) {
+    <div 
+      class="project-tooltip" 
+      [style.left.px]="tooltipX()" 
+      [style.top.px]="tooltipY()">
+      <div class="tooltip-header">
+        <span class="category">{{ project.category || 'Architecture' }}</span>
+        <span class="year">{{ project.year || '2026' }}</span>
+      </div>
+      <h3 class="title">{{ project.title }}</h3>
+      <div class="location-tag">{{ project.location || 'Concept Studio' }}</div>
+      <div class="click-instruction">click cube to explore</div>
+    </div>
+  }
+</div>

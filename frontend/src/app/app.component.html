@@ -1,0 +1,62 @@
+<!-- Logo at the Top Left -->
+<div class="logo-wrapper">
+  <a routerLink="/" class="logo-link" routerLinkActive="" [routerLinkActiveOptions]="{exact: true}">
+    <img src="grahita-logo.png" alt="Grahita Design — Architect Studio" class="site-logo">
+  </a>
+</div>
+
+<!-- Navigation Menu and Language Switcher at the Bottom Left -->
+<div class="menu-wrapper">
+  <nav class="nav-menu">
+    <ul>
+      <li>
+        <a routerLink="/manifestation" routerLinkActive="active-link">
+          {{ lang.translate('nav.manifestation') }}
+        </a>
+      </li>
+      <li>
+        <a routerLink="/about-us" routerLinkActive="active-link">
+          {{ lang.translate('nav.aboutUs') }}
+        </a>
+      </li>
+      <li>
+        <a routerLink="/news" routerLinkActive="active-link">
+          {{ lang.translate('nav.news') }}
+        </a>
+      </li>
+      <li>
+        <a routerLink="/career" routerLinkActive="active-link">
+          {{ lang.translate('nav.career') }}
+        </a>
+      </li>
+      <li>
+        <a routerLink="/contact-us" routerLinkActive="active-link">
+          {{ lang.translate('nav.contactUs') }}
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Language Switcher below nav -->
+  <div class="lang-switcher">
+    <span class="label">{{ lang.translate('explore.lang') }}</span>
+    <button 
+      (click)="setLanguage('en')" 
+      [class.active]="lang.currentLang() === 'en'"
+      class="lang-btn">
+      English
+    </button>
+    <span class="divider">/</span>
+    <button 
+      (click)="setLanguage('zh')" 
+      [class.active]="lang.currentLang() === 'zh'"
+      class="lang-btn">
+      中文
+    </button>
+  </div>
+</div>
+
+<!-- Main Area where pages render -->
+<main class="app-main-content">
+  <router-outlet></router-outlet>
+</main>

@@ -1,0 +1,36 @@
+<div class="page-overlay">
+  <div class="content-container">
+    <header class="section-header">
+      <span class="index">02 / PROFILE</span>
+      <h1 class="title">{{ lang.translate('about.title') }}</h1>
+    </header>
+
+    <div class="about-content">
+      <div class="profile-text">
+        <p class="lead">
+          Founded on the principle of reduction, we are an architectural design studio collaborating across design, landscape, and spatial research.
+        </p>
+        <p>
+          We operate as a compact collective of designers, thinkers, and builders. Our practice prioritizes structural integrity and environmental dialogues over decorative gestures. Each commission is approached as a clean sheet, aiming to uncover the singular architectural response that belongs naturally to its context.
+        </p>
+      </div>
+
+      <div class="team-section">
+        <h2 class="sub-title">People</h2>
+        <div class="team-grid">
+          @for (member of team; track $index) {
+            <div class="team-card">
+              <div class="photo-placeholder">
+                <div class="crosshair"></div>
+              </div>
+              <div class="info">
+                <h3 class="name">{{ member.name }}</h3>
+                <span class="role">{{ member.role }}</span>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

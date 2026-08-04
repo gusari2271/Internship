@@ -1,0 +1,237 @@
+.page-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 75vw;
+  height: 100vh;
+  background-color: #ffffff;
+  z-index: 5;
+  overflow-y: auto;
+  padding: 100px 10% 100px 40px;
+  box-sizing: border-box;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  animation: slideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+  @media (max-width: 1024px) {
+    width: 70vw;
+  }
+
+  @media (max-width: 768px) {
+    width: 100vw;
+    padding: 140px 24px 60px 24px;
+    position: absolute;
+    min-height: 100vh;
+    height: auto;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.content-container {
+  max-width: 850px;
+  margin: 0;
+}
+
+.section-header {
+  margin-bottom: 60px;
+
+  .index {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: #999999;
+    font-family: monospace;
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .title {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #111111;
+    margin: 0;
+    text-transform: uppercase;
+
+    @media (max-width: 768px) {
+      font-size: 28px;
+    }
+  }
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 60px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+.studio-info {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  .info-block {
+    h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #111111;
+      text-transform: uppercase;
+      margin: 0 0 10px 0;
+      letter-spacing: 0.05em;
+    }
+
+    p {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #666666;
+      margin: 0 0 10px 0;
+    }
+
+    .phone, .email {
+      font-size: 13px;
+      color: #111111;
+      font-weight: 500;
+      font-family: monospace;
+    }
+  }
+}
+
+.form-container {
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #999999;
+    font-weight: 600;
+  }
+
+  input, textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 16px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    background-color: #ffffff;
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 13px;
+    color: #111111;
+    border-radius: 0; // Pure square minimal look
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    outline: none;
+
+    &::placeholder {
+      color: #bbbbbb;
+      font-style: italic;
+      text-transform: lowercase;
+    }
+
+    &:focus {
+      border-color: #111111;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    }
+  }
+
+  &.has-error {
+    input, textarea {
+      border-color: #d9534f;
+    }
+  }
+
+  .error-msg {
+    font-size: 11px;
+    color: #d9534f;
+  }
+}
+
+.submit-btn {
+  background-color: #111111;
+  color: #ffffff;
+  border: none;
+  padding: 14px 28px;
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  border-radius: 0;
+  align-self: flex-start;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+
+  &:hover {
+    background-color: #333333;
+  }
+
+  &:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+}
+
+.alert {
+  padding: 16px;
+  font-size: 13px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+
+  p {
+    margin: 0;
+  }
+
+  &.success-alert {
+    background-color: #f7f9f7;
+    border: 1px solid #d4ded4;
+    color: #3c763d;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+
+    .check-mark {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .btn-reset {
+      background: none;
+      border: none;
+      padding: 0;
+      font-family: inherit;
+      font-size: 11px;
+      text-decoration: underline;
+      color: #111111;
+      cursor: pointer;
+      text-transform: lowercase;
+    }
+  }
+
+  &.error-alert {
+    background-color: #fff5f5;
+    border: 1px solid #ebd3d3;
+    color: #a94442;
+  }
+}

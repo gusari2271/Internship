@@ -1,0 +1,30 @@
+<div class="page-overlay">
+  <div class="content-container">
+    <header class="section-header">
+      <span class="index">04 / TALENT</span>
+      <h1 class="title">{{ lang.translate('career.title') }}</h1>
+    </header>
+
+    <div class="career-content">
+      <p class="intro">
+        We are always looking for singular talents to join our studios in Tokyo and Copenhagen. If you share our dedication to spatial research, structural reduction, and raw materials, please review the active vacancies below.
+      </p>
+
+      <div class="openings-list">
+        @for (job of openings; track job.id) {
+          <div class="job-card">
+            <div class="job-header">
+              <h2 class="job-title">{{ job.title }}</h2>
+              <span class="job-type">{{ job.type }}</span>
+            </div>
+            <span class="job-loc">{{ job.location }}</span>
+            <p class="job-desc">{{ job.description }}</p>
+            <div class="apply-info">
+              To apply, please submit your CV and Portfolio (PDF, max 15MB) to <span class="email">careers&#64;radarchitecture.net</span> citing the reference <span class="ref">[{{ job.id }}]</span> in the subject line.
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

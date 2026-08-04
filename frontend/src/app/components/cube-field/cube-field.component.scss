@@ -1,0 +1,100 @@
+.cube-field-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+
+  canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    outline: none;
+  }
+}
+
+.loader-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #f3f3f3;
+    border-top: 1px solid #111111;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 16px;
+  }
+
+  .loader-text {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: #888888;
+    text-transform: lowercase;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.project-tooltip {
+  position: fixed;
+  transform: translate(5px, 5px);
+  pointer-events: none; // ensure mouse ignores the tooltip to avoid raycasting blockage
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 16px;
+  min-width: 200px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  z-index: 1000;
+  transition: opacity 0.15s ease-out;
+
+  .tooltip-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 9px;
+    color: #888888;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding-bottom: 6px;
+  }
+
+  .title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #111111;
+    margin: 0 0 4px 0;
+    line-height: 1.2;
+  }
+
+  .location-tag {
+    font-size: 11px;
+    color: #666666;
+    margin-bottom: 12px;
+  }
+
+  .click-instruction {
+    font-size: 8px;
+    letter-spacing: 0.05em;
+    color: #aaaaaa;
+    text-transform: lowercase;
+    font-style: italic;
+  }
+}

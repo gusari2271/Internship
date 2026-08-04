@@ -1,0 +1,151 @@
+// Fixed Logo at the Top Left
+.logo-wrapper {
+  position: fixed;
+  top: 32px;
+  left: 36px;
+  z-index: 10;
+  pointer-events: auto;
+
+  .logo-link {
+    display: block;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.75;
+    }
+
+    .site-logo {
+      width: 110px;      // controls logo display size — adjust as needed
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+  }
+
+  @media (max-width: 768px) {
+    top: 20px;
+    left: 20px;
+
+    .logo-link .site-logo {
+      width: 80px;
+    }
+  }
+}
+
+// Fixed Vertical Navigation Menu at the Bottom Left
+.menu-wrapper {
+  position: fixed;
+  bottom: 40px;
+  left: 40px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  pointer-events: auto;
+
+  @media (max-width: 768px) {
+    bottom: 24px;
+    left: 24px;
+    gap: 16px;
+  }
+
+  .nav-menu {
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      li {
+        a {
+          font-family: 'Inter', -apple-system, sans-serif;
+          font-size: 13px;
+          font-weight: 400;
+          color: #888888;
+          text-decoration: none;
+          text-transform: lowercase;
+          transition: color 0.2s ease, padding-left 0.2s ease;
+          display: inline-flex;
+          align-items: center;
+          position: relative;
+
+          &:hover {
+            color: #111111;
+            padding-left: 4px;
+          }
+
+          &.active-link {
+            color: #111111;
+            font-weight: 600;
+            padding-left: 12px;
+
+            &::before {
+              content: '';
+              position: absolute;
+              left: 0;
+              top: 50%;
+              transform: translateY(-50%);
+              width: 6px;
+              height: 1px;
+              background-color: #111111;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Language Switcher below navigation
+  .lang-switcher {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 10px;
+    color: #aaaaaa;
+
+    .label {
+      margin-right: 4px;
+      text-transform: lowercase;
+    }
+
+    .lang-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 0;
+      font-family: inherit;
+      font-size: inherit;
+      color: #888888;
+      cursor: pointer;
+      font-weight: 500;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: #111111;
+      }
+
+      &.active {
+        color: #111111;
+        font-weight: 700;
+      }
+    }
+
+    .divider {
+      color: #e0e0e0;
+      user-select: none;
+    }
+  }
+}
+
+// Full screen layout wrapper
+.app-main-content {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background-color: #ffffff;
+}

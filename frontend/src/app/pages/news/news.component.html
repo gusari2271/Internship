@@ -1,0 +1,31 @@
+<div class="page-overlay">
+  <div class="content-container">
+    <header class="section-header">
+      <span class="index">03 / CHRONICLES</span>
+      <h1 class="title">{{ lang.translate('news.title') }}</h1>
+    </header>
+
+    <div class="news-content">
+      @if (newsList.length > 0) {
+        <div class="news-list">
+          @for (item of newsList; track item.id) {
+            <article class="news-item">
+              <div class="meta">
+                <span class="date">{{ item.date }}</span>
+                <span class="cat">{{ item.category }}</span>
+              </div>
+              <h2 class="news-title">{{ item.title }}</h2>
+              <p class="summary">{{ item.summary }}</p>
+            </article>
+          }
+        </div>
+      } @else {
+        <div class="empty-state">
+          <div class="empty-symbol">Ø</div>
+          <p class="empty-text">No active press releases or news updates at this coordinates.</p>
+          <span class="empty-sub">Check back for future publications and announcements.</span>
+        </div>
+      }
+    </div>
+  </div>
+</div>
