@@ -49,24 +49,67 @@
 
           <div class="gallery-section">
             <h3 class="gallery-title">Visual Documentation</h3>
-            <div class="gallery-grid">
-              <!-- Placeholder drawing slots representing future gallery images -->
-              <div class="gallery-item placeholder">
-                <div class="crosshair"></div>
-                <span class="slot-label">Elevation Drawing Slot</span>
+            
+            <div 
+              class="gallery-container"
+              [class.single]="galleryImages().length === 1"
+              [class.double]="galleryImages().length === 2"
+              [class.multi]="galleryImages().length > 2">
+              
+              <div 
+                *ngFor="let url of galleryImages(); let idx = index" 
+                class="gallery-item"
+                (click)="openLightbox(idx)">
+                <img [src]="url" [alt]="project()!.title" class="gallery-img">
+                <div class="zoom-indicator">
+                  <span class="icon">⤢</span>
+                </div>
               </div>
-              <div class="gallery-item placeholder">
-                <div class="crosshair"></div>
-                <span class="slot-label">Render Perspective Slot</span>
-              </div>
-              <div class="gallery-item placeholder">
-                <div class="crosshair"></div>
-                <span class="slot-label">Section Detail Slot</span>
+
+              <!-- Fallback drawing placeholders if no photo uploaded -->
+              <div *ngIf="galleryImages().length === 0" class="fallback-placeholders">
+                <div class="gallery-item placeholder">
+                  <div class="crosshair"></div>
+                  <span class="slot-label">Elevation Drawing Slot</span>
+                </div>
+                <div class="gallery-item placeholder">
+                  <div class="crosshair"></div>
+                  <span class="slot-label">Render Perspective Slot</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </article>
     }
+  </div>
+
+  <!-- Fullscreen Lightbox Modal -->
+  <div *ngIf="lightboxOpen()" class="lightbox-overlay" (click)="closeLightbox()">
+    <button class="lightbox-btn close-btn" (click)="closeLightbox()" title="Close (Esc)">✕</button>
+    
+    <button 
+      *ngIf="galleryImages().length > 1" 
+      class="lightbox-btn prev-btn" 
+      (click)="$event.stopPropagation(); prevLightboxImage()" 
+      title="Previous (←)">
+      ‹
+    </button>
+    
+    <div class="lightbox-content" (click)="$event.stopPropagation()">
+      <img [src]="galleryImages()[lightboxIndex()]" [alt]="project()?.title" class="lightbox-img">
+      <div class="lightbox-caption">
+        <span>{{ project()?.title }}</span>
+        <span class="counter">{{ lightboxIndex() + 1 }} / {{ galleryImages().length }}</span>
+      </div>
+    </div>
+
+    <button 
+      *ngIf="galleryImages().length > 1" 
+      class="lightbox-btn next-btn" 
+      (click)="$event.stopPropagation(); nextLightboxImage()" 
+      title="Next (→)">
+      ›
+    </button>
   </div>
 </div>

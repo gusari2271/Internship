@@ -1,0 +1,84 @@
+<!-- Hamburger Icon Button at Bottom Left -->
+<button 
+  class="hamburger-btn"
+  (click)="toggleMenu($event)"
+  [attr.aria-expanded]="isMenuOpen()"
+  aria-label="Toggle navigation menu"
+  [class.open]="isMenuOpen()">
+  <span class="icon-line line-top"></span>
+  <span class="icon-line line-middle"></span>
+  <span class="icon-line line-bottom"></span>
+</button>
+
+<!-- Full-screen backdrop when open -->
+<div 
+  *ngIf="isMenuOpen()" 
+  class="menu-backdrop" 
+  (click)="closeMenu($event)"
+  @backdrop>
+</div>
+
+<!-- Collapsible Overlay Menu Panel -->
+<div 
+  *ngIf="isMenuOpen()" 
+  class="menu-overlay"
+  @menuSlide>
+  <div class="menu-content">
+    <nav class="nav-menu">
+      <ul class="menu-list">
+        <li>
+          <a routerLink="/manifestation" routerLinkActive="active-link" (click)="closeMenu()">
+            {{ lang.translate('nav.manifestation') }}
+          </a>
+        </li>
+        <li>
+          <a routerLink="/about-us" routerLinkActive="active-link" (click)="closeMenu()">
+            {{ lang.translate('nav.aboutUs') }}
+          </a>
+        </li>
+        <li>
+          <a routerLink="/news" routerLinkActive="active-link" (click)="closeMenu()">
+            {{ lang.translate('nav.news') }}
+          </a>
+        </li>
+        <li>
+          <a routerLink="/career" routerLinkActive="active-link" (click)="closeMenu()">
+            {{ lang.translate('nav.career') }}
+          </a>
+        </li>
+        <li>
+          <a routerLink="/contact-us" routerLinkActive="active-link" (click)="closeMenu()">
+            {{ lang.translate('nav.contactUs') }}
+          </a>
+        </li>
+        
+        <!-- Divider and Admin Login Link -->
+        <li class="menu-divider"></li>
+        
+        <li class="admin-login-item">
+          <a routerLink="/admin/login" routerLinkActive="active-link" (click)="closeMenu()">
+            login as admin
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Language Switcher inside Overlay Menu -->
+    <div class="lang-switcher">
+      <span class="label">{{ lang.translate('explore.lang') }}</span>
+      <button 
+        (click)="setLanguage('en')" 
+        [class.active]="lang.currentLang() === 'en'"
+        class="lang-btn">
+        English
+      </button>
+      <span class="divider">/</span>
+      <button 
+        (click)="setLanguage('zh')" 
+        [class.active]="lang.currentLang() === 'zh'"
+        class="lang-btn">
+        中文
+      </button>
+    </div>
+  </div>
+</div>

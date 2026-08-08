@@ -1,0 +1,45 @@
+<div class="login-container">
+  <div class="glass-login-card">
+    <div class="login-header">
+      <h1 class="title">grahita design</h1>
+      <p class="subtitle">administration gateway</p>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm" class="login-form">
+      <div class="form-group">
+        <label for="email">email</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          [(ngModel)]="email" 
+          required 
+          placeholder="admin@example.com"
+          class="form-control"
+          #emailInput="ngModel">
+      </div>
+
+      <div class="form-group">
+        <label for="password">password</label>
+        <input 
+          type="password" 
+          id="password" 
+          name="password" 
+          [(ngModel)]="password" 
+          required 
+          placeholder="••••••••"
+          class="form-control"
+          #passwordInput="ngModel">
+      </div>
+
+      <div *ngIf="errorMessage()" class="error-banner">
+        <span>{{ errorMessage() }}</span>
+      </div>
+
+      <button type="submit" [disabled]="isLoading() || !loginForm.form.valid" class="btn-submit">
+        <span *ngIf="!isLoading()">authenticate</span>
+        <span *ngIf="isLoading()" class="spinner"></span>
+      </button>
+    </form>
+  </div>
+</div>

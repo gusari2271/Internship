@@ -6,6 +6,9 @@ import { NewsComponent } from './pages/news/news.component';
 import { CareerComponent } from './pages/career/career.component';
 import { ContactUsComponent } from './pages/contact-us/contact-us.component';
 import { ProjectDetailComponent } from './pages/project-detail/project-detail.component';
+import { AdminLoginComponent } from './pages/admin-login/admin-login.component';
+import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,5 +18,11 @@ export const routes: Routes = [
   { path: 'career', component: CareerComponent },
   { path: 'contact-us', component: ContactUsComponent },
   { path: 'projects/:id', component: ProjectDetailComponent },
+  { path: 'admin/login', component: AdminLoginComponent },
+  { 
+    path: 'admin/dashboard', 
+    component: AdminDashboardComponent, 
+    canActivate: [authGuard] 
+  },
   { path: '**', redirectTo: '' }
 ];

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, AfterViewInit, OnDestroy, ViewChild, HostListener, inject, Signal, signal, WritableSignal } from '@angular/core';
+import { Component, ElementRef, OnInit, AfterViewInit, OnDestroy, ViewChild, HostListener, inject, Signal, signal, WritableSignal, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import * as THREE from 'three';
@@ -18,6 +18,65 @@ interface FloatingCube {
   baseRotation: THREE.Euler;
 }
 
+function mulberry32(a: number) {
+  return function() {
+    let t = a += 0x6D2B79F5;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+export interface PaneLayoutSeed {
+  paneIndex: number;
+  position: { x: number; y: number; z: number };
+  rotation: { x: number; y: number; z: number };
+  scale: { width: number; height: number; depth: number };
+  speed: number;
+  phase: number;
+}
+
+export function generatePaneLayoutConfig(count = 40): PaneLayoutSeed[] {
+  const rng = mulberry32(1337);
+  const config: PaneLayoutSeed[] = [];
+  const spacing = 5;
+  const cols = 5;
+
+  for (let i = 0; i < count; i++) {
+    const col = i % cols;
+    const row = Math.floor(i / cols) % cols;
+    const layer = Math.floor(i / (cols * cols));
+
+    const x = (col - 2) * spacing + (rng() - 0.5) * 2.5;
+    const y = (row - 2) * spacing + (rng() - 0.5) * 2.5;
+    const z = (layer - 1) * spacing + (rng() - 0.5) * 4;
+
+    const width = 1.5 + rng() * 1.5;
+    const height = 1.5 + rng() * 1.5;
+    const depth = ((width + height) / 2) * (0.03 + rng() * 0.02);
+
+    const rx = rng() * Math.PI * 2;
+    const ry = rng() * Math.PI * 2;
+    const rz = rng() * Math.PI * 2;
+
+    const speed = 0.4 + rng() * 0.6;
+    const phase = rng() * Math.PI * 2;
+
+    config.push({
+      paneIndex: i,
+      position: { x, y, z },
+      rotation: { x: rx, y: ry, z: rz },
+      scale: { width, height, depth },
+      speed,
+      phase,
+    });
+  }
+
+  return config;
+}
+
+export const PANE_LAYOUT_CONFIG = generatePaneLayoutConfig(40);
+
 @Component({
   selector: 'app-cube-field',
   standalone: true,
@@ -32,6 +91,11 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
   private projectService = inject(ProjectService);
   private router = inject(Router);
   private subscription = new Subscription();
+
+  // Input & Output properties
+  @Input() selectionMode = false;
+  @Input() selectedIndex: number | null = null;
+  @Output() indexSelect = new EventEmitter<number>();
 
   // Signals for state
   hoveredProject: WritableSignal<Project | null> = signal(null);
@@ -76,11 +140,11 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
           console.error('Failed to load projects from backend, using offline fallback', err);
           // Fallback placeholders if backend is down or not seeded yet
           this.projects = [
-            { id: 1, title: 'Untitled Project I', category: 'Residential', location: 'Tokyo, Japan', year: 2024 },
-            { id: 2, title: 'Untitled Project II', category: 'Cultural', location: 'Copenhagen, Denmark', year: 2025 },
-            { id: 3, title: 'Untitled Project III', category: 'Commercial', location: 'Jakarta, Indonesia', year: 2026 },
-            { id: 4, title: 'Untitled Project IV', category: 'Residential', location: 'Berlin, Germany', year: 2023 },
-            { id: 5, title: 'Untitled Project V', category: 'Institutional', location: 'Melbourne, Australia', year: 2027 }
+            { id: 1, title: 'Untitled Project I', category: 'Residential', location: 'Tokyo, Japan', year: 2024, cubeIndex: 5 },
+            { id: 2, title: 'Untitled Project II', category: 'Cultural', location: 'Copenhagen, Denmark', year: 2025, cubeIndex: 12 },
+            { id: 3, title: 'Untitled Project III', category: 'Commercial', location: 'Jakarta, Indonesia', year: 2026, cubeIndex: 20 },
+            { id: 4, title: 'Untitled Project IV', category: 'Residential', location: 'Berlin, Germany', year: 2023, cubeIndex: 28 },
+            { id: 5, title: 'Untitled Project V', category: 'Institutional', location: 'Melbourne, Australia', year: 2027, cubeIndex: 35 }
           ];
           this.isLoading.set(false);
           this.buildCubeField();
@@ -91,6 +155,7 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     this.initThree();
+    this.onWindowResize();
     this.animate();
   }
 
@@ -189,49 +254,49 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
 
     if (isLowEnd) {
       faceMaterial = new THREE.MeshPhysicalMaterial({
-        color: 0xffffff,
+        color: 0xe0e6e6,
         roughness: 0.1,
         metalness: 0.1,
         transparent: true,
-        opacity: 0.35,
+        opacity: 0.45,
         transmission: 0,
         ior: 1.5,
         side: THREE.DoubleSide
       });
 
       edgeMaterial = new THREE.MeshStandardMaterial({
-        color: 0x8fc4ab,
-        emissive: 0x8fc4ab,
-        emissiveIntensity: 0.15,
+        color: 0x4a7c74,
+        emissive: 0x4a7c74,
+        emissiveIntensity: 0.2,
         transparent: true,
-        opacity: 0.7,
+        opacity: 0.85,
         roughness: 0.2,
         metalness: 0.1,
         side: THREE.DoubleSide
       });
     } else {
       faceMaterial = new THREE.MeshPhysicalMaterial({
-        color: 0xffffff,
-        transmission: 0.98,
-        roughness: 0.04,
-        metalness: 0.0,
-        thickness: 0.05,
+        color: 0xebf2f2,
+        transmission: 0.85,
+        roughness: 0.08,
+        metalness: 0.05,
+        thickness: 0.1,
         ior: 1.5,
         clearcoat: 1.0,
         clearcoatRoughness: 0.05,
         transparent: true,
-        opacity: 0.4,
+        opacity: 0.6,
         side: THREE.DoubleSide
       });
 
       edgeMaterial = new THREE.MeshPhysicalMaterial({
-        color: 0x8fc4ab,
+        color: 0x3d6b63,
         roughness: 0.15,
         metalness: 0.1,
         transmission: 0.2,
         ior: 1.5,
         transparent: true,
-        opacity: 0.75,
+        opacity: 0.85,
         side: THREE.DoubleSide
       });
     }
@@ -297,117 +362,66 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
     this.texturesToDispose.forEach(t => t.dispose());
     this.texturesToDispose.clear();
 
-    // Total cubes in the field (limited to max 40 objects)
-    const totalCubes = 40;
-    const isLowEnd = this.isDynamicLowEnd || this.checkIsLowEnd(totalCubes);
-    
-    // Let's pre-generate random index positions for projects, ensuring spread
-    const projectCount = this.projects.length;
-    const projectIndices = new Set<number>();
-    while (projectIndices.size < projectCount) {
-      const idx = Math.floor(Math.random() * totalCubes);
-      projectIndices.add(idx);
-    }
-    const projectIndicesArr = Array.from(projectIndices);
+    const totalCubes = PANE_LAYOUT_CONFIG.length;
+    const isLowEnd = this.selectionMode || this.isDynamicLowEnd || this.checkIsLowEnd(totalCubes);
 
-    // Grid bounds & dimensions
-    const spacing = 5; // space between grid columns
-    const slots: {x: number, y: number, z: number}[] = [];
-
-    for (let x = -2; x <= 2; x++) {
-      for (let y = -2; y <= 2; y++) {
-        for (let z = -2; z <= 2; z++) {
-          slots.push({ x: x * spacing, y: y * spacing, z: z * spacing });
-        }
+    const projectMap = new Map<number, Project>();
+    this.projects.forEach(project => {
+      if (project.cubeIndex !== undefined && project.cubeIndex !== null) {
+        projectMap.set(project.cubeIndex, project);
       }
-    }
+    });
 
-    // Shuffle slots
-    for (let i = slots.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [slots[i], slots[j]] = [slots[j], slots[i]];
-    }
+    PANE_LAYOUT_CONFIG.forEach((seed) => {
+      const { paneIndex, position, rotation, scale, speed, phase } = seed;
+      const geometry = this.createGlassPaneGeometry(scale.width, scale.height, scale.depth);
 
-    for (let i = 0; i < totalCubes; i++) {
-      if (i >= slots.length) break;
-
-      const slot = slots[i];
-      
-      // Jitter positions slightly to make it "broken/messy"
-      const jitterX = (Math.random() - 0.5) * 3;
-      const jitterY = (Math.random() - 0.5) * 2;
-      const jitterZ = (Math.random() - 0.5) * 3;
-
-      const x = slot.x + jitterX;
-      const y = slot.y + jitterY;
-      const z = slot.z + jitterZ;
-
-      // Random sizes (BoxGeometry) - Glass sheets/panes
-      const scaleX = 1.5 + Math.random() * 1.5;
-      const scaleY = 1.5 + Math.random() * 1.5;
-      // depth (ketebalan): SANGAT TIPIS, sekitar 3-5% dari width/height
-      const thickness = ((scaleX + scaleY) / 2) * (0.03 + Math.random() * 0.02);
-      const geometry = this.createGlassPaneGeometry(scaleX, scaleY, thickness);
-
-      // Check if this cube holds project data
-      const projectIndex = projectIndicesArr.indexOf(i);
-      const isProjectCube = projectIndex !== -1;
-      const project = isProjectCube ? this.projects[projectIndex] : undefined;
+      const project = projectMap.get(paneIndex);
+      const isProjectCube = !!project;
 
       const materials = this.createGlassPaneMaterials(isLowEnd);
 
       if (project && project.thumbnailUrl) {
-        // Terapkan texture gambar HANYA pada satu sisi konsisten (Front face: indeks 4)
         const projectFaceMat = this.createProjectFaceMaterial(project.thumbnailUrl);
         materials[4] = projectFaceMat;
       }
 
       const mesh = new THREE.Mesh(geometry, materials);
-      mesh.position.set(x, y, z);
+      mesh.position.set(position.x, position.y, position.z);
+      mesh.rotation.set(rotation.x, rotation.y, rotation.z);
 
-      // Randomize rotation across all 3 axes independently with full range
-      const rx = Math.random() * Math.PI * 2;
-      const ry = Math.random() * Math.PI * 2;
-      const rz = Math.random() * Math.PI * 2;
-      mesh.rotation.set(rx, ry, rz);
-
-      // Save custom user data for raycasting and store base rotation
       mesh.userData = {
         project: project,
         isProjectCube: isProjectCube,
-        baseRotation: { x: rx, y: ry, z: rz }
+        paneIndex: paneIndex,
+        baseRotation: { x: rotation.x, y: rotation.y, z: rotation.z }
       };
 
-      // Create wireframe edges geometry (outline tipis)
       const edges = new THREE.EdgesGeometry(geometry);
-      // Rim light / highlight tipis di sepanjang tepi lempengan: putih terang, opacity rendah
-      const lineColor = 0xffffff;
-      const lineOpacity = isProjectCube ? 0.6 : 0.3;
       const lineMaterial = new THREE.LineBasicMaterial({
-        color: lineColor,
+        color: 0x334444,
         transparent: true,
-        opacity: lineOpacity,
+        opacity: isProjectCube ? 0.9 : 0.5,
         linewidth: 1
       });
       this.materialsToDispose.add(lineMaterial);
 
       const line = new THREE.LineSegments(edges, lineMaterial);
-      mesh.add(line); // Add as child so it moves/rotates/scales with the parent mesh
+      mesh.add(line);
 
       this.scene.add(mesh);
 
-      // Save references for animation and interaction
       this.cubes.push({
         mesh: mesh,
         line: line,
-        initialY: y,
-        speed: 0.2 + Math.random() * 0.3,
-        phase: Math.random() * Math.PI * 2,
+        initialY: position.y,
+        speed: speed,
+        phase: phase,
         project: project,
         baseScale: new THREE.Vector3(1, 1, 1),
-        baseRotation: new THREE.Euler(rx, ry, rz)
+        baseRotation: new THREE.Euler(rotation.x, rotation.y, rotation.z)
       });
-    }
+    });
   }
 
   private animate = () => {
@@ -441,7 +455,7 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     // Subtle idle animation: cubes move up and down slowly (floating effect) and wobble around base rotation
-    this.cubes.forEach(cube => {
+    this.cubes.forEach((cube, index) => {
       // Y-axis float
       cube.mesh.position.y = cube.initialY + Math.sin(time * cube.speed + cube.phase) * 0.4;
       
@@ -456,9 +470,23 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
         cube.baseRotation.z + wobbleZ
       );
 
+      // Highlight selected pane in selection mode
+      const lineMat = cube.line.material as THREE.LineBasicMaterial;
+      if (this.selectionMode && this.selectedIndex === index) {
+        lineMat.color.setHex(0xffd700); // Gold outline for selected pane
+        lineMat.opacity = 1.0;
+      } else if (this.hoveredCube === cube) {
+        lineMat.color.setHex(0x00f3ff); // Cyan hover
+        lineMat.opacity = 1.0;
+      } else {
+        const isProject = cube.mesh.userData['isProjectCube'];
+        lineMat.color.setHex(0x334444);
+        lineMat.opacity = isProject ? 0.9 : 0.5;
+      }
+
       // Smoothly interpolate scale for hover highlights
       let targetScale = 1.0;
-      if (this.hoveredCube && this.hoveredCube.mesh === cube.mesh) {
+      if (this.hoveredCube === cube || (this.selectionMode && this.selectedIndex === index)) {
         targetScale = 1.15;
       }
       
@@ -517,41 +545,39 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private checkIntersections() {
-    if (!this.camera || !this.scene) return;
+    if (!this.camera || !this.scene || this.cubes.length === 0) return;
 
     this.raycaster.setFromCamera(this.mouse, this.camera);
-    
-    // Get all meshes in the scene
     const meshes = this.cubes.map(c => c.mesh);
     const intersects = this.raycaster.intersectObjects(meshes);
 
     if (intersects.length > 0) {
-      // Find the first intersected cube that represents a project
-      const firstIntersect = intersects.find(intersect => intersect.object.userData['isProjectCube']);
-      
-      if (firstIntersect) {
-        const intersectedMesh = firstIntersect.object as THREE.Mesh;
-        const cubeObj = this.cubes.find(c => c.mesh === intersectedMesh);
+      const firstIntersect = intersects[0];
+      const intersectedMesh = firstIntersect.object as THREE.Mesh;
+      const cubeObj = this.cubes.find(c => c.mesh === intersectedMesh);
 
-        if (cubeObj && cubeObj.project) {
+      if (cubeObj) {
+        const isProject = !!cubeObj.project;
+        
+        if (this.selectionMode || isProject) {
           if (this.hoveredCube !== cubeObj) {
-            // Restore previous hovered line color
             if (this.hoveredCube) {
               const prevLineMat = this.hoveredCube.line.material as THREE.LineBasicMaterial;
               prevLineMat.color.setHex(0xffffff);
-              prevLineMat.opacity = 0.6;
+              prevLineMat.opacity = this.hoveredCube.project ? 0.6 : 0.3;
             }
 
-            // Set new hovered cube
             this.hoveredCube = cubeObj;
-            this.hoveredProject.set(cubeObj.project);
+            if (cubeObj.project) {
+              this.hoveredProject.set(cubeObj.project);
+            } else {
+              this.hoveredProject.set(null);
+            }
 
-            // Highlight line color (bright glow)
             const lineMat = cubeObj.line.material as THREE.LineBasicMaterial;
-            lineMat.color.setHex(0x00f3ff); // Cyan glow
+            lineMat.color.setHex(0x00f3ff);
             lineMat.opacity = 1.0;
-            
-            // Set cursor
+
             document.body.style.cursor = 'pointer';
           }
           return;
@@ -559,11 +585,11 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     }
 
-    // No project cube intersected
     if (this.hoveredCube) {
       const lineMat = this.hoveredCube.line.material as THREE.LineBasicMaterial;
       lineMat.color.setHex(0xffffff);
-      lineMat.opacity = 0.6;
+      lineMat.opacity = this.hoveredCube.project ? 0.6 : 0.3;
+
       this.hoveredCube = null;
       this.hoveredProject.set(null);
       document.body.style.cursor = 'default';
@@ -571,10 +597,19 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onCanvasClick() {
-    // If hovering on a project, navigate to detail page
-    if (this.hoveredCube && this.hoveredCube.project) {
-      document.body.style.cursor = 'default';
-      this.router.navigate(['/projects', this.hoveredCube.project.id]);
+    if (this.selectionMode) {
+      if (this.hoveredCube) {
+        const cubeIndex = this.cubes.findIndex(c => c.mesh === this.hoveredCube!.mesh);
+        if (cubeIndex !== -1) {
+          this.indexSelect.emit(cubeIndex);
+        }
+      }
+    } else {
+      // If hovering on a project, navigate to detail page
+      if (this.hoveredCube && this.hoveredCube.project) {
+        document.body.style.cursor = 'default';
+        this.router.navigate(['/projects', this.hoveredCube.project.id]);
+      }
     }
   }
 }

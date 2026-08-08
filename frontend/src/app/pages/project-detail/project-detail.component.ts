@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy, inject, signal } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { ProjectService, Project } from '../../services/project.service';
+import { ProjectService, Project, ProjectImage } from '../../services/project.service';
 import { LanguageService } from '../../services/language.service';
 import { Subscription } from 'rxjs';
 
@@ -22,6 +22,23 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
   isLoading = signal(true);
   errorMsg = signal<string | null>(null);
 
+  // Lightbox state
+  lightboxOpen = signal(false);
+  lightboxIndex = signal(0);
+
+  // Computed list of images for gallery
+  galleryImages = computed(() => {
+    const proj = this.project();
+    if (!proj) return [];
+    if (proj.images && proj.images.length > 0) {
+      return proj.images.map(img => img.imageUrl);
+    }
+    if (proj.thumbnailUrl) {
+      return [proj.thumbnailUrl];
+    }
+    return [];
+  });
+
   ngOnInit() {
     this.subscription.add(
       this.route.paramMap.subscribe(params => {
@@ -37,6 +54,40 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  openLightbox(index: number) {
+    this.lightboxIndex.set(index);
+    this.lightboxOpen.set(true);
+  }
+
+  closeLightbox() {
+    this.lightboxOpen.set(false);
+  }
+
+  nextLightboxImage() {
+    const images = this.galleryImages();
+    if (images.length === 0) return;
+    this.lightboxIndex.set((this.lightboxIndex() + 1) % images.length);
+  }
+
+  prevLightboxImage() {
+    const images = this.galleryImages();
+    if (images.length === 0) return;
+    this.lightboxIndex.set((this.lightboxIndex() - 1 + images.length) % images.length);
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboard(event: KeyboardEvent) {
+    if (!this.lightboxOpen()) return;
+
+    if (event.key === 'Escape') {
+      this.closeLightbox();
+    } else if (event.key === 'ArrowRight') {
+      this.nextLightboxImage();
+    } else if (event.key === 'ArrowLeft') {
+      this.prevLightboxImage();
+    }
+  }
+
   private loadProject(id: number) {
     this.isLoading.set(true);
     this.errorMsg.set(null);
@@ -48,7 +99,6 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
       },
       error: (err) => {
         console.error('Failed to load project details', err);
-        // Fallback for offline/development if DB not active yet
         const offlineFallbacks: Record<number, Project> = {
           1: { id: 1, title: 'Untitled Project I', category: 'Residential', location: 'Tokyo, Japan', year: 2024, description: 'A study in minimalist concrete structure and light well integration. This residential pavilion explores the intersection of monolithic walls and fluid spatial boundaries, utilizing raw textures and shadows as primary aesthetic drivers.' },
           2: { id: 2, title: 'Untitled Project II', category: 'Cultural', location: 'Copenhagen, Denmark', year: 2025, description: 'An open-air pavilion designed to blend into the surrounding coastal landscape. The project features a floating timber grid structure that filters sunlight to create a dynamic play of patterns on the stone floor below.' },

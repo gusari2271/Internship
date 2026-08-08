@@ -1,0 +1,177 @@
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <div class="brand">
+      <span class="logo">grahita design</span>
+      <span class="badge">admin workspace</span>
+    </div>
+    <button (click)="logout()" class="btn-logout">sign out</button>
+  </header>
+
+  <div class="workspace-grid">
+    <div class="left-panel">
+      <section class="card form-card">
+        <h2 class="card-title">{{ isEditing() ? 'edit project settings' : 'register new project' }}</h2>
+        
+        <form (ngSubmit)="onSubmit()" class="crud-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="title">project title *</label>
+              <input type="text" id="title" [(ngModel)]="title" name="title" required placeholder="minimalist gallery structure" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="category">category</label>
+              <input type="text" id="category" [(ngModel)]="category" name="category" placeholder="Residential / Cultural" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="location">location</label>
+              <input type="text" id="location" [(ngModel)]="location" name="location" placeholder="Kyoto, Japan" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="year">completion year</label>
+              <input type="number" id="year" [(ngModel)]="year" name="year" placeholder="2026" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description">description / architectural concept</label>
+            <textarea id="description" [(ngModel)]="description" name="description" placeholder="Describe the geometric language, material exploration, and site integration..." class="form-control textarea"></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="images">project photos (multiple)</label>
+              <input type="file" id="images" (change)="onFilesSelected($event)" accept="image/*" multiple class="form-control file-input">
+            </div>
+            <div class="form-group">
+              <label for="paneIndex">linked 3D glass pane index</label>
+              <div class="pane-selector-display">
+                <span class="value" [class.empty]="selectedPaneIndex() === null">
+                  {{ selectedPaneIndex() !== null ? 'Pane #' + selectedPaneIndex() : 'No pane linked (click one on the right)' }}
+                </span>
+                <button type="button" *ngIf="selectedPaneIndex() !== null" (click)="selectedPaneIndex.set(null)" class="btn-clear-pane">×</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Multi-photo previews list -->
+          <div class="photos-preview-section" *ngIf="existingImages.length > 0 || newFiles.length > 0">
+            <label class="section-label">photo gallery previews & cover selection</label>
+            
+            <div class="previews-grid">
+              <!-- Existing saved photos -->
+              <div class="preview-card" *ngFor="let img of existingImages">
+                <img [src]="img.imageUrl" alt="Gallery photo" class="preview-img">
+                <div class="card-overlay">
+                  <button type="button" (click)="setCover('existing', img.id)" [class.active]="img.isCover" class="btn-cover">
+                    {{ img.isCover ? '★ Cover' : 'Set Cover' }}
+                  </button>
+                  <button type="button" (click)="removeExistingImage(img)" class="btn-remove" title="Remove photo">✕</button>
+                </div>
+              </div>
+
+              <!-- Newly selected upload photos -->
+              <div class="preview-card new-upload" *ngFor="let preview of newFiles; let i = index">
+                <img [src]="preview.previewUrl" alt="New upload photo" class="preview-img">
+                <span class="new-badge">new</span>
+                <div class="card-overlay">
+                  <button type="button" (click)="setCover('new', i)" [class.active]="preview.isCover" class="btn-cover">
+                    {{ preview.isCover ? '★ Cover' : 'Set Cover' }}
+                  </button>
+                  <button type="button" (click)="removeNewFile(i)" class="btn-remove" title="Remove photo">✕</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="errorMessage()" class="alert-message error">
+            {{ errorMessage() }}
+          </div>
+
+          <div *ngIf="successMessage()" class="alert-message success">
+            {{ successMessage() }}
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn-primary">
+              {{ isEditing() ? 'apply modifications' : 'save project' }}
+            </button>
+            <button type="button" (click)="resetForm()" class="btn-secondary">
+              cancel / reset
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="card table-card">
+        <h2 class="card-title">project registry catalog</h2>
+        <div class="table-responsive">
+          <table class="registry-table">
+            <thead>
+              <tr>
+                <th>preview</th>
+                <th>title</th>
+                <th>category</th>
+                <th>location</th>
+                <th>photos</th>
+                <th>3D index</th>
+                <th>actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let project of projects()">
+                <td>
+                  <div class="thumbnail-cell">
+                    <img *ngIf="project.thumbnailUrl" [src]="project.thumbnailUrl" alt="" class="small-thumbnail">
+                    <span *ngIf="!project.thumbnailUrl" class="no-img">no img</span>
+                  </div>
+                </td>
+                <td class="font-bold">{{ project.title }}</td>
+                <td>{{ project.category || '—' }}</td>
+                <td>{{ project.location || '—' }}</td>
+                <td>
+                  <span class="badge-count">{{ project.images ? project.images.length : (project.thumbnailUrl ? 1 : 0) }} photos</span>
+                </td>
+                <td>
+                  <span class="badge-index" [class.unassigned]="project.cubeIndex === undefined || project.cubeIndex === null">
+                    {{ project.cubeIndex !== undefined && project.cubeIndex !== null ? 'Pane #' + project.cubeIndex : 'none' }}
+                  </span>
+                </td>
+                <td>
+                  <div class="action-buttons">
+                    <button (click)="editProject(project)" class="btn-action edit" title="Edit settings">edit</button>
+                    <button (click)="deleteProject(project.id)" class="btn-action delete" title="Delete project">delete</button>
+                  </div>
+                </td>
+              </tr>
+              <tr *ngIf="projects().length === 0">
+                <td colspan="7" class="text-center empty-state">No projects registered. Complete the form above to add one.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <div class="right-panel">
+      <div class="pane-selector-card card">
+        <div class="pane-selector-header">
+          <h2 class="card-title">visual 3D pane selector</h2>
+          <p class="card-subtitle">linked to the floating glass panes on home screen</p>
+        </div>
+        <div class="field-container">
+          <app-cube-field [selectionMode]="true" [selectedIndex]="selectedPaneIndex()" (indexSelect)="onPaneSelected($event)"></app-cube-field>
+        </div>
+        <div class="pane-selector-footer">
+          <div class="color-key">
+            <span class="key-item"><span class="color-box gold"></span>Selected</span>
+            <span class="key-item"><span class="color-box cyan"></span>Hovered</span>
+          </div>
+          <p class="instructions">Orbit with drag. Click any floating glass sheet to associate it with this project.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

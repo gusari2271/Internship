@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { ProjectImage } from './project-image.entity';
 
 @Entity('projects')
 export class Project {
@@ -8,18 +9,24 @@ export class Project {
   @Column()
   title: string;
 
-  @Column({ nullable: true })
-  category: string;
+  @Column({ type: 'varchar', nullable: true })
+  category?: string | null;
 
-  @Column({ nullable: true })
-  location: string;
+  @Column({ type: 'varchar', nullable: true })
+  location?: string | null;
 
-  @Column({ nullable: true })
-  year: number;
+  @Column({ type: 'integer', nullable: true })
+  year?: number | null;
 
-  @Column({ nullable: true })
-  thumbnailUrl: string;
+  @Column({ type: 'varchar', nullable: true })
+  thumbnailUrl?: string | null;
 
-  @Column({ nullable: true })
-  description: string;
+  @Column({ type: 'text', nullable: true })
+  description?: string | null;
+
+  @Column({ type: 'integer', unique: true, nullable: true })
+  cubeIndex?: number | null;
+
+  @OneToMany(() => ProjectImage, (image) => image.project, { cascade: true, eager: true })
+  images: ProjectImage[];
 }
