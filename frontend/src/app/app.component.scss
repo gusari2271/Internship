@@ -2,7 +2,7 @@
 .logo-wrapper {
   position: fixed;
   top: 32px;
-  left: 36px;
+  left: 50px;
   z-index: 10;
   pointer-events: auto;
 
@@ -12,11 +12,11 @@
     transition: opacity 0.2s ease;
 
     &:hover {
-      opacity: 0.75;
+      opacity: 0.50;
     }
 
     .site-logo {
-      width: 110px;      // controls logo display size — adjust as needed
+      width: 90px;      // controls logo display size — adjust as needed
       height: auto;
       display: block;
       object-fit: contain;
