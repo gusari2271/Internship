@@ -1,0 +1,91 @@
+
+> backend@0.0.1 start:dev
+> nest start --watch
+
+[2J[3J[H[[90m15.16.41[0m] Starting compilation in watch mode...
+
+[[90m15.16.44[0m] Found 0 errors. Watching for file changes.
+
+[32m[Nest] 39540  - [39m14/08/2026, 15.16.45 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 39540  - [39m14/08/2026, 15.16.45 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +14ms[39m
+[32m[Nest] 39540  - [39m14/08/2026, 15.16.45 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 39540  - [39m14/08/2026, 15.16.45 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 39540  - [39m14/08/2026, 15.16.45 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 39540  - [39m14/08/2026, 15.16.45 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 39540  - [39m14/08/2026, 15.16.45 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 39540  - [39m14/08/2026, 15.16.45 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 39540  - [39m14/08/2026, 15.16.45 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +18ms[39m
+[32m[Nest] 39540  - [39m14/08/2026, 15.16.45 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 39540  - [39m14/08/2026, 15.16.45 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 39540  - [39m14/08/2026, 15.16.45 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 39540  - [39m14/08/2026, 15.16.45 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mContactModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 39540  - [39m14/08/2026, 15.16.45 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 39540  - [39m14/08/2026, 15.16.45 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mProjectsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 39540  - [39m14/08/2026, 15.16.45 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mProjectsController {/projects}:[39m[38;5;3m +37ms[39m
+[32m[Nest] 39540  - [39m14/08/2026, 15.16.45 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/projects, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 39540  - [39m14/08/2026, 15.16.45 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/projects/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 39540  - [39m14/08/2026, 15.16.45 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/projects, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 39540  - [39m14/08/2026, 15.16.45 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/projects/:id, PUT} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 39540  - [39m14/08/2026, 15.16.45 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/projects/:id/images/:imageId, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 39540  - [39m14/08/2026, 15.16.45 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/projects/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 39540  - [39m14/08/2026, 15.16.45 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mContactController {/contact}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 39540  - [39m14/08/2026, 15.16.45 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/contact, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 39540  - [39m14/08/2026, 15.16.45 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthController {/auth}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 39540  - [39m14/08/2026, 15.16.45 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/login, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 39540  - [39m14/08/2026, 15.16.45 [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +4ms[39m
+Backend is running on: http://localhost:3000
+[2J[3J[H[[90m15.26.53[0m] File change detected. Starting incremental compilation...
+
+[[90m15.26.54[0m] Found 0 errors. Watching for file changes.
+
+[2J[3J[H[[90m15.26.54[0m] File change detected. Starting incremental compilation...
+
+[[90m15.26.55[0m] Found 0 errors. Watching for file changes.
+
+[2J[3J[H[[90m15.26.55[0m] File change detected. Starting incremental compilation...
+
+[32m[Nest] 42024  - [39m14/08/2026, 15.26.56 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 42024  - [39m14/08/2026, 15.26.56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +12ms[39m
+[32m[Nest] 42024  - [39m14/08/2026, 15.26.56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 42024  - [39m14/08/2026, 15.26.56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 42024  - [39m14/08/2026, 15.26.56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 42024  - [39m14/08/2026, 15.26.56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 42024  - [39m14/08/2026, 15.26.56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 42024  - [39m14/08/2026, 15.26.56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +0ms[39m
+[[90m15.26.56[0m] Found 0 errors. Watching for file changes.
+
+[2J[3J[H[[90m15.26.56[0m] File change detected. Starting incremental compilation...
+
+[[90m15.26.57[0m] Found 0 errors. Watching for file changes.
+
+[32m[Nest] 14120  - [39m14/08/2026, 15.26.58 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 14120  - [39m14/08/2026, 15.26.58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +11ms[39m
+[32m[Nest] 14120  - [39m14/08/2026, 15.26.58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 14120  - [39m14/08/2026, 15.26.58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 14120  - [39m14/08/2026, 15.26.58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 14120  - [39m14/08/2026, 15.26.58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 14120  - [39m14/08/2026, 15.26.58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 14120  - [39m14/08/2026, 15.26.58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 14120  - [39m14/08/2026, 15.26.58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +17ms[39m
+[32m[Nest] 14120  - [39m14/08/2026, 15.26.58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 14120  - [39m14/08/2026, 15.26.58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 14120  - [39m14/08/2026, 15.26.58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 14120  - [39m14/08/2026, 15.26.58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mContactModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 14120  - [39m14/08/2026, 15.26.58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 14120  - [39m14/08/2026, 15.26.58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mProjectsModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 14120  - [39m14/08/2026, 15.26.58 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mProjectsController {/projects}:[39m[38;5;3m +25ms[39m
+[32m[Nest] 14120  - [39m14/08/2026, 15.26.58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/projects, GET} route[39m[38;5;3m +2ms[39m
+[32m[Nest] 14120  - [39m14/08/2026, 15.26.58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/projects/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14120  - [39m14/08/2026, 15.26.58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/projects, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14120  - [39m14/08/2026, 15.26.58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/projects/:id, PUT} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14120  - [39m14/08/2026, 15.26.58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/projects/:id/images/:imageId, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14120  - [39m14/08/2026, 15.26.58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/projects/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14120  - [39m14/08/2026, 15.26.58 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mContactController {/contact}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 14120  - [39m14/08/2026, 15.26.58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/contact, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14120  - [39m14/08/2026, 15.26.58 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthController {/auth}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 14120  - [39m14/08/2026, 15.26.58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/login, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14120  - [39m14/08/2026, 15.26.58 [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +5ms[39m
+Backend is running on: http://localhost:3000
+New contact message from Budi Santoso (budi.santoso@gmail.com) received.
+New contact message from Budi Santoso (budi.santoso@gmail.com) received.
+^C

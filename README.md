@@ -1,4 +1,4 @@
-# RADAR — Spatial Architecture Studio Portfolio
+# GRAHITA — Spatial Architecture Studio Portfolio
 
 A full-stack web portfolio for an architecture studio, featuring an immersive **floating 3D cube field** hero built with Three.js inside Angular, backed by a NestJS REST API with SQLite storage.
 
@@ -6,13 +6,13 @@ A full-stack web portfolio for an architecture studio, featuring an immersive **
 
 ## Stack
 
-| Layer | Technology |
-|-------|-----------|
-| **Frontend** | Angular 18 (Standalone, Signals, SCSS) |
-| **3D Engine** | Three.js (native, via `@ViewChild canvas`) |
-| **Backend** | Node.js + NestJS + TypeORM |
-| **Database** | SQLite via `better-sqlite3` (auto-created) |
-| **Monorepo** | `/frontend` + `/backend` with root `concurrently` |
+| Layer         | Technology                                        |
+| ------------- | ------------------------------------------------- |
+| **Frontend**  | Angular 18 (Standalone, Signals, SCSS)            |
+| **3D Engine** | Three.js (native, via `@ViewChild canvas`)        |
+| **Backend**   | Node.js + NestJS + TypeORM                        |
+| **Database**  | SQLite via `better-sqlite3` (auto-created)        |
+| **Monorepo**  | `/frontend` + `/backend` with root `concurrently` |
 
 ---
 
@@ -87,6 +87,7 @@ npm run dev
 ```
 
 This uses `concurrently` to launch:
+
 - 🔵 **Frontend** at **http://localhost:4200** (Angular dev server with hot reload)
 - 🟢 **Backend** at **http://localhost:3000** (NestJS watch mode)
 
@@ -109,11 +110,11 @@ npm run start:backend
 
 ## API Endpoints
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/projects` | Returns all projects (array) |
-| `GET` | `/projects/:id` | Returns a single project by ID |
-| `POST` | `/contact` | Saves a contact form submission |
+| Method | Endpoint        | Description                     |
+| ------ | --------------- | ------------------------------- |
+| `GET`  | `/projects`     | Returns all projects (array)    |
+| `GET`  | `/projects/:id` | Returns a single project by ID  |
+| `POST` | `/contact`      | Saves a contact form submission |
 
 ### POST /contact body example
 
