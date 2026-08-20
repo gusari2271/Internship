@@ -124,6 +124,7 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
   private raycaster = new THREE.Raycaster();
   private mouse = new THREE.Vector2();
   private cubes: FloatingCube[] = [];
+  private hitboxMeshes: THREE.Mesh[] = [];
   private hoveredCube: FloatingCube | null = null;
   private projects: Project[] = [];
 
@@ -356,6 +357,9 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     this.cubes = [];
 
+    this.hitboxMeshes.forEach(h => h.geometry.dispose());
+    this.hitboxMeshes = [];
+
     // Clear previously disposed materials/textures if rebuilding to avoid leak
     this.materialsToDispose.forEach(m => m.dispose());
     this.materialsToDispose.clear();
@@ -409,9 +413,21 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
       const line = new THREE.LineSegments(edges, lineMaterial);
       mesh.add(line);
 
+      // Create Invisible Thicker Hitbox Mesh for accurate raycasting from any angle (front, 45 deg, edge-on)
+      const hitboxWidth = scale.width * 1.35;
+      const hitboxHeight = scale.height * 1.35;
+      const hitboxDepth = Math.max(scale.depth * 6, 0.9);
+      const hitboxGeo = new THREE.BoxGeometry(hitboxWidth, hitboxHeight, hitboxDepth);
+      const hitboxMat = new THREE.MeshBasicMaterial({ visible: false });
+      this.materialsToDispose.add(hitboxMat);
+
+      const hitboxMesh = new THREE.Mesh(hitboxGeo, hitboxMat);
+      mesh.add(hitboxMesh);
+      this.hitboxMeshes.push(hitboxMesh);
+
       this.scene.add(mesh);
 
-      this.cubes.push({
+      const cubeObj: FloatingCube = {
         mesh: mesh,
         line: line,
         initialY: position.y,
@@ -420,7 +436,10 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
         project: project,
         baseScale: new THREE.Vector3(1, 1, 1),
         baseRotation: new THREE.Euler(rotation.x, rotation.y, rotation.z)
-      });
+      };
+
+      hitboxMesh.userData = { cubeObj };
+      this.cubes.push(cubeObj);
     });
   }
 
@@ -548,13 +567,12 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!this.camera || !this.scene || this.cubes.length === 0) return;
 
     this.raycaster.setFromCamera(this.mouse, this.camera);
-    const meshes = this.cubes.map(c => c.mesh);
-    const intersects = this.raycaster.intersectObjects(meshes);
+    const intersects = this.raycaster.intersectObjects(this.hitboxMeshes);
 
     if (intersects.length > 0) {
       const firstIntersect = intersects[0];
-      const intersectedMesh = firstIntersect.object as THREE.Mesh;
-      const cubeObj = this.cubes.find(c => c.mesh === intersectedMesh);
+      const intersectedHitbox = firstIntersect.object as THREE.Mesh;
+      const cubeObj = intersectedHitbox.userData['cubeObj'] as FloatingCube | undefined;
 
       if (cubeObj) {
         const isProject = !!cubeObj.project;
