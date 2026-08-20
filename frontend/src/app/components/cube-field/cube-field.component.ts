@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 interface FloatingCube {
   mesh: THREE.Mesh;
   line: THREE.LineSegments;
+  hitboxMesh: THREE.Mesh;
   initialY: number;
   speed: number;
   phase: number;
@@ -169,6 +170,7 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
     this.cubes.forEach(c => {
       c.mesh.geometry.dispose();
       c.line.geometry.dispose();
+      c.hitboxMesh.geometry.dispose();
     });
 
     this.materialsToDispose.forEach(m => m.dispose());
@@ -353,6 +355,9 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
     // Clear existing cubes if any
     this.cubes.forEach(c => {
       this.scene.remove(c.mesh);
+      c.mesh.geometry.dispose();
+      c.line.geometry.dispose();
+      c.hitboxMesh.geometry.dispose();
     });
     this.cubes = [];
 
@@ -397,6 +402,30 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
         baseRotation: { x: rotation.x, y: rotation.y, z: rotation.z }
       };
 
+      // Create enlarged invisible hitbox geometry for seamless raycasting from any angle
+      // Added +30% width/height and deep thickness (0.5 minimum) so it's easily clicked edge-on or angled
+      const hitboxW = scale.width * 1.3;
+      const hitboxH = scale.height * 1.3;
+      const hitboxD = Math.max(scale.depth * 3.5, 0.5);
+      const hitboxGeometry = new THREE.BoxGeometry(hitboxW, hitboxH, hitboxD);
+
+      const hitboxMaterial = new THREE.MeshBasicMaterial({
+        transparent: true,
+        opacity: 0,
+        depthWrite: false,
+        side: THREE.DoubleSide
+      });
+      this.materialsToDispose.add(hitboxMaterial);
+
+      const hitboxMesh = new THREE.Mesh(hitboxGeometry, hitboxMaterial);
+      hitboxMesh.userData = {
+        project: project,
+        isProjectCube: isProjectCube,
+        paneIndex: paneIndex
+      };
+      // Attach hitbox directly as a child of mesh so it follows position/rotation/scaling automatically
+      mesh.add(hitboxMesh);
+
       const edges = new THREE.EdgesGeometry(geometry);
       const lineMaterial = new THREE.LineBasicMaterial({
         color: 0x334444,
@@ -414,6 +443,7 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
       this.cubes.push({
         mesh: mesh,
         line: line,
+        hitboxMesh: hitboxMesh,
         initialY: position.y,
         speed: speed,
         phase: phase,
@@ -548,25 +578,20 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!this.camera || !this.scene || this.cubes.length === 0) return;
 
     this.raycaster.setFromCamera(this.mouse, this.camera);
-    const meshes = this.cubes.map(c => c.mesh);
-    const intersects = this.raycaster.intersectObjects(meshes);
+    // Raycast targeting all hitbox meshes for effortless multi-angle hit detection
+    const hitboxes = this.cubes.map(c => c.hitboxMesh);
+    const intersects = this.raycaster.intersectObjects(hitboxes);
 
     if (intersects.length > 0) {
       const firstIntersect = intersects[0];
-      const intersectedMesh = firstIntersect.object as THREE.Mesh;
-      const cubeObj = this.cubes.find(c => c.mesh === intersectedMesh);
+      const intersectedHitbox = firstIntersect.object as THREE.Mesh;
+      const cubeObj = this.cubes.find(c => c.hitboxMesh === intersectedHitbox || c.mesh === intersectedHitbox);
 
       if (cubeObj) {
         const isProject = !!cubeObj.project;
         
         if (this.selectionMode || isProject) {
           if (this.hoveredCube !== cubeObj) {
-            if (this.hoveredCube) {
-              const prevLineMat = this.hoveredCube.line.material as THREE.LineBasicMaterial;
-              prevLineMat.color.setHex(0xffffff);
-              prevLineMat.opacity = this.hoveredCube.project ? 0.6 : 0.3;
-            }
-
             this.hoveredCube = cubeObj;
             if (cubeObj.project) {
               this.hoveredProject.set(cubeObj.project);
@@ -586,10 +611,6 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     if (this.hoveredCube) {
-      const lineMat = this.hoveredCube.line.material as THREE.LineBasicMaterial;
-      lineMat.color.setHex(0xffffff);
-      lineMat.opacity = this.hoveredCube.project ? 0.6 : 0.3;
-
       this.hoveredCube = null;
       this.hoveredProject.set(null);
       document.body.style.cursor = 'default';
@@ -599,7 +620,7 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
   onCanvasClick() {
     if (this.selectionMode) {
       if (this.hoveredCube) {
-        const cubeIndex = this.cubes.findIndex(c => c.mesh === this.hoveredCube!.mesh);
+        const cubeIndex = this.cubes.findIndex(c => c === this.hoveredCube);
         if (cubeIndex !== -1) {
           this.indexSelect.emit(cubeIndex);
         }

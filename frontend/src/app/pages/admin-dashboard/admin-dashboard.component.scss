@@ -1,5 +1,5 @@
 .dashboard-container {
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
   background-color: #fafafa;
   font-family: 'Inter', -apple-system, sans-serif;
@@ -12,12 +12,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 50px 40px;
+  padding: 30px 48px 30px 170px;
   background: #ffffff;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 0;
+  z-index: 9;
 
   @media (max-width: 768px) {
-    padding: 16px 24px;
+    padding: 24px 20px 24px 120px;
   }
 
   .brand {
@@ -25,35 +28,31 @@
     align-items: center;
     gap: 12px;
 
-    .logo {
-      font-size: 16px;
+    .admin-title {
+      font-size: 13px;
       font-weight: 700;
+      letter-spacing: 0.15em;
       color: #111111;
-      text-transform: lowercase;
-      letter-spacing: -0.5px;
-    }
-
-    .badge {
-      font-size: 10px;
-      font-weight: 600;
-      color: #666666;
+      text-transform: uppercase;
       background: rgba(0, 0, 0, 0.04);
-      padding: 3px 8px;
-      border-radius: 20px;
-      text-transform: lowercase;
+      padding: 6px 14px;
+      border-radius: 4px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
     }
   }
 
   .btn-logout {
     background: none;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    padding: 8px 16px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    padding: 8px 18px;
     border-radius: 6px;
     font-family: inherit;
-    font-size: 12px;
-    color: #666666;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #555555;
     cursor: pointer;
-    text-transform: lowercase;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     transition: all 0.2s ease;
 
     &:hover {
@@ -64,37 +63,30 @@
   }
 }
 
-.workspace-grid {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  flex: 1;
-  gap: 32px;
-  padding: 32px 40px;
-  box-sizing: border-box;
-
-  @media (max-width: 1024px) {
-    grid-template-columns: 1fr;
-    padding: 24px;
-  }
-}
-
-.left-panel {
+.dashboard-content {
   display: flex;
   flex-direction: column;
-  gap: 32px;
-}
+  gap: 40px;
+  padding: 40px 48px 80px 48px;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  box-sizing: border-box;
 
-.right-panel {
-  position: relative;
+  @media (max-width: 768px) {
+    padding: 24px 20px 60px 20px;
+    gap: 28px;
+  }
 }
 
 .card {
   background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 16px;
   padding: 32px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.01);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02);
   box-sizing: border-box;
+  width: 100%;
 
   @media (max-width: 768px) {
     padding: 20px;
@@ -102,27 +94,118 @@
 }
 
 .card-title {
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
   color: #111111;
   margin: 0 0 24px 0;
-  text-transform: lowercase;
-  letter-spacing: -0.2px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
+// 1. Visual 3D Pane Selector Card Styles
+.pane-selector-card {
+  display: flex;
+  flex-direction: column;
+  height: 55vh;
+  min-height: 460px;
+  padding: 28px 32px;
+
+  @media (max-width: 768px) {
+    height: 480px;
+    padding: 20px;
+  }
+}
+
+.pane-selector-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  gap: 16px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+
+  .card-title {
+    margin: 0 0 4px 0;
+  }
+
+  .card-subtitle {
+    margin: 0;
+    font-size: 12px;
+    color: #777777;
+    text-transform: lowercase;
+  }
+
+  .color-key {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+
+    .key-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      color: #666666;
+      text-transform: lowercase;
+    }
+
+    .color-box {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+
+      &.gold { background: #ffd700; }
+      &.cyan { background: #00f3ff; }
+    }
+  }
+}
+
+.field-container {
+  flex: 1;
+  min-height: 300px;
+  background: radial-gradient(circle at center, #ffffff 0%, #f6f8f8 100%);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.02);
+
+  app-cube-field {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+}
+
+.pane-selector-footer {
+  margin-top: 12px;
+
+  .instructions {
+    margin: 0;
+    font-size: 11.5px;
+    color: #888888;
+    line-height: 1.4;
+  }
+}
+
+// 2. Form Styles
 .crud-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 22px;
 }
 
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 24px;
 
-  @media (max-width: 576px) {
+  @media (max-width: 640px) {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 }
 
@@ -132,21 +215,22 @@
   gap: 6px;
 
   label {
-    font-size: 11px;
-    font-weight: 500;
-    color: #666666;
-    text-transform: lowercase;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #555555;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
   }
 
   .form-control {
     width: 100%;
-    padding: 10px 14px;
+    padding: 12px 16px;
     font-family: inherit;
     font-size: 13.5px;
     color: #111111;
-    background: rgba(0, 0, 0, 0.01);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.015);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
     outline: none;
     box-sizing: border-box;
     transition: all 0.2s ease;
@@ -154,21 +238,23 @@
     &:focus {
       background: #ffffff;
       border-color: #111111;
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.04);
     }
 
     &::placeholder {
-      color: #bbbbbb;
+      color: #aaaaaa;
     }
   }
 
   .textarea {
-    min-height: 100px;
+    min-height: 110px;
     resize: vertical;
+    line-height: 1.5;
   }
 
   .file-input {
-    padding: 8px 12px;
-    font-size: 12px;
+    padding: 10px 14px;
+    font-size: 12.5px;
     background: none;
   }
 }
@@ -176,24 +262,29 @@
 .photos-preview-section {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.015);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
 
   .section-label {
-    font-size: 11px;
-    font-weight: 500;
-    color: #666666;
-    text-transform: lowercase;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #555555;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
   }
 
   .previews-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 14px;
 
     .preview-card {
       position: relative;
       width: 100%;
-      height: 90px;
+      height: 100px;
       border-radius: 8px;
       overflow: hidden;
       border: 1px solid rgba(0, 0, 0, 0.08);
@@ -206,25 +297,26 @@
 
       .new-badge {
         position: absolute;
-        top: 4px;
-        left: 4px;
+        top: 6px;
+        left: 6px;
         background: #00f3ff;
         color: #111111;
         font-size: 9px;
         font-weight: 700;
-        padding: 1px 4px;
+        padding: 2px 5px;
         border-radius: 3px;
         text-transform: uppercase;
+        letter-spacing: 0.05em;
       }
 
       .card-overlay {
         position: absolute;
         inset: 0;
-        background: rgba(0, 0, 0, 0.5);
+        background: rgba(0, 0, 0, 0.55);
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        padding: 6px;
+        padding: 8px;
         opacity: 0;
         transition: opacity 0.2s ease;
       }
@@ -234,12 +326,12 @@
       }
 
       .btn-cover {
-        background: rgba(255, 255, 255, 0.85);
+        background: rgba(255, 255, 255, 0.9);
         border: none;
         color: #111;
-        font-size: 10px;
+        font-size: 10.5px;
         font-weight: 600;
-        padding: 4px 6px;
+        padding: 4px 8px;
         border-radius: 4px;
         cursor: pointer;
 
@@ -251,13 +343,13 @@
 
       .btn-remove {
         align-self: flex-end;
-        background: rgba(209, 26, 42, 0.85);
+        background: rgba(209, 26, 42, 0.9);
         color: #fff;
         border: none;
-        width: 22px;
-        height: 22px;
+        width: 24px;
+        height: 24px;
         border-radius: 50%;
-        font-size: 11px;
+        font-size: 12px;
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -271,15 +363,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 14px;
-  border-radius: 6px;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
   background: rgba(0, 0, 0, 0.02);
-  height: 38px;
+  height: 44px;
   box-sizing: border-box;
 
   .value {
-    font-size: 12px;
+    font-size: 12.5px;
     font-weight: 600;
     color: #111111;
 
@@ -292,10 +384,10 @@
   .btn-clear-pane {
     background: none;
     border: none;
-    font-size: 18px;
+    font-size: 20px;
     color: #888888;
     cursor: pointer;
-    padding: 0;
+    padding: 0 4px;
     line-height: 1;
 
     &:hover {
@@ -305,74 +397,78 @@
 }
 
 .alert-message {
-  padding: 10px 14px;
-  border-radius: 6px;
-  font-size: 12.5px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 13px;
   font-weight: 500;
   text-align: center;
 
   &.error {
-    background: rgba(209, 26, 42, 0.04);
-    border: 1px solid rgba(209, 26, 42, 0.08);
+    background: rgba(209, 26, 42, 0.05);
+    border: 1px solid rgba(209, 26, 42, 0.12);
     color: #d11a2a;
   }
 
   &.success {
-    background: rgba(40, 167, 69, 0.04);
-    border: 1px solid rgba(40, 167, 69, 0.08);
+    background: rgba(40, 167, 69, 0.05);
+    border: 1px solid rgba(40, 167, 69, 0.12);
     color: #28a745;
   }
 }
 
 .form-actions {
   display: flex;
-  gap: 12px;
-  margin-top: 8px;
+  gap: 16px;
+  margin-top: 10px;
 
   .btn-primary {
     background: #111111;
     color: #ffffff;
     border: none;
-    padding: 12px 24px;
-    border-radius: 6px;
+    padding: 14px 28px;
+    border-radius: 8px;
     cursor: pointer;
     font-family: inherit;
     font-size: 13px;
     font-weight: 600;
-    text-transform: lowercase;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     transition: all 0.2s ease;
 
     &:hover {
-      background: #222222;
+      background: #2b2b2b;
       transform: translateY(-1px);
     }
   }
 
   .btn-secondary {
     background: none;
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.12);
     color: #666666;
-    padding: 12px 20px;
-    border-radius: 6px;
+    padding: 14px 24px;
+    border-radius: 8px;
     cursor: pointer;
     font-family: inherit;
     font-size: 13px;
-    text-transform: lowercase;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     transition: all 0.2s ease;
 
     &:hover {
-      background: rgba(0, 0, 0, 0.02);
+      background: rgba(0, 0, 0, 0.03);
       color: #111111;
     }
   }
 }
 
+// 3. Table Catalog Styles
 .table-card {
-  padding-bottom: 16px;
+  padding-bottom: 24px;
 }
 
 .table-responsive {
   overflow-x: auto;
+  margin-top: 8px;
 }
 
 .registry-table {
@@ -382,15 +478,17 @@
   font-size: 13px;
 
   th {
-    padding: 12px 16px;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.04);
+    padding: 14px 18px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.05);
     color: #666666;
-    font-weight: 500;
-    text-transform: lowercase;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 11px;
   }
 
   td {
-    padding: 16px;
+    padding: 16px 18px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.04);
     color: #333333;
     vertical-align: middle;
@@ -402,11 +500,11 @@
   }
 
   .thumbnail-cell {
-    width: 48px;
-    height: 48px;
+    width: 52px;
+    height: 52px;
     background: rgba(0, 0, 0, 0.02);
-    border: 1px solid rgba(0, 0, 0, 0.04);
-    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 6px;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -425,14 +523,23 @@
     }
   }
 
+  .badge-count {
+    font-size: 11.5px;
+    color: #666666;
+    background: rgba(0, 0, 0, 0.04);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-weight: 500;
+  }
+
   .badge-index {
     display: inline-block;
-    font-size: 11px;
+    font-size: 11.5px;
     font-weight: 600;
     color: #ffffff;
     background: #111111;
-    padding: 2px 8px;
-    border-radius: 4px;
+    padding: 4px 10px;
+    border-radius: 6px;
 
     &.unassigned {
       background: rgba(0, 0, 0, 0.05);
@@ -448,28 +555,31 @@
     .btn-action {
       background: none;
       border: none;
-      padding: 4px 8px;
+      padding: 6px 12px;
       font-family: inherit;
       font-size: 11.5px;
+      font-weight: 600;
       cursor: pointer;
-      text-transform: lowercase;
-      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      border-radius: 6px;
+      transition: all 0.2s ease;
 
       &.edit {
         color: #111111;
-        background: rgba(0, 0, 0, 0.04);
+        background: rgba(0, 0, 0, 0.05);
 
         &:hover {
-          background: rgba(0, 0, 0, 0.08);
+          background: rgba(0, 0, 0, 0.1);
         }
       }
 
       &.delete {
         color: #d11a2a;
-        background: rgba(209, 26, 42, 0.04);
+        background: rgba(209, 26, 42, 0.05);
 
         &:hover {
-          background: rgba(209, 26, 42, 0.08);
+          background: rgba(209, 26, 42, 0.12);
         }
       }
     }
@@ -477,81 +587,6 @@
 
   .empty-state {
     color: #888888;
-    padding: 32px;
-  }
-}
-
-.pane-selector-card {
-  position: sticky;
-  top: 32px;
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - 150px);
-  min-height: 550px;
-  padding: 24px;
-}
-
-.pane-selector-header {
-  margin-bottom: 16px;
-
-  .card-subtitle {
-    margin: 4px 0 0 0;
-    font-size: 11px;
-    color: #888888;
-    text-transform: lowercase;
-  }
-}
-
-.field-container {
-  flex: 1;
-  background: radial-gradient(circle at center, #ffffff 0%, #f7f7f7 100%);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  border-radius: 12px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.02);
-
-  app-cube-field {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-}
-
-.pane-selector-footer {
-  margin-top: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-
-  .color-key {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-
-    .key-item {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      color: #666666;
-      text-transform: lowercase;
-    }
-
-    .color-box {
-      width: 10px;
-      height: 10px;
-      border-radius: 2px;
-
-      &.gold { background: #ffd700; }
-      &.cyan { background: #00f3ff; }
-    }
-  }
-
-  .instructions {
-    margin: 0;
-    font-size: 10.5px;
-    color: #888888;
-    line-height: 1.4;
+    padding: 48px;
   }
 }
