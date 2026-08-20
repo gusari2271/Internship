@@ -37,7 +37,7 @@ export interface PaneLayoutSeed {
   phase: number;
 }
 
-export function generatePaneLayoutConfig(count = 40): PaneLayoutSeed[] {
+export function getClonedPaneConfig(count = 40): PaneLayoutSeed[] {
   const rng = mulberry32(1337);
   const config: PaneLayoutSeed[] = [];
   const spacing = 5;
@@ -76,7 +76,7 @@ export function generatePaneLayoutConfig(count = 40): PaneLayoutSeed[] {
   return config;
 }
 
-export const PANE_LAYOUT_CONFIG = generatePaneLayoutConfig(40);
+export const PANE_LAYOUT_CONFIG = getClonedPaneConfig(40);
 
 @Component({
   selector: 'app-cube-field',
@@ -121,6 +121,10 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
   private isDynamicLowEnd = false;
   private hasAttemptedFallback = false;
 
+  // Lifecycle & Resize Tracking
+  private resizeObserver?: ResizeObserver;
+  private isDestroyed = false;
+
   // Interactivity
   private raycaster = new THREE.Raycaster();
   private mouse = new THREE.Vector2();
@@ -133,11 +137,13 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscription.add(
       this.projectService.getProjects().subscribe({
         next: (data) => {
+          if (this.isDestroyed) return;
           this.projects = data;
           this.isLoading.set(false);
           this.buildCubeField();
         },
         error: (err) => {
+          if (this.isDestroyed) return;
           console.error('Failed to load projects from backend, using offline fallback', err);
           // Fallback placeholders if backend is down or not seeded yet
           this.projects = [
@@ -155,23 +161,56 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
+    this.isDestroyed = false;
     this.initThree();
     this.onWindowResize();
+
+    if (typeof ResizeObserver !== 'undefined' && this.canvasContainer) {
+      this.resizeObserver = new ResizeObserver(() => {
+        this.onWindowResize();
+      });
+      this.resizeObserver.observe(this.canvasContainer.nativeElement);
+    }
+
+    // Safety checks after layout calculations complete
+    setTimeout(() => {
+      if (!this.isDestroyed) {
+        this.onWindowResize();
+      }
+    }, 50);
+    setTimeout(() => {
+      if (!this.isDestroyed) {
+        this.onWindowResize();
+      }
+    }, 200);
+
     this.animate();
   }
 
   ngOnDestroy() {
+    this.isDestroyed = true;
     this.subscription.unsubscribe();
+
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+      this.resizeObserver = undefined;
+    }
+
     if (this.animationFrameId) {
       cancelAnimationFrame(this.animationFrameId);
+      this.animationFrameId = undefined;
     }
     
     // Clean up Three.js resources
     this.cubes.forEach(c => {
+      if (this.scene) {
+        this.scene.remove(c.mesh);
+      }
       c.mesh.geometry.dispose();
       c.line.geometry.dispose();
       c.hitboxMesh.geometry.dispose();
     });
+    this.cubes = [];
 
     this.materialsToDispose.forEach(m => m.dispose());
     this.materialsToDispose.clear();
@@ -184,6 +223,7 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     if (this.renderer) {
       this.renderer.dispose();
+      this.renderer.forceContextLoss();
     }
   }
 
@@ -367,7 +407,8 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
     this.texturesToDispose.forEach(t => t.dispose());
     this.texturesToDispose.clear();
 
-    const totalCubes = PANE_LAYOUT_CONFIG.length;
+    const paneConfigs = getClonedPaneConfig(40);
+    const totalCubes = paneConfigs.length;
     const isLowEnd = this.selectionMode || this.isDynamicLowEnd || this.checkIsLowEnd(totalCubes);
 
     const projectMap = new Map<number, Project>();
@@ -377,7 +418,7 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
 
-    PANE_LAYOUT_CONFIG.forEach((seed) => {
+    paneConfigs.forEach((seed) => {
       const { paneIndex, position, rotation, scale, speed, phase } = seed;
       const geometry = this.createGlassPaneGeometry(scale.width, scale.height, scale.depth);
 
@@ -455,6 +496,7 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private animate = () => {
+    if (this.isDestroyed) return;
     this.animationFrameId = requestAnimationFrame(this.animate);
 
     const time = Date.now() * 0.001;
@@ -534,15 +576,21 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @HostListener('window:resize')
   onWindowResize() {
-    if (!this.canvasContainer || !this.renderer || !this.camera) return;
+    if (!this.canvasContainer || !this.renderer || !this.camera || this.isDestroyed) return;
 
-    const width = this.canvasContainer.nativeElement.clientWidth;
-    const height = this.canvasContainer.nativeElement.clientHeight;
+    const container = this.canvasContainer.nativeElement;
+    const width = container.clientWidth;
+    const height = container.clientHeight;
 
-    this.camera.aspect = width / height;
+    if (width <= 0 || height <= 0) return;
+
+    const aspect = width / height;
+    if (!isFinite(aspect) || isNaN(aspect)) return;
+
+    this.camera.aspect = aspect;
     this.camera.updateProjectionMatrix();
 
-    this.renderer.setSize(width, height);
+    this.renderer.setSize(width, height, false);
   }
 
   onMouseMove(event: MouseEvent) {
