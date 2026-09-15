@@ -2,13 +2,13 @@
   position: fixed;
   top: 0;
   right: 0;
-  width: 75vw;
+  width: 100vw;
   height: 100vh;
   background-color: #ffffff;
   z-index: 5;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 100px 10% 120px 40px;
+  padding: 100px 40px 120px 40px;
   box-sizing: border-box;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   animation: slideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -38,8 +38,8 @@
 }
 
 .content-container {
-  max-width: 800px;   
-  margin: 0;
+  max-width: 85%;   
+  margin: 0 auto;
 }
 
 .back-link-container {
@@ -155,132 +155,134 @@
   }
 }
 
-.gallery-container {
-  display: grid;
-  gap: 20px;
+.custom-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
 
-  &.single {
-    grid-template-columns: 1fr;
-    .gallery-item {
-      aspect-ratio: 16 / 9;
+  // 1. Foto Utama (Hero) di Atas
+  .main-photo {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: #fafafa;
+    border: 1px solid #eeeeee;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+
+    .gallery-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+      &:hover {
+        transform: scale(1.02);
+      }
     }
   }
 
-  &.double {
+  // 2. Grid 2 Kolom di Bawahnya
+  .sub-gallery-grid {
+    display: grid;
     grid-template-columns: 1fr 1fr;
-    .gallery-item {
-      aspect-ratio: 4 / 3;
-    }
-    @media (max-width: 600px) {
+    gap: 20px;
+    width: 100%;
+
+    @media (max-width: 650px) {
       grid-template-columns: 1fr;
     }
   }
 
-  &.multi {
-    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-    .gallery-item {
-      aspect-ratio: 4 / 3;
-    }
-  }
-}
-
-.gallery-item {
-  width: 100%;
-  background-color: #fafafa;
-  border: 1px solid #eeeeee;
-  border-radius: 8px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  cursor: pointer;
-
-  .gallery-img {
+  .grid-item {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
+    aspect-ratio: 4 / 3;
+    background-color: #fafafa;
+    border: 1px solid #eeeeee;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    box-sizing: border-box;
 
-  .zoom-indicator {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-
-    .icon {
-      color: #ffffff;
-      font-size: 24px;
-      font-weight: 300;
-    }
-  }
-
-  &:hover {
     .gallery-img {
-      transform: scale(1.04);
-    }
-    .zoom-indicator {
-      opacity: 1;
-    }
-  }
-
-  .slot-label {
-    font-size: 10px;
-    letter-spacing: 0.05em;
-    color: #aaaaaa;
-    text-transform: lowercase;
-    font-style: italic;
-    background-color: #ffffff;
-    padding: 4px 12px;
-    border: 1px solid #e0e0e0;
-    z-index: 2;
-  }
-
-  .crosshair {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    &::before, &::after {
-      content: '';
-      position: absolute;
-      background-color: rgba(0, 0, 0, 0.03);
-    }
-
-    &::before {
       width: 100%;
-      height: 1px;
-      top: 50%;
-      left: 0;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+      &:hover {
+        transform: scale(1.03);
+      }
     }
 
-    &::after {
-      width: 1px;
-      height: 100%;
-      top: 0;
-      left: 50%;
+    &.placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 220px;
+      cursor: default;
+
+      .slot-label {
+        font-size: 10px;
+        letter-spacing: 0.05em;
+        color: #aaaaaa;
+        text-transform: uppercase;
+        font-style: italic;
+        background-color: #ffffff;
+        padding: 6px 14px;
+        border: 1px solid #e0e0e0;
+        z-index: 2;
+      }
+
+      .crosshair {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        &::before, &::after {
+          content: '';
+          position: absolute;
+          background-color: rgba(0, 0, 0, 0.04);
+        }
+
+        &::before {
+          width: 100%;
+          height: 1px;
+          top: 50%;
+          left: 0;
+        }
+
+        &::after {
+          width: 1px;
+          height: 100%;
+          top: 0;
+          left: 50%;
+        }
+      }
     }
   }
 }
 
 // Fullscreen Lightbox Modal
 .lightbox-overlay {
+  width: 100vw;
+  height: 100vh;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.92);
+  background: rgba(255, 69, 69, 0.92);  //WARNA DIBELAKANG FULL SCREEN GAMBAR
   backdrop-filter: blur(12px);
   z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 0px;
   animation: fadeIn 0.25s ease-out;
 
   .lightbox-content {

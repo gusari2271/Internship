@@ -1,5 +1,5 @@
-<!-- Logo at the Top Left -->
-<div class="logo-wrapper">
+<!-- Logo at the Top Left — hidden on admin pages -->
+<div class="logo-wrapper" *ngIf="!isAdminPage">
   <a
     routerLink="/"
     class="logo-link"

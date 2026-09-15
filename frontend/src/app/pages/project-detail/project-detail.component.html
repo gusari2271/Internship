@@ -2,7 +2,7 @@
   <div class="content-container">
     <div class="back-link-container">
       <a routerLink="/" class="back-link">
-        <span class="arrow">←</span> {{ lang.translate('project.back') }}
+        <span class="arrow">←</span> {{ lang.translate("project.back") }}
       </a>
     </div>
 
@@ -23,58 +23,75 @@
     @if (!isLoading() && !errorMsg() && project()) {
       <article class="project-details">
         <header class="project-header">
-          <span class="category">{{ project()!.category || 'Architecture' }}</span>
+          <span class="category">{{
+            project()!.category || "Architecture"
+          }}</span>
           <h1 class="title">{{ project()!.title }}</h1>
         </header>
 
         <div class="metadata-grid">
           <div class="meta-item">
-            <span class="label">{{ lang.translate('project.location') }}</span>
-            <span class="val">{{ project()!.location || 'Concept Studio' }}</span>
+            <span class="label">{{ lang.translate("project.location") }}</span>
+            <span class="val">{{
+              project()!.location || "Concept Studio"
+            }}</span>
           </div>
           <div class="meta-item">
-            <span class="label">{{ lang.translate('project.year') }}</span>
-            <span class="val">{{ project()!.year || '2026' }}</span>
+            <span class="label">{{ lang.translate("project.year") }}</span>
+            <span class="val">{{ project()!.year || "2026" }}</span>
           </div>
           <div class="meta-item">
-            <span class="label">{{ lang.translate('project.category') }}</span>
-            <span class="val">{{ project()!.category || 'Theoretical' }}</span>
+            <span class="label">{{ lang.translate("project.category") }}</span>
+            <span class="val">{{ project()!.category || "Theoretical" }}</span>
           </div>
         </div>
 
         <div class="project-body">
           <div class="desc-text">
-            <p>{{ project()!.description || 'No detailed description available. Project details are currently kept in draft state.' }}</p>
+            <p>
+              {{
+                project()!.description ||
+                  "No detailed description available. Project details are currently kept in draft state."
+              }}
+            </p>
           </div>
 
           <div class="gallery-section">
             <h3 class="gallery-title">Visual Documentation</h3>
-            
-            <div 
-              class="gallery-container"
-              [class.single]="galleryImages().length === 1"
-              [class.double]="galleryImages().length === 2"
-              [class.multi]="galleryImages().length > 2">
-              
-              <div 
-                *ngFor="let url of galleryImages(); let idx = index" 
-                class="gallery-item"
-                (click)="openLightbox(idx)">
-                <img [src]="url" [alt]="project()!.title" class="gallery-img">
-                <div class="zoom-indicator">
-                  <span class="icon">⤢</span>
+
+            <div class="custom-gallery">
+              <!-- 1. Foto Utama di Atas (Lebar Penuh) -->
+              <div class="main-photo" *ngIf="mainImage()" (click)="openLightbox(0)">
+                <img [src]="mainImage()!" [alt]="project()!.title" class="gallery-img" />
+              </div>
+
+              <!-- 2. Grid 2 Foto di Bawahnya -->
+              <div class="sub-gallery-grid">
+                <!-- Looping gambar ke-2 dan ke-3 jika ada -->
+                <div 
+                  *ngFor="let url of subImages(); let idx = index" 
+                  class="grid-item"
+                  (click)="openLightbox(idx + 1)"
+                >
+                  <img [src]="url" [alt]="project()!.title" class="gallery-img" />
+                </div>
+
+                <!-- Fallback placeholder jika foto ke-2 atau ke-3 belum diunggah -->
+                <div *ngIf="subImages().length < 1" class="grid-item placeholder">
+                  <div class="crosshair"></div>
+                  <span class="slot-label">Detail Perspective 01</span>
+                </div>
+                <div *ngIf="subImages().length < 2" class="grid-item placeholder">
+                  <div class="crosshair"></div>
+                  <span class="slot-label">Detail Perspective 02</span>
                 </div>
               </div>
 
-              <!-- Fallback drawing placeholders if no photo uploaded -->
-              <div *ngIf="galleryImages().length === 0" class="fallback-placeholders">
-                <div class="gallery-item placeholder">
+              <!-- Fallback placeholder jika tidak ada foto sama sekali -->
+              <div *ngIf="!mainImage()" class="fallback-placeholders">
+                <div class="grid-item placeholder" style="min-height: 350px; width: 100%;">
                   <div class="crosshair"></div>
-                  <span class="slot-label">Elevation Drawing Slot</span>
-                </div>
-                <div class="gallery-item placeholder">
-                  <div class="crosshair"></div>
-                  <span class="slot-label">Render Perspective Slot</span>
+                  <span class="slot-label">Master Perspective Slot</span>
                 </div>
               </div>
             </div>
@@ -85,31 +102,49 @@
   </div>
 
   <!-- Fullscreen Lightbox Modal -->
-  <div *ngIf="lightboxOpen()" class="lightbox-overlay" (click)="closeLightbox()">
-    <button class="lightbox-btn close-btn" (click)="closeLightbox()" title="Close (Esc)">✕</button>
-    
-    <button 
-      *ngIf="galleryImages().length > 1" 
-      class="lightbox-btn prev-btn" 
-      (click)="$event.stopPropagation(); prevLightboxImage()" 
-      title="Previous (←)">
+  <!-- <div
+    *ngIf="lightboxOpen()"
+    class="lightbox-overlay"
+    (click)="closeLightbox()"
+  >
+    <button
+      class="lightbox-btn close-btn"
+      (click)="closeLightbox()"
+      title="Close (Esc)"
+    >
+      ✕
+    </button>
+
+    <button
+      *ngIf="galleryImages().length > 1"
+      class="lightbox-btn prev-btn"
+      (click)="$event.stopPropagation(); prevLightboxImage()"
+      title="Previous (←)"
+    >
       ‹
     </button>
-    
+
     <div class="lightbox-content" (click)="$event.stopPropagation()">
-      <img [src]="galleryImages()[lightboxIndex()]" [alt]="project()?.title" class="lightbox-img">
+      <img
+        [src]="galleryImages()[lightboxIndex()]"
+        [alt]="project()?.title"
+        class="lightbox-img"
+      />
       <div class="lightbox-caption">
         <span>{{ project()?.title }}</span>
-        <span class="counter">{{ lightboxIndex() + 1 }} / {{ galleryImages().length }}</span>
+        <span class="counter"
+          >{{ lightboxIndex() + 1 }} / {{ galleryImages().length }}</span
+        >
       </div>
     </div>
 
-    <button 
-      *ngIf="galleryImages().length > 1" 
-      class="lightbox-btn next-btn" 
-      (click)="$event.stopPropagation(); nextLightboxImage()" 
-      title="Next (→)">
+    <button
+      *ngIf="galleryImages().length > 1"
+      class="lightbox-btn next-btn"
+      (click)="$event.stopPropagation(); nextLightboxImage()"
+      title="Next (→)"
+    >
       ›
     </button>
-  </div>
+  </div> -->
 </div>

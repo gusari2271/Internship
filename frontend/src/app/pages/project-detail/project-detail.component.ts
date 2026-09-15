@@ -46,9 +46,24 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
       return proj.images.map((img) => img.imageUrl);
     }
     if (proj.thumbnailUrl) {
-      return [proj.thumbnailUrl];
+      return [
+        proj.thumbnailUrl ||
+          'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200',
+        'https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?w=800',
+        'https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?w=800',
+      ];
     }
     return [];
+  });
+  mainImage = computed(() => {
+    const images = this.galleryImages();
+    return images.length > 0 ? images[0] : null;
+  });
+
+  subImages = computed(() => {
+    const images = this.galleryImages();
+    // Mengambil foto mulai dari indeks ke-1 sampai indeks ke-3 (maksimal 2 foto)
+    return images.slice(1, 3);
   });
 
   ngOnInit() {

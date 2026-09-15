@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HamburgerMenuComponent } from './components/hamburger-menu/hamburger-menu.component';
 
@@ -10,4 +10,10 @@ import { HamburgerMenuComponent } from './components/hamburger-menu/hamburger-me
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {}
+export class AppComponent {
+  private router = inject(Router);
+
+  get isAdminPage(): boolean {
+    return this.router.url.startsWith('/admin');
+  }
+}
