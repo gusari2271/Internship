@@ -98,6 +98,15 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() selectedIndex: number | null = null;
   @Output() indexSelect = new EventEmitter<number>();
 
+  @Input() set projectsInput(data: Project[] | undefined) {
+    if (data) {
+      this.projects = [...data];
+      if (this.scene && !this.isDestroyed) {
+        this.buildCubeField();
+      }
+    }
+  }
+
   // Signals for state
   hoveredProject: WritableSignal<Project | null> = signal(null);
   tooltipX = signal(0);
@@ -665,7 +674,14 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  onCanvasClick() {
+  onCanvasClick(event?: MouseEvent) {
+    if (event && this.renderer) {
+      const rect = this.renderer.domElement.getBoundingClientRect();
+      this.mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+      this.mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+      this.checkIntersections();
+    }
+
     if (this.selectionMode) {
       if (this.hoveredCube) {
         const cubeIndex = this.cubes.findIndex(c => c === this.hoveredCube);

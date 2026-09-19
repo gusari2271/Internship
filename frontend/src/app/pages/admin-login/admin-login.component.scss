@@ -11,21 +11,21 @@
 }
 
 .glass-login-card {
-  width: 400px;
+  width: 420px;
   padding: 48px;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: column;
-  gap: 36px;
+  gap: 32px;
   z-index: 10;
   
   @media (max-width: 480px) {
-    width: 90%;
-    padding: 32px 24px;
+    width: 92%;
+    padding: 32px 20px;
   }
 }
 
@@ -43,7 +43,7 @@
   
   .subtitle {
     font-size: 11px;
-    color: #888888;
+    color: #777777;
     margin: 0;
     letter-spacing: 0.5px;
     text-transform: lowercase;
@@ -53,7 +53,7 @@
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
 .form-group {
@@ -63,8 +63,8 @@
   
   label {
     font-size: 11px;
-    font-weight: 500;
-    color: #555555;
+    font-weight: 600;
+    color: #444444;
     text-transform: lowercase;
     letter-spacing: 0.3px;
   }
@@ -75,7 +75,7 @@
     font-size: 14px;
     color: #111111;
     background: rgba(0, 0, 0, 0.02);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 8px;
     outline: none;
     box-sizing: border-box;
@@ -84,24 +84,98 @@
     &:focus {
       background: #ffffff;
       border-color: #111111;
-      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.02);
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.03);
     }
     
     &::placeholder {
-      color: #bbbbbb;
+      color: #aaaaaa;
+    }
+
+    &.is-invalid {
+      border-color: #d11a2a;
+      background: rgba(209, 26, 42, 0.02);
     }
   }
 }
 
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  .password-control {
+    padding-right: 44px;
+  }
+
+  .btn-toggle-pwd {
+    position: absolute;
+    right: 12px;
+    background: transparent;
+    border: none;
+    color: #888888;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: #111111;
+    }
+  }
+}
+
+.forgot-pwd-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 4px;
+
+  .forgot-link {
+    font-size: 11px;
+    color: #666666;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #111111;
+      text-decoration: underline;
+    }
+  }
+}
+
+.inline-error {
+  font-size: 11px;
+  color: #d11a2a;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
 .error-banner {
-  background: rgba(209, 26, 42, 0.05);
-  border: 1px solid rgba(209, 26, 42, 0.1);
+  background: rgba(209, 26, 42, 0.06);
+  border: 1px solid rgba(209, 26, 42, 0.15);
   padding: 10px 14px;
-  border-radius: 6px;
+  border-radius: 8px;
   text-align: center;
   
   span {
     color: #d11a2a;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+}
+
+.success-banner {
+  background: rgba(40, 167, 69, 0.08);
+  border: 1px solid rgba(40, 167, 69, 0.2);
+  padding: 10px 14px;
+  border-radius: 8px;
+  text-align: center;
+  
+  span {
+    color: #1e7e34;
     font-size: 12px;
     font-weight: 500;
   }
@@ -135,6 +209,76 @@
   &:disabled {
     background-color: #cccccc;
     cursor: not-allowed;
+  }
+}
+
+/* 2FA OTP Screen Styles */
+.otp-step {
+  .otp-notice {
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+
+    .otp-desc {
+      font-size: 13px;
+      color: #222222;
+      margin: 0 0 4px 0;
+    }
+
+    .otp-subdesc {
+      font-size: 11px;
+      color: #777777;
+      margin: 0;
+    }
+  }
+
+  .otp-input {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 12px;
+    text-align: center;
+    padding: 12px;
+  }
+
+  .otp-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 4px;
+
+    .btn-text {
+      background: transparent;
+      border: none;
+      font-size: 12px;
+      color: #555555;
+      cursor: pointer;
+      text-decoration: underline;
+
+      &:hover:not(:disabled) {
+        color: #111111;
+      }
+
+      &:disabled {
+        color: #aaaaaa;
+        text-decoration: none;
+        cursor: not-allowed;
+      }
+    }
+
+    .btn-back {
+      background: transparent;
+      border: none;
+      font-size: 12px;
+      color: #888888;
+      cursor: pointer;
+
+      &:hover {
+        color: #111111;
+      }
+    }
   }
 }
 

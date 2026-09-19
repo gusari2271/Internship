@@ -14,11 +14,20 @@ import {
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { extname } from 'path';
+import { extname, join } from 'path';
+import * as fs from 'fs';
 import { ProjectsService } from './projects.service';
 import { Project } from './project.entity';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import type { Request } from 'express';
+
+const getUploadsDestination = (req: any, file: any, cb: any) => {
+  const dir = join(__dirname, '..', '..', 'uploads');
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+  cb(null, dir);
+};
 
 @Controller('projects')
 export class ProjectsController {
@@ -27,6 +36,11 @@ export class ProjectsController {
   @Get()
   async getAllProjects(): Promise<Project[]> {
     return this.projectsService.findAll();
+  }
+
+  @Get('pane-status')
+  async getPaneStatus(): Promise<{ cubeIndex: number; projectId: number; title: string }[]> {
+    return this.projectsService.getPaneStatus();
   }
 
   @Get(':id')
@@ -43,7 +57,7 @@ export class ProjectsController {
   @UseInterceptors(
     FilesInterceptor('images', 20, {
       storage: diskStorage({
-        destination: './uploads',
+        destination: getUploadsDestination,
         filename: (req, file, cb) => {
           const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
           cb(null, `${uniqueSuffix}${extname(file.originalname)}`);
@@ -80,7 +94,7 @@ export class ProjectsController {
   @UseInterceptors(
     FilesInterceptor('images', 20, {
       storage: diskStorage({
-        destination: './uploads',
+        destination: getUploadsDestination,
         filename: (req, file, cb) => {
           const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
           cb(null, `${uniqueSuffix}${extname(file.originalname)}`);

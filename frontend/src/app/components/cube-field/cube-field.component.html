@@ -3,7 +3,7 @@
     #canvas 
     (mousemove)="onMouseMove($event)" 
     (touchstart)="onTouchStart($event)"
-    (click)="onCanvasClick()">
+    (click)="onCanvasClick($event)">
   </canvas>
 
   @if (isLoading()) {

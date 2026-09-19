@@ -12,6 +12,7 @@ A full-stack web portfolio for an architecture studio, featuring an immersive **
 | **3D Engine** | Three.js (native, via `@ViewChild canvas`)        |
 | **Backend**   | Node.js + NestJS + TypeORM                        |
 | **Database**  | SQLite via `better-sqlite3` (auto-created)        |
+| **Security**  | JWT, HttpOnly Cookies, 2FA OTP, RBAC, Rate Limit  |
 | **Monorepo**  | `/frontend` + `/backend` with root `concurrently` |
 
 ---
@@ -19,7 +20,7 @@ A full-stack web portfolio for an architecture studio, featuring an immersive **
 ## Project Structure
 
 ```
-UJI COBA/
+Internship/
 ├── package.json              ← Root: npm run dev starts BOTH services
 ├── README.md
 │
@@ -32,34 +33,32 @@ UJI COBA/
 │   │   │   │   ├── home/             ← Homepage (mounts cube-field)
 │   │   │   │   ├── manifestation/    ← Studio manifesto
 │   │   │   │   ├── about-us/         ← Team & studio profile
-│   │   │   │   ├── news/             ← News archive (empty)
+│   │   │   │   ├── news/             ← News archive
 │   │   │   │   ├── career/           ← Job openings
 │   │   │   │   ├── contact-us/       ← Contact form → POST /contact
-│   │   │   │   └── project-detail/   ← Project detail page
+│   │   │   │   ├── project-detail/   ← Project detail page
+│   │   │   │   ├── admin-login/      ← 2FA Login Gateway
+│   │   │   │   ├── forgot-password/  ← Password reset request
+│   │   │   │   ├── reset-password/   ← Set / Reset password flow
+│   │   │   │   └── admin-dashboard/  ← Studio & Admin Control Center
 │   │   │   ├── services/
-│   │   │   │   ├── project.service.ts    ← HTTP client to backend
-│   │   │   │   └── language.service.ts   ← EN / 中文 toggle (Signals)
-│   │   │   ├── app.component.ts/html/scss ← Global layout (logo, nav)
-│   │   │   ├── app.routes.ts              ← Angular router config
-│   │   │   └── app.config.ts              ← provideHttpClient, router
-│   │   └── styles.scss               ← Global reset + Inter font
+│   │   │   │   ├── auth.service.ts   ← Auth state, 2FA, token refresh
+│   │   │   │   ├── admin.service.ts  ← RBAC admin management & audit logs
+│   │   │   │   ├── project.service.ts← Project CRUD client
+│   │   │   │   └── language.service.ts← Language switcher
+│   │   │   └── app.routes.ts         ← Protected routes & guards
+│   │   └── styles.scss
 │   └── package.json
 │
 └── backend/                  ← NestJS API
     ├── src/
-    │   ├── projects/
-    │   │   ├── project.entity.ts     ← TypeORM entity
-    │   │   ├── projects.service.ts   ← DB queries + auto-seed
-    │   │   ├── projects.controller.ts ← GET /projects, GET /projects/:id
-    │   │   └── projects.module.ts
-    │   ├── contact/
-    │   │   ├── contact.entity.ts     ← TypeORM entity
-    │   │   ├── create-contact.dto.ts ← Validation DTO
-    │   │   ├── contact.service.ts    ← Saves form submissions
-    │   │   ├── contact.controller.ts ← POST /contact
-    │   │   └── contact.module.ts
-    │   ├── app.module.ts             ← TypeORM (SQLite) + module registry
-    │   └── main.ts                   ← CORS + ValidationPipe + port 3000
+    │   ├── auth/                 ← 2FA, OTP, JWT, HttpOnly cookies, RBAC
+    │   ├── admin-management/     ← Superadmin member invitation & controls
+    │   ├── audit-log/            ← Comprehensive audit logging system
+    │   ├── mail/                 ← Nodemailer service (dev fallback)
+    │   ├── projects/             ← Project catalog & 3D pane coordinates
+    │   ├── contact/              ← Inquiries & contact form handling
+    │   └── main.ts               ← Cookies, CORS credentials, rate limiting
     └── package.json
 ```
 
@@ -78,93 +77,105 @@ UJI COBA/
 npm install
 ```
 
-> This automatically runs `npm install` inside `/frontend` and `/backend` via the `postinstall` script.
-
 ### 2. Run both services simultaneously
 
 ```bash
 npm run dev
 ```
 
-This uses `concurrently` to launch:
-
-- 🔵 **Frontend** at **http://localhost:4200** (Angular dev server with hot reload)
-- 🟢 **Backend** at **http://localhost:3000** (NestJS watch mode)
-
-The SQLite database (`backend/db.sqlite`) is created automatically on first run.
-5 placeholder projects are auto-seeded into the database on first startup.
+- 🔵 **Frontend** at **http://localhost:4200**
+- 🟢 **Backend** at **http://localhost:3000**
 
 ---
 
-## Running Separately
+## Production-Ready Admin Authentication & Security
 
-```bash
-# Frontend only
-npm run start:frontend
+The application includes an enterprise-grade, hardened authentication and administration system:
 
-# Backend only
-npm run start:backend
-```
+### 1. Default Superadmin Account
 
----
+On initial startup, the backend automatically seeds a default master administrator:
 
-## API Endpoints
+- **Email**: `superadmin@grahita.id` (customizable via `SUPERADMIN_EMAIL` in `.env`)
+- **Initial Password**: `SuperAdminGrahita2026!` (customizable via `SUPERADMIN_PASSWORD` in `.env`)
+- **Role**: `superadmin`
+- **First-Time Password Change**: Marked with `mustChangePassword: true`. Upon logging in for the first time, an obligatory modal will enforce changing this temporary password to a personal secure password before unlocking dashboard controls.
 
-| Method | Endpoint        | Description                     |
-| ------ | --------------- | ------------------------------- |
-| `GET`  | `/projects`     | Returns all projects (array)    |
-| `GET`  | `/projects/:id` | Returns a single project by ID  |
-| `POST` | `/contact`      | Saves a contact form submission |
+### 2. Two-Factor Authentication (2FA Email OTP)
 
-### POST /contact body example
-
-```json
-{
-  "name": "Taro Yamamoto",
-  "email": "taro@example.com",
-  "message": "We would like to discuss a residential commission in Kyoto."
-}
-```
+1. **Step 1 (Credentials)**:
+   - Admin enters email and password on `/admin/login`.
+   - Client validates input formatting (email format, non-empty fields).
+   - Password input includes an eye toggle button to show or hide the password.
+   - If credentials fail, a **generic error message** (`"Invalid email or password"`) is always returned to prevent username/email enumeration.
+2. **Step 2 (6-Digit Email OTP)**:
+   - When credentials match, a 6-digit numeric OTP code is generated, hashed with SHA-256, and sent via email (expires in 5 minutes).
+   - In local development, the code is also clearly printed in the backend terminal logs.
+   - Admin inputs the OTP on the verification screen.
+   - Includes a 60-second cooldown timer on the "Resend Code" button.
+   - Maximum 5 failed OTP attempts before the session resets.
+   - Upon successful verification, an **Access Token** (short-lived, 2 hours) and a secure **Refresh Token** (7 days, delivered via `HttpOnly` cookie) are issued.
 
 ---
 
-## 3D Scene — How It Works
+### 3. Rate Limiting & Brute-Force Protection
 
-The **CubeFieldComponent** (`/frontend/src/app/components/cube-field/`) creates a Three.js `WebGLRenderer` mounted on a `<canvas>` element via Angular's `@ViewChild`.
-
-- **55 cubes** are scattered across a loosely broken 5×5×5 grid
-- All cubes are **wireframe** (EdgeGeometry + LineBasicMaterial) with near-transparent solid faces for raycasting
-- **5 project-slot cubes** are assigned to backend project data; they get slightly darker wireframe and a brighter edge highlight on hover
-- **OrbitControls** with damping enable drag-to-rotate and scroll-to-zoom
-- **Idle animation**: every cube has a unique floating speed/phase and slow continuous Y-axis rotation
-- **Hover**: Raycasting detects project cubes → scale enlargement + dark border highlight + glassmorphism tooltip
-- **Click**: Navigates to `/projects/:id` in Angular router
+- Monitored on `POST /auth/login`.
+- Maximum **5 failed login attempts** per email address within a 15-minute sliding window.
+- After 5 consecutive failures, the endpoint returns **HTTP 429 (Too Many Requests)** with the remaining retry cooldown time.
+- All failed attempts and IP addresses are recorded in the `login_attempts` table.
 
 ---
 
-## Adding Real Project Data
+### 4. Forgot & Reset Password Flow
 
-1. Open `backend/db.sqlite` with any SQLite viewer (e.g. DB Browser for SQLite)
-2. Edit the `projects` table rows — change `title`, `category`, `location`, `year`, `description`, and set `thumbnailUrl` to any publicly accessible image URL
-3. The 3D cube field reads from `GET /projects` on load — refresh the page to see project images on the top face of their assigned cubes
-
-Alternatively, add a POST `/projects` route to `ProjectsController` when ready for full CRUD.
-
----
-
-## Language Support
-
-The language switcher (bottom-left UI) toggles between **English** and **中文** using a simple Angular Signal-based `LanguageService`. All navigation labels and form text are translated. To add more keys, extend the `dictionary` object in:
-
-```
-frontend/src/app/services/language.service.ts
-```
+- **Request Page**: `/admin/forgot-password`
+  - Submits to `POST /auth/forgot-password`.
+  - **User Enumeration Safe**: Always returns the exact same generic message (`"If this email is registered, a password reset link has been sent to your inbox."`) whether the email exists in the database or not.
+- **Reset Page**: `/admin/reset-password?token=...`
+  - Validates cryptographically random 32-byte token (30-minute expiration).
+  - Updates password (hashed with bcrypt).
+  - Immediately **invalidates all active sessions and refresh tokens** for that administrator across all devices.
 
 ---
 
-## Notes
+### 5. Multi-Tier Role-Based Access Control (RBAC)
 
-- The SQLite database file is created at `backend/db.sqlite` and is excluded from version control via `.gitignore`
-- All project `thumbnailUrl` fields are `null` by default — the cubes render as wireframe-only until you populate image URLs
-- The `/news` page intentionally starts with an empty list — add entries directly to the component array or connect a new NestJS endpoint when ready
-- The `Career` page includes 2 placeholder job listings — edit them in `career.component.ts`
+#### Superadmin (`role: 'superadmin'`)
+
+- Full access to Project Catalog and 3D Pane Selector.
+- Access to **"Manage Admins"** tab:
+  - **Invite New Admin**: sends an activation invitation link to the colleague's email with a 48-hour secure token (no plain passwords sent).
+  - **Deactivate Admin**: soft-deactivates an admin account and instantly revokes all their active sessions.
+  - **Reactivate Admin**: restores administrative privileges.
+  - **Delete Admin**: permanently removes an account.
+  - **Safeguards**: Superadmin cannot deactivate or delete their own account, and the last remaining superadmin cannot be removed.
+- Access to **"Activity Log"** tab: view complete chronological audit trail.
+
+#### Sub-admin (`role: 'admin'`)
+
+- Dedicated to architecture content curation: create, update, and manage studio projects and 3D floating glass panes.
+- Restricted from accessing Admin Management and Activity Log endpoints (`403 Forbidden`).
+
+---
+
+### 6. Session & Cookie Management
+
+- **Access Token**: Short lifespan (2 hours) for API authorization.
+- **Refresh Token**: Long lifespan (7 days) stored inside an `HttpOnly`, `SameSite=Lax` cookie to prevent cross-site scripting (XSS) extraction.
+- **Sign Out**: Revokes the current session and clears the cookie.
+- **Sign Out All Devices**: Revokes all refresh tokens belonging to the admin account.
+
+---
+
+### 7. Audit Logging
+
+Every sensitive action is tracked in the `audit_logs` database table:
+
+- Login success / failed attempts / OTP attempts
+- Rate limit triggers
+- Password resets & password changes
+- Admin invitations, activations, deactivations, reactivations, and deletions
+- Project CRUD actions
+
+Superadmins can view and search this log directly inside the Admin Dashboard under the **Activity Log** tab.

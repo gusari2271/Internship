@@ -1,331 +1,934 @@
 <div class="dashboard-container">
-  <header class="dashboard-header">
-    <div class="brand">
-      <span class="admin-title">ADMIN DASHBOARD</span>
-    </div>
-    <button (click)="logout()" class="btn-logout">sign out</button>
-  </header>
-
-  <main class="dashboard-content">
-    <!-- 1. Visual 3D Pane Selector (Top, Full Width) -->
-    <section class="card pane-selector-card">
-      <div class="pane-selector-header">
-        <div>
-          <h2 class="card-title">visual 3D pane selector</h2>
-          <p class="card-subtitle">
-            linked to the floating glass panes on the home screen. orbit with drag & click to select.
-          </p>
-        </div>
-        <div class="color-key">
-          <span class="key-item">
-            <span class="color-box gold"></span>Selected
-          </span>
-          <span class="key-item">
-            <span class="color-box cyan"></span>Hovered
-          </span>
-        </div>
-      </div>
-
-      <div class="field-container">
-        <app-cube-field
-          [selectionMode]="true"
-          [selectedIndex]="selectedPaneIndex()"
-          (indexSelect)="onPaneSelected($event)"
-        ></app-cube-field>
-      </div>
-
-      <div class="pane-selector-footer">
-        <p class="instructions">
-          Orbit by dragging anywhere inside the 3D space. Click any floating glass sheet to associate it with this project.
+  <!-- FORCED PASSWORD CHANGE MODAL (If mustChangePassword is true) -->
+  <div *ngIf="mustChangePassword()" class="forced-modal-overlay">
+    <div class="forced-modal-card">
+      <div class="modal-header">
+        <h2 class="modal-title">initial password change required</h2>
+        <p class="modal-subtitle">
+          Your account was provisioned with temporary default credentials. For
+          security compliance, please configure a personal password before
+          continuing.
         </p>
       </div>
-    </section>
 
-    <!-- 2. Register New Project / Edit Project Form (Middle, Full Width) -->
-    <section class="card form-card">
-      <h2 class="card-title">
-        {{ isEditing() ? "edit project settings" : "Register new project" }}
-      </h2>
-
-      <form (ngSubmit)="onSubmit()" class="crud-form">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="title">project title *</label>
+      <form (ngSubmit)="onSubmitForcedPassword()" class="modal-form">
+        <div class="form-group">
+          <label for="fNewPwd">new password (min. 8 characters)</label>
+          <div class="pwd-wrapper">
             <input
-              type="text"
-              id="title"
-              [(ngModel)]="title"
-              name="title"
+              [type]="showForcedNew() ? 'text' : 'password'"
+              id="fNewPwd"
+              name="fNewPwd"
+              [(ngModel)]="forcedNewPassword"
+              placeholder="••••••••"
+              class="form-control"
               required
-              placeholder="minimalist gallery structure"
-              class="form-control"
             />
-          </div>
-          <div class="form-group">
-            <label for="category">category</label>
-            <input
-              type="text"
-              id="category"
-              [(ngModel)]="category"
-              name="category"
-              placeholder="Residential / Cultural"
-              class="form-control"
-            />
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="location">location</label>
-            <input
-              type="text"
-              id="location"
-              [(ngModel)]="location"
-              name="location"
-              placeholder="Kyoto, Japan"
-              class="form-control"
-            />
-          </div>
-          <div class="form-group">
-            <label for="year">completion year</label>
-            <input
-              type="number"
-              id="year"
-              [(ngModel)]="year"
-              name="year"
-              placeholder="2026"
-              class="form-control"
-            />
+            <button
+              type="button"
+              class="btn-pwd-eye"
+              (click)="showForcedNew.set(!showForcedNew())"
+            >
+              <svg
+                *ngIf="!showForcedNew()"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+              <svg
+                *ngIf="showForcedNew()"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24" />
+                <line x1="2" y1="2" x2="22" y2="22" />
+              </svg>
+            </button>
           </div>
         </div>
 
         <div class="form-group">
-          <label for="description">description / architectural concept</label>
-          <textarea
-            id="description"
-            [(ngModel)]="description"
-            name="description"
-            placeholder="Describe the geometric language, material exploration, and site integration..."
-            class="form-control textarea"
-          ></textarea>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="images">project photos (multiple)</label>
+          <label for="fConfPwd">confirm new password</label>
+          <div class="pwd-wrapper">
             <input
-              type="file"
-              id="images"
-              (change)="onFilesSelected($event)"
-              accept="image/*"
-              multiple
-              class="form-control file-input"
+              [type]="showForcedConfirm() ? 'text' : 'password'"
+              id="fConfPwd"
+              name="fConfPwd"
+              [(ngModel)]="forcedConfirmPassword"
+              placeholder="••••••••"
+              class="form-control"
+              required
             />
-          </div>
-          <div class="form-group">
-            <label for="paneIndex">linked 3D glass pane index</label>
-            <div class="pane-selector-display">
-              <span
-                class="value"
-                [class.empty]="selectedPaneIndex() === null"
-              >
-                {{
-                  selectedPaneIndex() !== null
-                    ? "Pane #" + selectedPaneIndex()
-                    : "No pane linked (click one in 3D selector above)"
-                }}
-              </span>
-              <button
-                type="button"
-                *ngIf="selectedPaneIndex() !== null"
-                (click)="selectedPaneIndex.set(null)"
-                class="btn-clear-pane"
-                title="Clear pane selection"
-              >
-                ×
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Multi-photo previews list -->
-        <div
-          class="photos-preview-section"
-          *ngIf="existingImages.length > 0 || newFiles.length > 0"
-        >
-          <label class="section-label"
-            >photo gallery previews & cover selection</label
-          >
-
-          <div class="previews-grid">
-            <!-- Existing saved photos -->
-            <div class="preview-card" *ngFor="let img of existingImages">
-              <img
-                [src]="img.imageUrl"
-                alt="Gallery photo"
-                class="preview-img"
-              />
-              <div class="card-overlay">
-                <button
-                  type="button"
-                  (click)="setCover('existing', img.id)"
-                  [class.active]="img.isCover"
-                  class="btn-cover"
-                >
-                  {{ img.isCover ? "★ Cover" : "Set Cover" }}
-                </button>
-                <button
-                  type="button"
-                  (click)="removeExistingImage(img)"
-                  class="btn-remove"
-                  title="Remove photo"
-                >
-                  ✕
-                </button>
-              </div>
-            </div>
-
-            <!-- Newly selected upload photos -->
-            <div
-              class="preview-card new-upload"
-              *ngFor="let preview of newFiles; let i = index"
+            <button
+              type="button"
+              class="btn-pwd-eye"
+              (click)="showForcedConfirm.set(!showForcedConfirm())"
             >
-              <img
-                [src]="preview.previewUrl"
-                alt="New upload photo"
-                class="preview-img"
-              />
-              <span class="new-badge">new</span>
-              <div class="card-overlay">
-                <button
-                  type="button"
-                  (click)="setCover('new', i)"
-                  [class.active]="preview.isCover"
-                  class="btn-cover"
-                >
-                  {{ preview.isCover ? "★ Cover" : "Set Cover" }}
-                </button>
-                <button
-                  type="button"
-                  (click)="removeNewFile(i)"
-                  class="btn-remove"
-                  title="Remove photo"
-                >
-                  ✕
-                </button>
-              </div>
-            </div>
+              <svg
+                *ngIf="!showForcedConfirm()"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+              <svg
+                *ngIf="showForcedConfirm()"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24" />
+                <line x1="2" y1="2" x2="22" y2="22" />
+              </svg>
+            </button>
           </div>
         </div>
 
-        <div *ngIf="errorMessage()" class="alert-message error">
-          {{ errorMessage() }}
+        <div *ngIf="forcedPasswordError()" class="error-banner">
+          <span>{{ forcedPasswordError() }}</span>
         </div>
 
-        <div *ngIf="successMessage()" class="alert-message success">
-          {{ successMessage() }}
+        <button
+          type="submit"
+          [disabled]="forcedPasswordLoading()"
+          class="btn-submit"
+        >
+          <span *ngIf="!forcedPasswordLoading()">save & unlock dashboard</span>
+          <span *ngIf="forcedPasswordLoading()" class="spinner"></span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- INVITE ADMIN MODAL -->
+  <div *ngIf="showInviteModal()" class="modal-backdrop">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">invite new administrator</h3>
+        <button
+          type="button"
+          class="btn-close-modal"
+          (click)="closeInviteModal()"
+        >
+          ×
+        </button>
+      </div>
+
+      <form (ngSubmit)="submitInvite()" class="modal-form">
+        <div class="form-group">
+          <label for="invEmail">administrator email *</label>
+          <input
+            type="email"
+            id="invEmail"
+            name="invEmail"
+            [(ngModel)]="inviteEmail"
+            placeholder="colleague@grahita.id"
+            class="form-control"
+            required
+          />
         </div>
 
-        <div class="form-actions">
-          <button type="submit" class="btn-primary">
-            {{ isEditing() ? "apply modifications" : "save project" }}
+        <div class="form-group">
+          <label for="invName">full name (optional)</label>
+          <input
+            type="text"
+            id="invName"
+            name="invName"
+            [(ngModel)]="inviteName"
+            placeholder="Architect Name"
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="invRole">administrative role *</label>
+          <select
+            id="invRole"
+            name="invRole"
+            [(ngModel)]="inviteRole"
+            class="form-control select-control"
+          >
+            <option value="admin">Admin (Project Management & Catalog)</option>
+            <option value="superadmin">
+              Superadmin (Full Access & Admin Management)
+            </option>
+          </select>
+          <p class="input-helper">
+            An invitation link with account activation will be securely sent to
+            this email address.
+          </p>
+        </div>
+
+        <div *ngIf="inviteError()" class="error-banner">
+          <span>{{ inviteError() }}</span>
+        </div>
+        <div *ngIf="inviteSuccess()" class="success-banner">
+          <span>{{ inviteSuccess() }}</span>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" (click)="closeInviteModal()" class="btn-cancel">
+            cancel
           </button>
-          <button type="button" (click)="resetForm()" class="btn-secondary">
-            cancel / reset
+          <button
+            type="submit"
+            [disabled]="inviteLoading()"
+            class="btn-submit modal-submit"
+          >
+            <span *ngIf="!inviteLoading()">send invitation</span>
+            <span *ngIf="inviteLoading()" class="spinner"></span>
           </button>
         </div>
       </form>
-    </section>
+    </div>
+  </div>
 
-    <!-- 3. Project Registry Catalog (Bottom, Full Width) -->
-    <section class="card table-card">
-      <h2 class="card-title">project registry catalog</h2>
-      <div class="table-responsive">
-        <table class="registry-table">
-          <thead>
-            <tr>
-              <th>preview</th>
-              <th>title</th>
-              <th>category</th>
-              <th>location</th>
-              <th>photos</th>
-              <th>3D index</th>
-              <th>actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let project of projects()">
-              <td>
-                <div class="thumbnail-cell">
+  <!-- DASHBOARD TOP HEADER -->
+  <header class="dashboard-header">
+    <div class="header-left">
+      <span class="admin-title">GRAHITA DESIGN</span>
+      <span class="system-tag">CONTROL GATEWAY</span>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs">
+      <button
+        type="button"
+        class="tab-btn"
+        [class.active]="activeTab() === 'projects'"
+        (click)="setTab('projects')"
+      >
+        projects catalog
+      </button>
+
+      <button
+        *ngIf="isSuperAdmin()"
+        type="button"
+        class="tab-btn"
+        [class.active]="activeTab() === 'admins'"
+        (click)="setTab('admins')"
+      >
+        manage admins
+      </button>
+
+      <button
+        *ngIf="isSuperAdmin()"
+        type="button"
+        class="tab-btn"
+        [class.active]="activeTab() === 'logs'"
+        (click)="setTab('logs')"
+      >
+        activity log
+      </button>
+    </nav>
+
+    <!-- User Profile & Sign Out Actions -->
+    <div class="header-right">
+      <div class="user-pill">
+        <span class="user-email">{{ currentUser()?.email }}</span>
+        <span
+          class="role-badge"
+          [class.badge-super]="currentUser()?.role === 'superadmin'"
+        >
+          {{ currentUser()?.role || "admin" }}
+        </span>
+      </div>
+
+      <div class="logout-group">
+        <button
+          (click)="logout()"
+          class="btn-logout"
+          title="Sign out from this device"
+        >
+          Sign out
+        </button>
+        <button
+          (click)="logoutAllDevices()"
+          class="btn-logout-all"
+          title="Terminate all active sessions across all devices"
+        >
+          all devices
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Notification Banner -->
+  <div *ngIf="adminActionMessage()" class="global-notice-banner">
+    <span>{{ adminActionMessage() }}</span>
+  </div>
+
+  <main class="dashboard-content">
+    <!-- ========================================== -->
+    <!-- TAB 1: PROJECTS CATALOG (Default)           -->
+    <!-- ========================================== -->
+    <div *ngIf="activeTab() === 'projects'" class="tab-content">
+      <!-- 1. Visual 3D Pane Selector -->
+      <section class="card pane-selector-card">
+        <div class="pane-selector-header">
+          <div>
+            <h2 class="card-title">visual 3D pane selector</h2>
+            <p class="card-subtitle">
+              linked to the floating glass panes on the home screen. orbit with
+              drag & click to select.
+            </p>
+          </div>
+          <div class="color-key">
+            <span class="key-item">
+              <span class="color-box gold"></span>Selected
+            </span>
+            <span class="key-item">
+              <span class="color-box cyan"></span>Hovered
+            </span>
+          </div>
+        </div>
+
+        <div class="field-container">
+          <app-cube-field
+            [selectionMode]="true"
+            [selectedIndex]="selectedPaneIndex()"
+            [projectsInput]="projects()"
+            (indexSelect)="onPaneSelected($event)"
+          ></app-cube-field>
+        </div>
+
+        <div class="pane-selector-footer">
+          <p class="instructions">
+            Orbit by dragging anywhere inside the 3D space. Click any floating
+            glass sheet to associate it with this project.
+          </p>
+        </div>
+      </section>
+
+      <!-- 2. Register New Project / Edit Project Form -->
+      <section class="card form-card">
+        <h2 class="card-title">
+          {{
+            isEditing()
+              ? "Edit Project: " + (title || "Untitled")
+              : "Register New Project"
+          }}
+        </h2>
+
+        <form (ngSubmit)="onSubmit()" class="crud-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="title">project title *</label>
+              <input
+                type="text"
+                id="title"
+                [(ngModel)]="title"
+                name="title"
+                required
+                placeholder="minimalist gallery structure"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <label for="category">category</label>
+              <input
+                type="text"
+                id="category"
+                [(ngModel)]="category"
+                name="category"
+                placeholder="Residential / Cultural"
+                class="form-control"
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="location">location</label>
+              <input
+                type="text"
+                id="location"
+                [(ngModel)]="location"
+                name="location"
+                placeholder="Kyoto, Japan"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <label for="year">completion year</label>
+              <input
+                type="number"
+                id="year"
+                [(ngModel)]="year"
+                name="year"
+                placeholder="2026"
+                class="form-control"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description">description / architectural concept</label>
+            <textarea
+              id="description"
+              [(ngModel)]="description"
+              name="description"
+              rows="3"
+              placeholder="Design philosophy, structural elements, natural illumination strategy..."
+              class="form-control"
+            ></textarea>
+          </div>
+
+          <!-- Linked 3D Glass Pane Index -->
+          <div class="form-group pane-link-group">
+            <label>linked 3d glass pane index</label>
+            <div class="pane-indicator">
+              <span class="badge" [class.linked]="selectedPaneIndex() !== null">
+                {{
+                  selectedPaneIndex() !== null
+                    ? "Pane #" + selectedPaneIndex()
+                    : "None Selected"
+                }}
+              </span>
+              <div class="pane-indicator-actions">
+                <!-- Change / Assign button -->
+                <button
+                  type="button"
+                  (click)="openPanePickerForEdit()"
+                  class="btn-change-pane"
+                  title="Open 3D pane picker to reassign the linked glass panel"
+                >
+                  {{
+                    selectedPaneIndex() !== null
+                      ? "↕ Change Pane"
+                      : "+ Assign Pane"
+                  }}
+                </button>
+                <!-- Clear button (only when assigned) -->
+                <button
+                  *ngIf="selectedPaneIndex() !== null"
+                  type="button"
+                  (click)="clearPaneSelection()"
+                  class="btn-clear-pane"
+                  title="Unlink from 3D pane"
+                >
+                  ×
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project Photos Management -->
+          <div class="form-group photos-mgmt-group photos-preview-container">
+            <!-- A. Existing Photos -->
+            <div *ngIf="existingImages.length > 0" class="existing-section photos-preview-section">
+              <div class="section-header-flex">
+                <label class="section-label"
+                  >Existing Project Photos ({{
+                    existingImages.length
+                  }}
+                  saved)</label
+                >
+                <span class="helper-note"
+                  >Click ★ Cover to set main thumbnail, or ✕ to remove</span
+                >
+              </div>
+              <div class="image-previews-grid">
+                <div
+                  *ngFor="let img of existingImages"
+                  class="preview-card"
+                  [class.is-cover]="
+                    coverTarget.type === 'existing' &&
+                    coverTarget.indexOrId === img.id
+                  "
+                >
+                  <img
+                    [src]="img.imageUrl"
+                    alt="Existing project photo"
+                    class="preview-thumbnail"
+                    style="width: 100%; height: 100%; object-fit: cover; display: block;"
+                  />
+                  <span
+                    *ngIf="
+                      coverTarget.type === 'existing' &&
+                      coverTarget.indexOrId === img.id
+                    "
+                    class="cover-badge"
+                  >
+                    ★ COVER
+                  </span>
+                  <div class="overlay-actions">
+                    <button
+                      type="button"
+                      (click)="setCover('existing', img.id)"
+                      class="btn-action-sm btn-cover"
+                      [class.active]="
+                        coverTarget.type === 'existing' &&
+                        coverTarget.indexOrId === img.id
+                      "
+                    >
+                      ★ Cover
+                    </button>
+                    <button
+                      type="button"
+                      (click)="removeExistingImage(img.id)"
+                      class="btn-action-sm btn-remove"
+                      title="Remove image"
+                    >
+                      ✕ Remove
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- B. Add New Photos -->
+            <div class="new-section photos-preview-section">
+              <label for="photos" class="section-label">Add New Photos (Multiple)</label>
+              <input
+                type="file"
+                id="photos"
+                multiple
+                (change)="onFileChange($event)"
+                accept="image/*"
+                class="form-control file-input"
+              />
+              <p class="input-helper">
+                Choose photos to add to this project. They will be uploaded when
+                you save.
+              </p>
+
+              <div
+                *ngIf="newFiles.length > 0"
+                class="image-previews-grid new-previews"
+              >
+                <div
+                  *ngFor="let file of newFiles; let i = index"
+                  class="preview-card"
+                  [class.is-cover]="
+                    coverTarget.type === 'new' && coverTarget.indexOrId === i
+                  "
+                >
+                  <img
+                    [src]="file.previewUrl"
+                    alt="New upload preview"
+                    class="preview-thumbnail"
+                    style="width: 100%; height: 100%; object-fit: cover; display: block;"
+                  />
+                  <span
+                    *ngIf="
+                      coverTarget.type === 'new' && coverTarget.indexOrId === i
+                    "
+                    class="cover-badge"
+                  >
+                    ★ NEW COVER
+                  </span>
+                  <div class="overlay-actions">
+                    <button
+                      type="button"
+                      (click)="setCover('new', i)"
+                      class="btn-action-sm btn-cover"
+                      [class.active]="
+                        coverTarget.type === 'new' &&
+                        coverTarget.indexOrId === i
+                      "
+                    >
+                      ★ Cover
+                    </button>
+                    <button
+                      type="button"
+                      (click)="removeNewFile(i)"
+                      class="btn-action-sm btn-remove"
+                      title="Remove image"
+                    >
+                      ✕ Remove
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="errorMessage()" class="alert alert-danger">
+            {{ errorMessage() }}
+          </div>
+          <div *ngIf="successMessage()" class="alert alert-success">
+            {{ successMessage() }}
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn-primary">
+              {{ isEditing() ? "Apply Modifications" : "Save Project Entry" }}
+            </button>
+            <button type="button" (click)="resetForm()" class="btn-secondary">
+              Cancel / Reset
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- 3. Project Registry Catalog Table -->
+      <section class="card catalog-card">
+        <h2 class="card-title">project registry catalog</h2>
+        <div class="table-responsive">
+          <table class="project-table">
+            <thead>
+              <tr>
+                <th>Cover</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Location</th>
+                <th>Year</th>
+                <th>Pane Index</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let project of projects()">
+                <td>
                   <img
                     *ngIf="project.thumbnailUrl"
                     [src]="project.thumbnailUrl"
-                    alt=""
-                    class="small-thumbnail"
+                    alt="Thumbnail"
+                    class="table-thumb"
                   />
-                  <span *ngIf="!project.thumbnailUrl" class="no-img"
-                    >no img</span
+                  <span *ngIf="!project.thumbnailUrl" class="no-thumb"
+                    >No Cover</span
                   >
-                </div>
-              </td>
-              <td class="font-bold">{{ project.title }}</td>
-              <td>{{ project.category || "—" }}</td>
-              <td>{{ project.location || "—" }}</td>
-              <td>
-                <span class="badge-count"
-                  >{{
-                    project.images
-                      ? project.images.length
-                      : project.thumbnailUrl
-                        ? 1
-                        : 0
-                  }}
-                  photos</span
-                >
-              </td>
-              <td>
-                <span
-                  class="badge-index"
-                  [class.unassigned]="
-                    project.cubeIndex === undefined ||
-                    project.cubeIndex === null
-                  "
-                >
-                  {{
-                    project.cubeIndex !== undefined &&
-                    project.cubeIndex !== null
-                      ? "Pane #" + project.cubeIndex
-                      : "none"
-                  }}
-                </span>
-              </td>
-              <td>
-                <div class="action-buttons">
-                  <button
-                    (click)="editProject(project)"
-                    class="btn-action edit"
-                    title="Edit settings"
+                </td>
+                <td class="font-medium">{{ project.title }}</td>
+                <td>{{ project.category || "-" }}</td>
+                <td>{{ project.location || "-" }}</td>
+                <td>{{ project.year || "-" }}</td>
+                <td>
+                  <span
+                    class="badge"
+                    [class.linked]="project.cubeIndex !== null"
                   >
-                    edit
+                    {{
+                      project.cubeIndex !== null
+                        ? "Pane #" + project.cubeIndex
+                        : "Unassigned"
+                    }}
+                  </span>
+                </td>
+                <td class="actions-cell">
+                  <button (click)="editProject(project)" class="btn-table-edit">
+                    Edit
                   </button>
                   <button
                     (click)="deleteProject(project.id)"
-                    class="btn-action delete"
-                    title="Delete project"
+                    class="btn-table-delete"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+              <tr *ngIf="projects().length === 0">
+                <td colspan="7" class="text-center empty-cell">
+                  No projects registered yet.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- PANE PICKER MODAL (Edit/Reassign flow)         -->
+    <!-- ============================================== -->
+    <div
+      *ngIf="showPanePickerModal()"
+      class="pane-picker-overlay"
+      (click.self)="closePanePickerModal()"
+    >
+      <div class="pane-picker-modal">
+        <!-- Header -->
+        <div class="ppm-header">
+          <div class="ppm-header-left">
+            <h3 class="ppm-title">Select 3D Glass Pane</h3>
+            <p class="ppm-subtitle">
+              Orbit by dragging, then click any glass pane to assign it to
+              <strong>"{{ title || "this project" }}"</strong>.
+            </p>
+          </div>
+          <button
+            type="button"
+            class="ppm-close"
+            (click)="closePanePickerModal()"
+            title="Close picker"
+          >
+            ×
+          </button>
+        </div>
+
+        <!-- Legend -->
+        <div class="ppm-legend">
+          <span class="legend-item">
+            <span class="legend-dot gold"></span> Currently selected
+          </span>
+          <span class="legend-item">
+            <span class="legend-dot cyan"></span> Hover
+          </span>
+          <span class="legend-item">
+            <span class="legend-dot grey"></span> Unoccupied pane
+          </span>
+          <span class="legend-item">
+            <span class="legend-dot occupied"></span> Occupied by other project
+            (will be unlinked)
+          </span>
+        </div>
+
+        <!-- 3D Cube Field -->
+        <div class="ppm-scene">
+          <app-cube-field
+            [selectionMode]="true"
+            [selectedIndex]="selectedPaneIndex()"
+            [projectsInput]="projects()"
+            (indexSelect)="onPaneSelectedFromModal($event)"
+          ></app-cube-field>
+        </div>
+
+        <!-- Footer -->
+        <div class="ppm-footer">
+          <button
+            type="button"
+            class="btn-ppm-cancel"
+            (click)="closePanePickerModal()"
+          >
+            Cancel — keep Pane
+            {{
+              selectedPaneIndex() !== null
+                ? "#" + selectedPaneIndex()
+                : "unassigned"
+            }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 2: MANAGE ADMINS (Superadmin Only)     -->
+    <!-- ========================================== -->
+    <div *ngIf="activeTab() === 'admins'" class="tab-content">
+      <section class="card">
+        <div class="card-header-flex">
+          <div>
+            <h2 class="card-title">administrator management</h2>
+            <p class="card-subtitle">
+              Manage studio access permissions, invite new team members, and
+              toggle administrative privileges.
+            </p>
+          </div>
+          <button
+            type="button"
+            class="btn-primary btn-invite"
+            (click)="openInviteModal()"
+          >
+            + invite new admin
+          </button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="project-table admin-table">
+            <thead>
+              <tr>
+                <th>Administrator</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Last Login</th>
+                <th>Created</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let adm of admins()">
+                <td>
+                  <div class="admin-profile-cell">
+                    <span class="admin-name">{{
+                      adm.name || "Unnamed Admin"
+                    }}</span>
+                    <span class="admin-email-sub">{{ adm.email }}</span>
+                  </div>
+                </td>
+                <td>
+                  <span
+                    class="role-badge"
+                    [class.badge-super]="adm.role === 'superadmin'"
+                  >
+                    {{ adm.role }}
+                  </span>
+                </td>
+                <td>
+                  <span
+                    class="status-pill"
+                    [class.active]="adm.isActive"
+                    [class.inactive]="!adm.isActive"
+                  >
+                    {{ adm.isActive ? "ACTIVE" : "DEACTIVATED" }}
+                  </span>
+                  <span
+                    *ngIf="adm.mustChangePassword"
+                    class="badge-notice"
+                    title="Requires password change on next login"
+                  >
+                    ⚠️ PWD RESET
+                  </span>
+                </td>
+                <td>
+                  {{
+                    adm.lastLoginAt
+                      ? (adm.lastLoginAt | date: "medium")
+                      : "Never"
+                  }}
+                </td>
+                <td>
+                  {{ adm.createdAt | date: "mediumDate" }}
+                </td>
+                <td class="actions-cell">
+                  <!-- Deactivate / Reactivate -->
+                  <button
+                    *ngIf="adm.isActive"
+                    (click)="deactivateAdmin(adm)"
+                    [disabled]="adm.id === currentUser()?.id"
+                    class="btn-table-deactivate"
+                    [title]="
+                      adm.id === currentUser()?.id
+                        ? 'Cannot deactivate self'
+                        : 'Deactivate administrator'
+                    "
+                  >
+                    deactivate
+                  </button>
+
+                  <button
+                    *ngIf="!adm.isActive"
+                    (click)="reactivateAdmin(adm)"
+                    class="btn-table-reactivate"
+                  >
+                    reactivate
+                  </button>
+
+                  <!-- Delete -->
+                  <button
+                    (click)="deleteAdmin(adm)"
+                    [disabled]="adm.id === currentUser()?.id"
+                    class="btn-table-delete"
+                    [title]="
+                      adm.id === currentUser()?.id
+                        ? 'Cannot delete self'
+                        : 'Permanently remove administrator'
+                    "
                   >
                     delete
                   </button>
-                </div>
-              </td>
-            </tr>
-            <tr *ngIf="projects().length === 0">
-              <td colspan="7" class="text-center empty-state">
-                No projects registered. Complete the form above to add one.
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+                </td>
+              </tr>
+              <tr *ngIf="admins().length === 0 && !isLoadingAdmins()">
+                <td colspan="6" class="text-center empty-cell">
+                  No administrators found.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 3: ACTIVITY LOG (Superadmin Only)      -->
+    <!-- ========================================== -->
+    <div *ngIf="activeTab() === 'logs'" class="tab-content">
+      <section class="card">
+        <div class="card-header-flex">
+          <div>
+            <h2 class="card-title">system activity & audit log</h2>
+            <p class="card-subtitle">
+              Comprehensive tamper-evident chronological audit trail of
+              authentication events and administrative changes.
+            </p>
+          </div>
+          <button
+            type="button"
+            (click)="loadAuditLogs()"
+            class="btn-secondary btn-refresh"
+          >
+            ↻ refresh log
+          </button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="project-table log-table">
+            <thead>
+              <tr>
+                <th>Timestamp</th>
+                <th>Admin Account</th>
+                <th>Action Event</th>
+                <th>IP Address</th>
+                <th>Audit Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let log of auditLogs()">
+                <td class="timestamp-cell">
+                  {{ log.createdAt | date: "yyyy-MM-dd HH:mm:ss" }}
+                </td>
+                <td>
+                  <span class="font-medium">{{
+                    log.adminEmail || "System / Unauthenticated"
+                  }}</span>
+                </td>
+                <td>
+                  <span
+                    class="action-badge"
+                    [class.act-success]="
+                      log.action.includes('SUCCESS') ||
+                      log.action.includes('ACTIVATED') ||
+                      log.action.includes('CREATED')
+                    "
+                    [class.act-danger]="
+                      log.action.includes('FAILED') ||
+                      log.action.includes('DELETED') ||
+                      log.action.includes('EXCEEDED')
+                    "
+                    [class.act-warning]="
+                      log.action.includes('DEACTIVATED') ||
+                      log.action.includes('RESET')
+                    "
+                  >
+                    {{ log.action }}
+                  </span>
+                </td>
+                <td>
+                  <code>{{ log.ipAddress || "127.0.0.1" }}</code>
+                </td>
+                <td class="details-cell">
+                  <span>{{ log.details || "-" }}</span>
+                </td>
+              </tr>
+              <tr *ngIf="auditLogs().length === 0 && !isLoadingLogs()">
+                <td colspan="5" class="text-center empty-cell">
+                  No activity logs recorded yet.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
   </main>
 </div>

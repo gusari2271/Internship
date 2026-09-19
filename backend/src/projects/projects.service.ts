@@ -76,18 +76,45 @@ export class ProjectsService implements OnModuleInit {
     }
   }
 
+  private ensureThumbnailInImages(project: Project | null): Project | null {
+    if (!project) return null;
+    if (project.thumbnailUrl && (!project.images || project.images.length === 0)) {
+      project.images = [
+        {
+          id: -project.id,
+          imageUrl: project.thumbnailUrl,
+          order: 0,
+          isCover: true,
+          project: project,
+        } as ProjectImage,
+      ];
+    }
+    return project;
+  }
+
   async findAll(): Promise<Project[]> {
-    return this.projectRepository.find({
+    const projects = await this.projectRepository.find({
       relations: { images: true },
       order: { id: 'DESC' },
     });
+    return projects.map((p) => this.ensureThumbnailInImages(p)!);
   }
 
   async findOne(id: number): Promise<Project | null> {
-    return this.projectRepository.findOne({
+    const project = await this.projectRepository.findOne({
       where: { id },
       relations: { images: true },
     });
+    return this.ensureThumbnailInImages(project);
+  }
+
+  async getPaneStatus(): Promise<{ cubeIndex: number; projectId: number; title: string }[]> {
+    const projects = await this.projectRepository.find({
+      select: { id: true, title: true, cubeIndex: true },
+    });
+    return projects
+      .filter((p) => p.cubeIndex !== null && p.cubeIndex !== undefined)
+      .map((p) => ({ cubeIndex: p.cubeIndex!, projectId: p.id, title: p.title }));
   }
 
   async handleCubeIndexConflict(cubeIndex: number | null | undefined, currentProjectId?: number) {
@@ -198,9 +225,11 @@ export class ProjectsService implements OnModuleInit {
 
       const coverImg = currentImages.find((img) => img.isCover) || currentImages[0];
       existing.thumbnailUrl = coverImg ? coverImg.imageUrl : null;
+      existing.images = currentImages;
       await this.projectRepository.save(existing);
     } else {
       existing.thumbnailUrl = null;
+      existing.images = [];
       await this.projectRepository.save(existing);
     }
 

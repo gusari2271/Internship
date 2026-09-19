@@ -7,6 +7,8 @@ import { CareerComponent } from './pages/career/career.component';
 import { ContactUsComponent } from './pages/contact-us/contact-us.component';
 import { ProjectDetailComponent } from './pages/project-detail/project-detail.component';
 import { AdminLoginComponent } from './pages/admin-login/admin-login.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 import { authGuard } from './guards/auth.guard';
 
@@ -19,6 +21,9 @@ export const routes: Routes = [
   { path: 'contact-us', component: ContactUsComponent },
   { path: 'projects/:id', component: ProjectDetailComponent },
   { path: 'admin/login', component: AdminLoginComponent },
+  { path: 'admin/forgot-password', component: ForgotPasswordComponent },
+  { path: 'admin/reset-password', component: ResetPasswordComponent },
+  { path: 'admin/set-password', component: ResetPasswordComponent },
   { 
     path: 'admin/dashboard', 
     component: AdminDashboardComponent, 

@@ -67,6 +67,12 @@ export class ProjectService {
     return this.http.delete(`${this.apiUrl}/projects/${id}`, this.getAuthHeaders());
   }
 
+  getPaneStatus(): Observable<{ cubeIndex: number; projectId: number; title: string }[]> {
+    return this.http.get<{ cubeIndex: number; projectId: number; title: string }[]>(
+      `${this.apiUrl}/projects/pane-status`,
+    );
+  }
+
   submitContact(data: ContactSubmission): Observable<any> {
     return this.http.post(`${this.apiUrl}/contact`, data);
   }
