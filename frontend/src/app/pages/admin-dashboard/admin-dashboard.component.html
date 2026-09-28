@@ -626,15 +626,17 @@
                   </span>
                 </td>
                 <td class="actions-cell">
-                  <button (click)="editProject(project)" class="btn-table-edit">
-                    Edit
-                  </button>
-                  <button
-                    (click)="deleteProject(project.id)"
-                    class="btn-table-delete"
-                  >
-                    Delete
-                  </button>
+                  <div class="actions-wrapper">
+                    <button (click)="editProject(project)" class="btn-table-edit">
+                      Edit
+                    </button>
+                    <button
+                      (click)="deleteProject(project.id)"
+                      class="btn-table-delete"
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </td>
               </tr>
               <tr *ngIf="projects().length === 0">
@@ -800,42 +802,44 @@
                   {{ adm.createdAt | date: "mediumDate" }}
                 </td>
                 <td class="actions-cell">
-                  <!-- Deactivate / Reactivate -->
-                  <button
-                    *ngIf="adm.isActive"
-                    (click)="deactivateAdmin(adm)"
-                    [disabled]="adm.id === currentUser()?.id"
-                    class="btn-table-deactivate"
-                    [title]="
-                      adm.id === currentUser()?.id
-                        ? 'Cannot deactivate self'
-                        : 'Deactivate administrator'
-                    "
-                  >
-                    deactivate
-                  </button>
+                  <div class="actions-wrapper">
+                    <!-- Deactivate / Reactivate -->
+                    <button
+                      *ngIf="adm.isActive"
+                      (click)="deactivateAdmin(adm)"
+                      [disabled]="adm.id === currentUser()?.id"
+                      class="btn-table-deactivate"
+                      [title]="
+                        adm.id === currentUser()?.id
+                          ? 'Cannot deactivate self'
+                          : 'Deactivate administrator'
+                      "
+                    >
+                      deactivate
+                    </button>
 
-                  <button
-                    *ngIf="!adm.isActive"
-                    (click)="reactivateAdmin(adm)"
-                    class="btn-table-reactivate"
-                  >
-                    reactivate
-                  </button>
+                    <button
+                      *ngIf="!adm.isActive"
+                      (click)="reactivateAdmin(adm)"
+                      class="btn-table-reactivate"
+                    >
+                      reactivate
+                    </button>
 
-                  <!-- Delete -->
-                  <button
-                    (click)="deleteAdmin(adm)"
-                    [disabled]="adm.id === currentUser()?.id"
-                    class="btn-table-delete"
-                    [title]="
-                      adm.id === currentUser()?.id
-                        ? 'Cannot delete self'
-                        : 'Permanently remove administrator'
-                    "
-                  >
-                    delete
-                  </button>
+                    <!-- Delete -->
+                    <button
+                      (click)="deleteAdmin(adm)"
+                      [disabled]="adm.id === currentUser()?.id"
+                      class="btn-table-delete"
+                      [title]="
+                        adm.id === currentUser()?.id
+                          ? 'Cannot delete self'
+                          : 'Permanently remove administrator'
+                      "
+                    >
+                      delete
+                    </button>
+                  </div>
                 </td>
               </tr>
               <tr *ngIf="admins().length === 0 && !isLoadingAdmins()">

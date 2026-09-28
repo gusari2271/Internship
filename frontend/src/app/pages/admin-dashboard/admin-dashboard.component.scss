@@ -710,12 +710,17 @@
     letter-spacing: 0.05em;
     font-size: 11px;
     white-space: nowrap;
+    vertical-align: middle;
 
     // Fixed width for cover column
     &:first-child {
       width: 80px;
       min-width: 80px;
     }
+  }
+
+  tr {
+    vertical-align: middle;
   }
 
   td {
@@ -765,6 +770,7 @@
   .font-medium {
     font-weight: 600;
     color: #111111;
+    vertical-align: middle;
   }
 
   .badge {
@@ -775,6 +781,7 @@
     border-radius: 4px;
     background: rgba(0, 0, 0, 0.05);
     color: #666666;
+    vertical-align: middle;
 
     &.linked {
       background: rgba(0, 0, 0, 0.85);
@@ -782,12 +789,28 @@
     }
   }
 
+  td.actions-cell,
   .actions-cell {
+    vertical-align: middle;
     white-space: nowrap;
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    flex-wrap: wrap;
+
+    .actions-wrapper {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      vertical-align: middle;
+    }
+
+    // Direct buttons fallback or inside wrapper
+    .btn-table-edit,
+    .btn-table-delete,
+    .btn-table-deactivate,
+    .btn-table-reactivate {
+      vertical-align: middle;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
   .btn-table-edit {
@@ -801,6 +824,10 @@
     cursor: pointer;
     font-family: inherit;
     transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.2;
 
     &:hover {
       background: #111111;
@@ -820,6 +847,10 @@
     cursor: pointer;
     font-family: inherit;
     transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.2;
 
     &:hover:not(:disabled) {
       background: #d11a2a;

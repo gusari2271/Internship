@@ -535,15 +535,14 @@ Continue?`,
       );
     } else if (this.coverTarget.type === 'new') {
       formData.append('coverIndex', this.coverTarget.indexOrId.toString());
+      formData.append('coverImageIdOrIndex', this.coverTarget.indexOrId.toString());
     }
 
-    if (this.isEditing() && this.existingImages.length > 0) {
+    if (this.isEditing()) {
       const validKeepIds = this.existingImages
-        .filter((img) => img.id > 0)
+        .filter((img) => img && typeof img.id === 'number' && img.id > 0)
         .map((img) => img.id);
-      if (validKeepIds.length > 0) {
-        formData.append('keepImageIds', validKeepIds.join(','));
-      }
+      formData.append('keepImageIds', validKeepIds.join(','));
     }
 
     this.errorMessage.set(null);

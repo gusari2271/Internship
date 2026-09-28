@@ -162,36 +162,65 @@ export class ProjectsService implements OnModuleInit {
     coverImageIdOrIndex?: number | string,
     keepImageIds?: number[],
   ): Promise<Project> {
-    const existing = await this.findOne(id);
+    const existing = await this.projectRepository.findOne({
+      where: { id },
+    });
     if (!existing) {
       throw new NotFoundException(`Project with ID ${id} not found`);
     }
 
     await this.handleCubeIndexConflict(projectData.cubeIndex, id);
 
-    // Remove images that are not in keepImageIds
-    if (keepImageIds && existing.images) {
-      for (const img of existing.images) {
-        if (!keepImageIds.includes(img.id)) {
-          this.deleteFileByUrl(img.imageUrl);
-          await this.projectImageRepository.remove(img);
+    // 1. Fetch current database images for this project ordered by order, then id
+    const currentDbImages = await this.projectImageRepository.find({
+      where: { project: { id } },
+      order: { order: 'ASC', id: 'ASC' },
+    });
+
+    let imagesAfterRemoval: ProjectImage[] = [...currentDbImages];
+
+    // 2. Perform safe, explicit ID-based diff if keepImageIds is provided
+    if (keepImageIds !== undefined) {
+      const keepIdSet = new Set<number>(
+        keepImageIds.map(Number).filter((n) => !isNaN(n) && n > 0),
+      );
+
+      // Explicit diff: photos in DB that are NOT in keepIdSet must be removed
+      const imagesToDelete = currentDbImages.filter((img) => !keepIdSet.has(img.id));
+      imagesAfterRemoval = currentDbImages.filter((img) => keepIdSet.has(img.id));
+
+      for (const img of imagesToDelete) {
+        // SAFETY DOUBLE-CHECK: verify imageId is NOT in keepIdSet
+        if (keepIdSet.has(img.id)) {
+          console.warn(`[SAFETY ABORT] Prevented deletion of image ID ${img.id}: present in keepIdSet!`);
+          continue;
         }
+
+        // SAFETY CHECK: Verify no other record or project references this exact file before unlinking
+        const otherImageRefs = await this.projectImageRepository.count({
+          where: { imageUrl: img.imageUrl, id: Not(img.id) },
+        });
+        const otherProjectThumbRefs = await this.projectRepository.count({
+          where: { thumbnailUrl: img.imageUrl, id: Not(id) },
+        });
+
+        if (otherImageRefs === 0 && otherProjectThumbRefs === 0) {
+          this.deleteFileByUrl(img.imageUrl, id, img.id);
+        } else {
+          console.log(
+            `[IMAGE DELETE] Skipped physical file delete for "${img.imageUrl}": file is still referenced by other records (imageRefs: ${otherImageRefs}, projectThumbRefs: ${otherProjectThumbRefs})`
+          );
+        }
+
+        // Delete from database record-by-record using explicit ID
+        await this.projectImageRepository.delete(img.id);
+        console.log(`[IMAGE DELETE] Deleted ProjectImage record ID: ${img.id} for Project ID: ${id}`);
       }
     }
 
-    // Assign remaining/merged basic project data
-    Object.assign(existing, projectData);
-    await this.projectRepository.save(existing);
-
-    // Reload remaining images
-    let currentImages = await this.projectImageRepository.find({
-      where: { project: { id } },
-      order: { order: 'ASC' },
-    });
-
-    // Add new image URLs
+    // 3. Process newly uploaded images as separate INSERT operations
     if (newImageUrls.length > 0) {
-      const startOrder = currentImages.length;
+      const startOrder = imagesAfterRemoval.length;
       const createdImages = newImageUrls.map((url, idx) => {
         return this.projectImageRepository.create({
           imageUrl: url,
@@ -201,37 +230,57 @@ export class ProjectsService implements OnModuleInit {
         });
       });
       const savedNewImages = await this.projectImageRepository.save(createdImages);
-      currentImages = [...currentImages, ...savedNewImages];
+      imagesAfterRemoval = [...imagesAfterRemoval, ...savedNewImages];
+      console.log(`[IMAGE UPLOAD] Added ${savedNewImages.length} new images to project ID: ${id}`);
     }
 
-    // Determine cover image
-    if (currentImages.length > 0) {
+    // 4. Resolve cover image and update order & isCover
+    if (imagesAfterRemoval.length > 0) {
       let coverTargetId: number | null = null;
+      let coverTargetIndex: number | null = null;
+
       if (typeof coverImageIdOrIndex === 'number') {
-        coverTargetId = coverImageIdOrIndex;
-      } else if (typeof coverImageIdOrIndex === 'string' && !isNaN(Number(coverImageIdOrIndex))) {
-        coverTargetId = Number(coverImageIdOrIndex);
+        if (imagesAfterRemoval.some((img) => img.id === coverImageIdOrIndex)) {
+          coverTargetId = coverImageIdOrIndex;
+        } else if (coverImageIdOrIndex >= 0 && coverImageIdOrIndex < imagesAfterRemoval.length) {
+          coverTargetIndex = coverImageIdOrIndex;
+        }
+      } else if (typeof coverImageIdOrIndex === 'string') {
+        const parsed = Number(coverImageIdOrIndex.trim());
+        if (!isNaN(parsed)) {
+          if (imagesAfterRemoval.some((img) => img.id === parsed)) {
+            coverTargetId = parsed;
+          } else if (parsed >= 0 && parsed < imagesAfterRemoval.length) {
+            coverTargetIndex = parsed;
+          }
+        }
       }
 
-      for (let i = 0; i < currentImages.length; i++) {
-        const img = currentImages[i];
+      for (let i = 0; i < imagesAfterRemoval.length; i++) {
+        const img = imagesAfterRemoval[i];
+        let isCover = false;
         if (coverTargetId !== null) {
-          img.isCover = img.id === coverTargetId;
-        } else if (i === 0 && !currentImages.some((m) => m.isCover)) {
-          img.isCover = true;
+          isCover = img.id === coverTargetId;
+        } else if (coverTargetIndex !== null) {
+          isCover = i === coverTargetIndex;
+        } else if (i === 0 && !imagesAfterRemoval.some((m) => m.isCover)) {
+          isCover = true;
         }
+        img.isCover = isCover;
+        img.order = i;
         await this.projectImageRepository.save(img);
       }
 
-      const coverImg = currentImages.find((img) => img.isCover) || currentImages[0];
-      existing.thumbnailUrl = coverImg ? coverImg.imageUrl : null;
-      existing.images = currentImages;
-      await this.projectRepository.save(existing);
+      const activeCover = imagesAfterRemoval.find((img) => img.isCover) || imagesAfterRemoval[0];
+      existing.thumbnailUrl = activeCover ? activeCover.imageUrl : null;
     } else {
       existing.thumbnailUrl = null;
-      existing.images = [];
-      await this.projectRepository.save(existing);
     }
+
+    // 5. Update basic project metadata without touching relations
+    Object.assign(existing, projectData);
+    delete (existing as any).images;
+    await this.projectRepository.save(existing);
 
     return this.findOne(id) as Promise<Project>;
   }
@@ -244,20 +293,41 @@ export class ProjectsService implements OnModuleInit {
       throw new NotFoundException(`Image with ID ${imageId} not found for project ${projectId}`);
     }
 
-    this.deleteFileByUrl(image.imageUrl);
-    await this.projectImageRepository.remove(image);
+    const otherImageRefs = await this.projectImageRepository.count({
+      where: { imageUrl: image.imageUrl, id: Not(imageId) },
+    });
+    const otherProjectThumbRefs = await this.projectRepository.count({
+      where: { thumbnailUrl: image.imageUrl, id: Not(projectId) },
+    });
 
-    const project = await this.findOne(projectId);
-    if (project && project.images.length > 0) {
-      if (!project.images.some((img) => img.isCover)) {
-        project.images[0].isCover = true;
-        await this.projectImageRepository.save(project.images[0]);
-        project.thumbnailUrl = project.images[0].imageUrl;
-      }
-    } else if (project) {
-      project.thumbnailUrl = null;
+    if (otherImageRefs === 0 && otherProjectThumbRefs === 0) {
+      this.deleteFileByUrl(image.imageUrl, projectId, imageId);
+    } else {
+      console.log(
+        `[IMAGE DELETE] Skipped physical file delete for "${image.imageUrl}": file referenced by other records.`
+      );
     }
+
+    await this.projectImageRepository.delete(imageId);
+    console.log(`[IMAGE DELETE] Deleted ProjectImage record ID: ${imageId} for Project ID: ${projectId}`);
+
+    const remainingImages = await this.projectImageRepository.find({
+      where: { project: { id: projectId } },
+      order: { order: 'ASC', id: 'ASC' },
+    });
+
+    const project = await this.projectRepository.findOne({ where: { id: projectId } });
     if (project) {
+      if (remainingImages.length > 0) {
+        if (!remainingImages.some((img) => img.isCover)) {
+          remainingImages[0].isCover = true;
+          await this.projectImageRepository.save(remainingImages[0]);
+          project.thumbnailUrl = remainingImages[0].imageUrl;
+        }
+      } else {
+        project.thumbnailUrl = null;
+      }
+      delete (project as any).images;
       await this.projectRepository.save(project);
     }
 
@@ -273,16 +343,16 @@ export class ProjectsService implements OnModuleInit {
     // Delete all gallery images from disk
     if (existing.images && existing.images.length > 0) {
       for (const img of existing.images) {
-        this.deleteFileByUrl(img.imageUrl);
+        this.deleteFileByUrl(img.imageUrl, id, img.id);
       }
     } else if (existing.thumbnailUrl) {
-      this.deleteFileByUrl(existing.thumbnailUrl);
+      this.deleteFileByUrl(existing.thumbnailUrl, id);
     }
 
     await this.projectRepository.remove(existing);
   }
 
-  private deleteFileByUrl(imageUrl?: string | null) {
+  private deleteFileByUrl(imageUrl?: string | null, projectId?: number, imageId?: number) {
     if (!imageUrl) return;
 
     try {
@@ -292,11 +362,17 @@ export class ProjectsService implements OnModuleInit {
         const filePath = join(__dirname, '..', '..', 'uploads', fileName);
         if (fs.existsSync(filePath)) {
           fs.unlinkSync(filePath);
-          console.log(`Successfully deleted file: ${filePath}`);
+          console.log(
+            `[IMAGE DELETE] Successfully deleted physical file: ${filePath} (ProjectId: ${projectId ?? 'N/A'}, ImageId: ${imageId ?? 'N/A'})`
+          );
+        } else {
+          console.warn(
+            `[IMAGE DELETE] Physical file not found on disk at: ${filePath} (ProjectId: ${projectId ?? 'N/A'}, ImageId: ${imageId ?? 'N/A'})`
+          );
         }
       }
     } catch (err) {
-      console.error('Failed to delete file from disk:', err);
+      console.error(`[IMAGE DELETE] Failed to delete file from disk for ${imageUrl}:`, err);
     }
   }
 }

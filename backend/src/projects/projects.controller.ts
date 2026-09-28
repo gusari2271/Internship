@@ -124,19 +124,28 @@ export class ProjectsController {
       : [];
 
     let keepImageIds: number[] | undefined;
-    if (body.keepImageIds) {
+    if (body.keepImageIds !== undefined) {
       if (Array.isArray(body.keepImageIds)) {
-        keepImageIds = body.keepImageIds.map(Number);
+        keepImageIds = body.keepImageIds.map(Number).filter((n: number) => !isNaN(n));
       } else if (typeof body.keepImageIds === 'string') {
-        keepImageIds = body.keepImageIds.split(',').map((s: string) => Number(s.trim())).filter((n: number) => !isNaN(n));
+        const trimmed = body.keepImageIds.trim();
+        keepImageIds =
+          trimmed === ''
+            ? []
+            : trimmed
+                .split(',')
+                .map((s: string) => Number(s.trim()))
+                .filter((n: number) => !isNaN(n));
       }
     }
+
+    const coverTarget = body.coverImageIdOrIndex ?? body.coverIndex;
 
     return this.projectsService.update(
       Number(id),
       projectData,
       newImageUrls,
-      body.coverImageIdOrIndex,
+      coverTarget,
       keepImageIds,
     );
   }

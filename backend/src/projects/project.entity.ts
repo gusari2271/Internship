@@ -27,6 +27,6 @@ export class Project {
   @Column({ type: 'integer', unique: true, nullable: true })
   cubeIndex?: number | null;
 
-  @OneToMany(() => ProjectImage, (image) => image.project, { cascade: true, eager: true })
+  @OneToMany(() => ProjectImage, (image) => image.project, { eager: true })
   images: ProjectImage[];
 }
