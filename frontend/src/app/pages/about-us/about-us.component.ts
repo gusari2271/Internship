@@ -14,7 +14,7 @@ interface TeamMember {
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './about-us.component.html',
-  styleUrls: ['./about-us.component.scss']
+  styleUrls: ['./about-us.component.scss'],
 })
 export class AboutUsComponent {
   public lang = inject(LanguageService);
@@ -22,9 +22,14 @@ export class AboutUsComponent {
   // Seed with empty/placeholder data as requested: "placeholder foto & nama kosong"
   // Let's make it look clean and ready-to-fill
   team: TeamMember[] = [
-    { name: '—', role: 'Principal Architect & Founder', photoUrl: null },
+    {
+      name: 'Mardika Dwi Parnadi',
+      role: 'Principal Architect & Founder',
+      photoUrl:
+        'https://res.cloudinary.com/v6zjgt2f/image/upload/v1790754897/Screenshot_2026-09-30_154707.png',
+    },
     { name: '—', role: 'Lead Design Associate', photoUrl: null },
     { name: '—', role: 'Project Architect', photoUrl: null },
-    { name: '—', role: '3D Visualization Specialist', photoUrl: null }
+    { name: '—', role: '3D Visualization Specialist', photoUrl: null },
   ];
 }

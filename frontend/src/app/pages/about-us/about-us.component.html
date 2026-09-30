@@ -21,7 +21,15 @@
           @for (member of team; track $index) {
             <div class="team-card">
               <div class="photo-placeholder">
-                <div class="crosshair"></div>
+                @if (member.photoUrl) {
+                  <img
+                    [src]="member.photoUrl"
+                    [alt]="member.name"
+                    class="member-photo"
+                  />
+                } @else {
+                  <div class="crosshair"></div>
+                }
               </div>
               <div class="info">
                 <h3 class="name">{{ member.name }}</h3>

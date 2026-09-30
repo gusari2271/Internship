@@ -2,24 +2,21 @@
   <div class="content-container">
     <header class="section-header">
       <span class="index">05 / ENQUIRY</span>
-      <h1 class="title">{{ lang.translate('nav.contactUs') }}</h1>
+      <h1 class="title">{{ lang.translate("nav.contactUs") }}</h1>
     </header>
 
     <div class="contact-grid">
       <div class="studio-info">
         <div class="info-block">
-          <h3>Tokyo Studio</h3>
-          <p>2-1-1 Nihonbashi, Chuo-ku<br>Tokyo 103-0027, Japan</p>
-          <span class="phone">+81 3 5555 0192</span>
-        </div>
-        <div class="info-block">
-          <h3>Copenhagen Studio</h3>
-          <p>Nørrebrogade 45, 2200<br>København N, Denmark</p>
-          <span class="phone">+45 35 55 01 99</span>
+          <h3>GRAHITA Studio</h3>
+          <p>
+            Jl. Jempiring no. 36 Baler Bale Agung<br />Negara,Jembrana, Bali
+          </p>
+          <span class="phone">082313540363</span>
         </div>
         <div class="info-block">
           <h3>General Inquiries</h3>
-          <span class="email">info&#64;grahita.studio</span>
+          <span class="email">grahitadesign&#64;gmail.com</span>
         </div>
       </div>
 
@@ -27,8 +24,10 @@
         @if (submitSuccess()) {
           <div class="alert success-alert">
             <span class="check-mark">✓</span>
-            <p>{{ lang.translate('contact.success') }}</p>
-            <button class="btn-reset" (click)="submitSuccess.set(false)">Send another message</button>
+            <p>{{ lang.translate("contact.success") }}</p>
+            <button class="btn-reset" (click)="submitSuccess.set(false)">
+              Send another message
+            </button>
           </div>
         } @else {
           <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
@@ -38,40 +37,90 @@
               </div>
             }
 
-            <div class="form-field" [class.has-error]="contactForm.get('name')?.touched && contactForm.get('name')?.invalid">
-              <label for="name">{{ lang.translate('contact.name') }}</label>
-              <input type="text" id="name" formControlName="name" placeholder="enter your name">
-              @if (contactForm.get('name')?.touched && contactForm.get('name')?.errors?.['required']) {
+            <div
+              class="form-field"
+              [class.has-error]="
+                contactForm.get('name')?.touched &&
+                contactForm.get('name')?.invalid
+              "
+            >
+              <label for="name">{{ lang.translate("contact.name") }}</label>
+              <input
+                type="text"
+                id="name"
+                formControlName="name"
+                placeholder="enter your name"
+              />
+              @if (
+                contactForm.get("name")?.touched &&
+                contactForm.get("name")?.errors?.["required"]
+              ) {
                 <span class="error-msg">Name is required</span>
               }
             </div>
 
-            <div class="form-field" [class.has-error]="contactForm.get('email')?.touched && contactForm.get('email')?.invalid">
-              <label for="email">{{ lang.translate('contact.email') }}</label>
-              <input type="email" id="email" formControlName="email" placeholder="enter your email address">
-              @if (contactForm.get('email')?.touched) {
-                @if (contactForm.get('email')?.errors?.['required']) {
+            <div
+              class="form-field"
+              [class.has-error]="
+                contactForm.get('email')?.touched &&
+                contactForm.get('email')?.invalid
+              "
+            >
+              <label for="email">{{ lang.translate("contact.email") }}</label>
+              <input
+                type="email"
+                id="email"
+                formControlName="email"
+                placeholder="enter your email address"
+              />
+              @if (contactForm.get("email")?.touched) {
+                @if (contactForm.get("email")?.errors?.["required"]) {
                   <span class="error-msg">Email is required</span>
-                } @else if (contactForm.get('email')?.errors?.['email']) {
-                  <span class="error-msg">Please enter a valid email address</span>
+                } @else if (contactForm.get("email")?.errors?.["email"]) {
+                  <span class="error-msg"
+                    >Please enter a valid email address</span
+                  >
                 }
               }
             </div>
 
-            <div class="form-field" [class.has-error]="contactForm.get('message')?.touched && contactForm.get('message')?.invalid">
-              <label for="message">{{ lang.translate('contact.message') }}</label>
-              <textarea id="message" formControlName="message" rows="5" placeholder="describe your project or inquiry"></textarea>
-              @if (contactForm.get('message')?.touched) {
-                @if (contactForm.get('message')?.errors?.['required']) {
+            <div
+              class="form-field"
+              [class.has-error]="
+                contactForm.get('message')?.touched &&
+                contactForm.get('message')?.invalid
+              "
+            >
+              <label for="message">{{
+                lang.translate("contact.message")
+              }}</label>
+              <textarea
+                id="message"
+                formControlName="message"
+                rows="5"
+                placeholder="describe your project or inquiry"
+              ></textarea>
+              @if (contactForm.get("message")?.touched) {
+                @if (contactForm.get("message")?.errors?.["required"]) {
                   <span class="error-msg">Message is required</span>
-                } @else if (contactForm.get('message')?.errors?.['minlength']) {
-                  <span class="error-msg">Message must be at least 10 characters long</span>
+                } @else if (contactForm.get("message")?.errors?.["minlength"]) {
+                  <span class="error-msg"
+                    >Message must be at least 10 characters long</span
+                  >
                 }
               }
             </div>
 
-            <button type="submit" class="submit-btn" [disabled]="isSubmitting()">
-              {{ isSubmitting() ? lang.translate('contact.submitting') : lang.translate('contact.submit') }}
+            <button
+              type="submit"
+              class="submit-btn"
+              [disabled]="isSubmitting()"
+            >
+              {{
+                isSubmitting()
+                  ? lang.translate("contact.submitting")
+                  : lang.translate("contact.submit")
+              }}
             </button>
           </form>
         }
