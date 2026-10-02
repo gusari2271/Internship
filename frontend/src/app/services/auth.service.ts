@@ -26,7 +26,9 @@ export interface VerifyOtpResponse {
 })
 export class AuthService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:3000/auth';
+  private apiUrl = typeof window !== 'undefined' && window.location.hostname === 'localhost'
+    ? 'http://localhost:3000/auth'
+    : '/auth';
 
   private userSignal = signal<UserProfile | null>(this.getStoredUser());
   private tokenSignal = signal<string | null>(localStorage.getItem('admin_token'));

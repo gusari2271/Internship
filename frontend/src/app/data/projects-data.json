@@ -1,0 +1,176 @@
+[
+  {
+    "id": 2,
+    "title": "GRAHA GUNGWAH",
+    "category": "Moder Tropical Residence",
+    "location": "Jembrana, Bali",
+    "year": 2025,
+    "thumbnailUrl": "/uploads/1787219709910-764079610.png",
+    "description": "An open-air pavilion designed to blend into the surrounding coastal landscape. The project features a floating timber grid structure that filters sunlight to create a dynamic play of patterns on the stone floor below.",
+    "cubeIndex": 12,
+    "images": [
+      {
+        "id": 10,
+        "imageUrl": "/uploads/1787219709910-764079610.png",
+        "order": 0,
+        "isCover": true
+      },
+      {
+        "id": 34,
+        "imageUrl": "/uploads/1789811044812-719343130.png",
+        "order": 1,
+        "isCover": false
+      },
+      {
+        "id": 35,
+        "imageUrl": "/uploads/1789811044823-947341070.png",
+        "order": 2,
+        "isCover": false
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "HANOMAN VILLA",
+    "category": "Commercial",
+    "location": "Ubud, Gianyar",
+    "year": 2024,
+    "thumbnailUrl": "/uploads/1787219859997-28582106.png",
+    "description": "A research on biophilic workspaces in dense tropical urban settings. By carving out a series of vertical micro-courtyards, the building facilitates natural cross-ventilation and brings localized flora to every work desk.",
+    "cubeIndex": 20,
+    "images": [
+      {
+        "id": 11,
+        "imageUrl": "/uploads/1787219859997-28582106.png",
+        "order": 0,
+        "isCover": true
+      },
+      {
+        "id": 44,
+        "imageUrl": "/uploads/1789820665511-271963800.png",
+        "order": 1,
+        "isCover": false
+      },
+      {
+        "id": 45,
+        "imageUrl": "/uploads/1789820665521-707953324.png",
+        "order": 2,
+        "isCover": false
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "title": "MODERN TROPICAL RESIDENCE",
+    "category": "Modern Tropical Residence",
+    "location": "Dauhwaru, Jembrana",
+    "year": 2026,
+    "thumbnailUrl": "/uploads/1787219283894-849532952.png",
+    "description": "Modern tropical residential architectural concept study featuring open-air pavilion and floating timber grid structure.",
+    "cubeIndex": 37,
+    "images": [
+      {
+        "id": 6,
+        "imageUrl": "/uploads/1787219283894-849532952.png",
+        "order": 0,
+        "isCover": true
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "title": "KANAYA FLORIST",
+    "category": "The Art of Blooming",
+    "location": "Dauhwaru, Jembrana",
+    "year": null,
+    "thumbnailUrl": "/uploads/1789820218604-227174989.png",
+    "description": "",
+    "cubeIndex": 11,
+    "images": [
+      {
+        "id": 38,
+        "imageUrl": "/uploads/1789820218597-23365186.png",
+        "order": 1,
+        "isCover": false
+      },
+      {
+        "id": 39,
+        "imageUrl": "/uploads/1789820218604-227174989.png",
+        "order": 2,
+        "isCover": true
+      },
+      {
+        "id": 40,
+        "imageUrl": "/uploads/1789820218611-917524914.png",
+        "order": 3,
+        "isCover": false
+      },
+      {
+        "id": 43,
+        "imageUrl": "/uploads/1787220248140-294740267.png",
+        "order": 0,
+        "isCover": false
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "title": "AW HOUSE",
+    "category": "Moder Tropical Residence",
+    "location": "Amlapura, Kab. Karangasem",
+    "year": null,
+    "thumbnailUrl": "/uploads/1787220485945-11514820.png",
+    "description": "",
+    "cubeIndex": 7,
+    "images": [
+      {
+        "id": 13,
+        "imageUrl": "/uploads/1787220485945-11514820.png",
+        "order": 0,
+        "isCover": true
+      },
+      {
+        "id": 36,
+        "imageUrl": "/uploads/1789820063422-712491446.png",
+        "order": 1,
+        "isCover": false
+      },
+      {
+        "id": 37,
+        "imageUrl": "/uploads/1789820063441-817692560.png",
+        "order": 2,
+        "isCover": false
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "title": "GILIMANUK CREATIVE HUB",
+    "category": "Ruang Kolaborasi",
+    "location": "Gilimanuk",
+    "year": null,
+    "thumbnailUrl": "/uploads/1789810354601-921054584.png",
+    "description": null,
+    "cubeIndex": 17,
+    "images": [
+      {
+        "id": 31,
+        "imageUrl": "/uploads/1789810354601-921054584.png",
+        "order": 0,
+        "isCover": true
+      },
+      {
+        "id": 32,
+        "imageUrl": "/uploads/1789810449106-605128577.png",
+        "order": 1,
+        "isCover": false
+      },
+      {
+        "id": 33,
+        "imageUrl": "/uploads/1789810553752-665936572.png",
+        "order": 2,
+        "isCover": false
+      }
+    ]
+  }
+]

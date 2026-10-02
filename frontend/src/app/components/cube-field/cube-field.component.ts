@@ -5,6 +5,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import { ProjectService, Project } from '../../services/project.service';
+import { FALLBACK_PROJECTS } from '../../data/projects-data';
 import { Subscription } from 'rxjs';
 
 interface FloatingCube {
@@ -153,15 +154,8 @@ export class CubeFieldComponent implements OnInit, AfterViewInit, OnDestroy {
         },
         error: (err) => {
           if (this.isDestroyed) return;
-          console.error('Failed to load projects from backend, using offline fallback', err);
-          // Fallback placeholders if backend is down or not seeded yet
-          this.projects = [
-            { id: 1, title: 'Untitled Project I', category: 'Residential', location: 'Tokyo, Japan', year: 2024, cubeIndex: 5 },
-            { id: 2, title: 'Untitled Project II', category: 'Cultural', location: 'Copenhagen, Denmark', year: 2025, cubeIndex: 12 },
-            { id: 3, title: 'Untitled Project III', category: 'Commercial', location: 'Jakarta, Indonesia', year: 2026, cubeIndex: 20 },
-            { id: 4, title: 'Untitled Project IV', category: 'Residential', location: 'Berlin, Germany', year: 2023, cubeIndex: 28 },
-            { id: 5, title: 'Untitled Project V', category: 'Institutional', location: 'Melbourne, Australia', year: 2027, cubeIndex: 35 }
-          ];
+          // Fallback to static projects with proper thumbnails if backend is unreachable
+          this.projects = FALLBACK_PROJECTS;
           this.isLoading.set(false);
           this.buildCubeField();
         }

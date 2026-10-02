@@ -31,7 +31,9 @@ export interface AuditLogItem {
 export class AdminService {
   private http = inject(HttpClient);
   private authService = inject(AuthService);
-  private baseUrl = 'http://localhost:3000';
+  private baseUrl = typeof window !== 'undefined' && window.location.hostname === 'localhost'
+    ? 'http://localhost:3000'
+    : '';
 
   getAdmins(): Observable<AdminUser[]> {
     return this.http.get<AdminUser[]>(`${this.baseUrl}/admin/list`, {

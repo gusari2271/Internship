@@ -79,10 +79,8 @@ export class ProjectsController {
       cubeIndex: body.cubeIndex !== undefined && body.cubeIndex !== '' && body.cubeIndex !== 'null' ? Number(body.cubeIndex) : null,
     };
 
-    const protocol = req.protocol;
-    const host = req.get('host');
     const imageUrls: string[] = files
-      ? files.map((file) => `${protocol}://${host}/uploads/${file.filename}`)
+      ? files.map((file) => `/uploads/${file.filename}`)
       : [];
 
     const coverIndex = body.coverIndex ? Number(body.coverIndex) : 0;
@@ -117,10 +115,8 @@ export class ProjectsController {
       cubeIndex: body.cubeIndex !== undefined && body.cubeIndex !== '' && body.cubeIndex !== 'null' ? Number(body.cubeIndex) : null,
     };
 
-    const protocol = req.protocol;
-    const host = req.get('host');
     const newImageUrls: string[] = files
-      ? files.map((file) => `${protocol}://${host}/uploads/${file.filename}`)
+      ? files.map((file) => `/uploads/${file.filename}`)
       : [];
 
     let keepImageIds: number[] | undefined;
