@@ -28,8 +28,16 @@ export class AboutUsComponent {
       photoUrl:
         'https://res.cloudinary.com/v6zjgt2f/image/upload/v1790754897/Screenshot_2026-09-30_154707.png',
     },
-    { name: '—', role: 'Lead Design Associate', photoUrl: null },
-    { name: '—', role: 'Project Architect', photoUrl: null },
-    { name: '—', role: '3D Visualization Specialist', photoUrl: null },
+    {
+      name: 'I Gede Yoga Pratama',
+      role: 'Structural Engineer',
+      photoUrl: null,
+    },
+    {
+      name: 'Kadek Dwi Kusuma Widyanatha',
+      role: 'Strucutural Engineer',
+      photoUrl: null,
+    },
+    // { name: '—', role: '-', photoUrl: null },
   ];
 }

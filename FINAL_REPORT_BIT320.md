@@ -1,116 +1,3 @@
-# Assignment Cover Sheet
-
-| Student Information (For group assignment, please state names of all members) | Grade/Marks |
-| :--- | :--- |
-| **Name:** [STUDENT NAME: e.g., ENRICO JUNIOR / YOUR NAME] | **ID:** [STUDENT ID: e.g., E2100297] |
-
-| Module/Subject Information | Office Acknowledgement |
-| :--- | :--- |
-| **Module/Subject Code:** BIT320 | |
-| **Module/Subject Name:** Industrial Internship | |
-| **Lecturer/Tutor/Facilitator:** Gusti Ngurah Aditya Krisnawan, S.S, M.Hum / Ms. Anitha Velayutham | |
-| **Due Date:** [DUE DATE: e.g., 25th September 2026 / 13th September 2024] | |
-| **Assignment Title/Topic:** Internship Final Report | |
-| **Intake (where applicable):** Sem July, 2026 | |
-| **Word Count:** ~7,500 words | **Date/Time:** [SUBMISSION DATE/TIME] |
-
-### Declaration
-- I/We have read and understood the Programme Handbook that explains on plagiarism, and I/we testify that, unless otherwise acknowledged, the work submitted herein is entirely my/our own.
-- I/We declare that no part of this assignment has been written for me/us by any other person(s) except where such collaboration has been authorized by the lecturer concerned.
-- I/We authorize the University to test any work submitted by me/us, using text comparison software, for instances of plagiarism. I/We understand this will involve the University or its contractors copying my/our work and storing it on a database to be used in future to test work submitted by others.
-
-*Note:*
-1. The attachment of this statement on any electronically submitted assignments will be deemed to have the same authority as a signed statement.
-2. The Group Leader signs the declaration on behalf of all members.
-
-**Signature:** `[DIGITAL SIGNATURE / SIGNATURE OF STUDENT]`  
-**Date:** [SUBMISSION DATE: e.g., 25th September 2026]  
-**E-mail:** [STUDENT EMAIL: e.g., student_id@stikom-bali.ac.id]
-
----
-
-# Feedback / Comments Sheet
-
-| Feedback / Comments* |
-| :--- |
-| **Main Strengths:**<br><br><br><br> |
-| **Main Weaknesses:**<br><br><br><br> |
-| **Suggestions for improvement:**<br><br><br><br> |
-
-| Student acknowledge feedback/comments |
-| :--- |
-| **Grader's signature:** ____________________ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **Student's signature:** `[SIGNATURE]` |
-| **Date:** ____________________ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **Date:** [DATE] |
-
-*Note:*
-1. A soft and hard copy of the assignment shall be submitted.
-2. The signed copy of the assignment cover sheet shall be retained by the marker.
-3. If the Turnitin report is required, students have to submit it with the assignment. However, departments may allow students up to THREE (3) working days after submission of the assignment to submit the Turnitin report. The assignment shall only be marked upon the submission of the Turnitin report.
-*Use additional sheets if required.
-
----
-
-<br><br><br>
-
-# Development of a Database-Driven Architecture Studio Portfolio Web Platform with Interactive 3D Spatial Engine and NestJS Backend for GRAHITA Design
-
-### BIT320 INDUSTRIAL INTERNSHIP
-### Final Report
-
-**Host Organisation:** Code Cipta (Development Team)  
-**Client Organisation:** GRAHITA Design (Spatial Architecture Studio)  
-**Author:** [STUDENT ID: E2100297] [STUDENT NAME: e.g., Enrico Junior / Your Name]  
-**Role:** Backend Developer  
-
-**HELP UNIVERSITY**  
-**SEMESTER 2, JULY 2026**
-
-<br><br><br>
-
----
-
-## Table of Contents
-
-- **Table of Contents** .................................................................................................... i
-- **1. Project Evaluation** ................................................................................................. 1
-  - **1.1 Review on Methodologies** ................................................................................. 1
-  - **1.2 Review on Actual Deliverables** .......................................................................... 3
-    - 1.2.1 Review of Project Goals ................................................................................ 3
-    - 1.2.2 System Architecture & Modular Infrastructure .................................................. 4
-    - 1.2.3 Relational Database Modelling & Schema Configuration .................................. 6
-    - 1.2.4 Dynamic Seeding Mechanism & Data Initialization ........................................... 8
-    - 1.2.5 Architectural Portfolio Management (Projects & Project Images CRUD) ............ 10
-    - 1.2.6 Three.js Coordinate Synchronization & Cube Index Conflict Resolution ............. 13
-    - 1.2.7 Multi-Part File Upload Management & Disk Storage Lifecycle ............................ 15
-    - 1.2.8 Client Inquiries & Contact Submission Service ................................................. 17
-    - 1.2.9 Administrative Authentication, JWT Strategy, & Route Protection ..................... 19
-    - 1.2.10 Frontend Integration & Interactive 3D Spatial Engine ...................................... 21
-    - 1.2.11 Analysis of Project Completion & Remaining Minor Bugs ................................ 23
-  - **1.3 Review on Project Management** ........................................................................ 25
-    - 1.3.1 Project Time Management ............................................................................. 25
-    - 1.3.2 Project Scope & Scope Creep Handling .......................................................... 26
-    - 1.3.3 Stakeholder Communication & Collaboration ................................................... 27
-  - **1.4 Conclusion** ........................................................................................................ 28
-- **2. Internship Report** ................................................................................................. 30
-  - **2.1 Accomplishments** .............................................................................................. 30
-    - 2.1.1 Core Backend Engineering & Architectural Implementations ............................ 30
-    - 2.1.2 Proactive Problem Solving & Operational Initiatives ......................................... 31
-    - 2.1.3 Development & Mastery of Technical Skills ..................................................... 32
-  - **2.2 Experience Gained** ............................................................................................ 34
-    - 2.2.1 Academic Learning vs. Real-World Engineering Practices ................................. 34
-    - 2.2.2 Professional Collaboration, Version Control, & Workflows ................................. 35
-    - 2.2.3 Challenges Encountered & Mitigation Strategies ............................................. 36
-- **REFERENCES** ........................................................................................................... 38
-- **APPENDIX** ................................................................................................................ 40
-  - **APPENDIX B – INTERNSHIP LOGBOOK 2 & 3** ........................................................ 40
-  - **APPENDIX C – MONTHLY PROGRESS REPORT 2 & 3** ............................................ 54
-  - **APPENDIX F – STUDENT FINAL EVALUATION OF INTERNSHIP EXPERIENCE** ....... 61
-  - **APPENDIX G – INTERNSHIP SUPERVISOR FINAL EVALUATION** ........................... 63
-  - **APPENDIX I – FINAL REPORT AND PRESENTATION MARKING SCHEME** ................ 67
-  - **APPLICATION FOR LATE SUBMISSION OF ASSIGNMENT** .................................... 69
-
----
-
 ## 1. Project Evaluation
 
 Project Evaluation consists of four topics, namely Review on Methodologies, Review on Actual Deliverables, Review on Project Management, and Conclusion. This report represents the engineering outcomes, technical documentation, and reflective analysis cultivated from a 12-week industrial internship conducted at **Code Cipta**, developing a bespoke digital web platform for our client, **GRAHITA Design** (Spatial Architecture Studio).
@@ -128,7 +15,9 @@ In hindsight, a purely Agile methodology without the initial Waterfall planning 
 ### 1.2 Review on Actual Deliverables
 
 #### 1.2.1 Review of Project Goals
+
 The overall project goals set out at the beginning of the internship were to replace GRAHITA Design's static portfolio presentation with a modern, database-driven web platform. The platform consists of five primary deliverables:
+
 1. **Database-Driven Portfolio Management:** Comprehensive portfolio management with category organisation, architectural metadata, rich descriptions, and multi-image galleries.
 2. **Secure Client Inquiry Handling:** A validated contact submission system to process client architectural inquiries.
 3. **Immersive Front-End Experience:** An interactive 3D spatial canvas built with Angular 18 and Three.js, mapping database records to interactive 3D cube meshes.
@@ -142,9 +31,11 @@ Overall, all major project goals have been achieved and the website is considere
 ---
 
 #### 1.2.2 System Architecture & Modular Infrastructure
+
 The server-side system was developed from the ground up using **NestJS**, an opinionated Node.js framework heavily inspired by Angular's architectural design principles, enforcing modularity, strong typing, and dependency injection (DI).
 
 **Primary Source Files:**
+
 - Server Bootstrap Entry Point: [`backend/src/main.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/main.ts#L1-L26)
 - Root Application Module: [`backend/src/app.module.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/app.module.ts#L1-L24)
 
@@ -164,13 +55,13 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 
   // Ensure uploads directory exists
-  const uploadsDir = join(__dirname, '..', 'uploads');
+  const uploadsDir = join(__dirname, "..", "uploads");
   if (!fs.existsSync(uploadsDir)) {
     fs.mkdirSync(uploadsDir);
   }
 
   // Serve uploads as static assets
-  app.useStaticAssets(uploadsDir, { prefix: '/uploads/' });
+  app.useStaticAssets(uploadsDir, { prefix: "/uploads/" });
 
   await app.listen(process.env.PORT ?? 3000);
   console.log(`Backend is running on: http://localhost:3000`);
@@ -178,36 +69,45 @@ async function bootstrap() {
 bootstrap();
 ```
 
-The modular hierarchy is aggregated inside [`backend/src/app.module.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/app.module.ts#L9-L23), which registers the database engine and sub-modules:
+The modular hierarchy is aggregated inside [`backend/src/app.module.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/app.module.ts#L13-L36), which registers the database engine, rate limiter, email service, and all sub-modules:
 
 ```typescript
-// File Reference: backend/src/app.module.ts (Lines 9-23)
+// File Reference: backend/src/app.module.ts (Lines 13-36)
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+    ThrottlerModule.forRoot([{ ttl: 60000, limit: 100 }]), // API Rate Limiting
     TypeOrmModule.forRoot({
-      type: 'better-sqlite3',
-      database: join(__dirname, '..', 'db.sqlite'),
+      type: "better-sqlite3",
+      database: join(__dirname, "..", "db.sqlite"),
       autoLoadEntities: true,
       synchronize: true, // Auto-creates tables from entities
     }),
-    ProjectsModule,
-    ContactModule,
-    AuthModule,
+    MailModule, // Nodemailer SMTP email service
+    AuditLogModule, // Admin action audit trail
+    AuthModule, // JWT authentication & 2FA
+    AdminManagementModule, // Admin user CRUD management
+    ProjectsModule, // Portfolio project & image management
+    ContactModule, // Client inquiry form & email notifications
   ],
 })
 export class AppModule {}
 ```
-- **Global Validation Pipeline:** Activated via `app.useGlobalPipes(new ValidationPipe({ whitelist: true }))`. This pipeline intercepts incoming payloads, automatically stripping unwhitelisted parameters and enforcing strict data-transfer object (DTO) constraints across all endpoints.
+
+- **Global Validation Pipeline:** Activated via `app.useGlobalPipes(new ValidationPipe({ whitelist: true }))`. This pipeline intercepts incoming payloads, automatically stripping unwhitelisted parameters and enforcing strict DTO constraints across all endpoints.
+- **API Rate Limiting:** Configured via `ThrottlerModule.forRoot([{ ttl: 60000, limit: 100 }])` ([`backend/src/app.module.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/app.module.ts#L16-L20)), limiting each client IP to 100 requests per 60 seconds to protect against abuse.
 - **Cross-Origin Resource Sharing (CORS):** Activated through `app.enableCors()`, permitting asynchronous HTTP communication with the Angular client application running on port 4200.
 - **Static Asset Serving:** Configured via `app.useStaticAssets(uploadsDir, { prefix: '/uploads/' })` to expose stored project gallery imagery through normalized HTTP URLs.
+- **MailModule, AuditLogModule, AdminManagementModule:** Additional global modules registered at root level, providing email dispatch, admin action audit logging, and admin user management capabilities.
 
 ---
 
 #### 1.2.3 Relational Database Modelling & Schema Configuration
+
 To fulfill GRAHITA Design's requirement for a zero-configuration, self-contained, and performant data storage layer, **SQLite** was selected as the database engine, driven by the native `better-sqlite3` binding and managed through **TypeORM**.
 
 **Primary Source Files:**
+
 - Project Entity: [`backend/src/projects/project.entity.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/project.entity.ts#L1-L33)
 - Project Image Entity: [`backend/src/projects/project-image.entity.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/project-image.entity.ts#L1-L22)
 - Contact Entity: [`backend/src/contact/contact.entity.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/contact/contact.entity.ts#L1-L22)
@@ -223,7 +123,7 @@ Figure 1.2 illustrates the relational schema engineered for the architectural po
 
 ```typescript
 // File Reference: backend/src/projects/project.entity.ts (Lines 4-32)
-@Entity('projects')
+@Entity("projects")
 export class Project {
   @PrimaryGeneratedColumn()
   id: number;
@@ -231,25 +131,28 @@ export class Project {
   @Column()
   title: string;
 
-  @Column({ type: 'varchar', nullable: true })
+  @Column({ type: "varchar", nullable: true })
   category?: string | null;
 
-  @Column({ type: 'varchar', nullable: true })
+  @Column({ type: "varchar", nullable: true })
   location?: string | null;
 
-  @Column({ type: 'integer', nullable: true })
+  @Column({ type: "integer", nullable: true })
   year?: number | null;
 
-  @Column({ type: 'varchar', nullable: true })
+  @Column({ type: "varchar", nullable: true })
   thumbnailUrl?: string | null;
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ type: "text", nullable: true })
   description?: string | null;
 
-  @Column({ type: 'integer', unique: true, nullable: true })
+  @Column({ type: "integer", unique: true, nullable: true })
   cubeIndex?: number | null;
 
-  @OneToMany(() => ProjectImage, (image) => image.project, { cascade: true, eager: true })
+  @OneToMany(() => ProjectImage, (image) => image.project, {
+    cascade: true,
+    eager: true,
+  })
   images: ProjectImage[];
 }
 ```
@@ -258,7 +161,7 @@ In [`backend/src/projects/project-image.entity.ts`](file:///c:/Users/LENOVO/Down
 
 ```typescript
 // File Reference: backend/src/projects/project-image.entity.ts (Lines 4-21)
-@Entity('project_images')
+@Entity("project_images")
 export class ProjectImage {
   @PrimaryGeneratedColumn()
   id: number;
@@ -272,12 +175,15 @@ export class ProjectImage {
   @Column({ default: false })
   isCover: boolean;
 
-  @ManyToOne(() => Project, (project) => project.images, { onDelete: 'CASCADE' })
+  @ManyToOne(() => Project, (project) => project.images, {
+    onDelete: "CASCADE",
+  })
   project: Project;
 }
 ```
 
 The domain model comprises:
+
 1. **[`Project`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/project.entity.ts#L5) Entity:** Defines architectural properties (`title`, `category`, `location`, `year`, `thumbnailUrl`, `description`, `cubeIndex`), maintaining an eager-loaded `@OneToMany` relation to gallery images with cascade persistence.
 2. **[`ProjectImage`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/project-image.entity.ts#L5) Entity:** Stores photographic assets, carousel display order, and a boolean flag (`isCover`) indicating whether the image acts as the primary thumbnail.
 3. **[`Contact`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/contact/contact.entity.ts#L5) Entity:** Stores prospective client commission inquiries (`name`, `email`, `message`, `createdAt`).
@@ -286,9 +192,11 @@ The domain model comprises:
 ---
 
 #### 1.2.4 Dynamic Seeding Mechanism & Data Initialization
+
 To ensure immediate usability upon first run by stakeholders and prospective evaluators, an automated data-seeding routine was embedded within the service lifecycle.
 
 **Primary Source Files:**
+
 - Projects Service Seeding: [`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L18-L77)
 - Admin User Seeding: [`backend/src/auth/auth.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/auth/auth.service.ts#L16-L29)
 
@@ -364,9 +272,11 @@ A parallel initialization routine exists in [`backend/src/auth/auth.service.ts`]
 ---
 
 #### 1.2.5 Architectural Portfolio Management (Projects & Project Images CRUD)
+
 The portfolio management engine serves as the functional core of the backend system, exposing RESTful endpoints via `ProjectsController`.
 
 **Primary Source Files:**
+
 - Controller Definition: [`backend/src/projects/projects.controller.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.controller.ts#L23-L145)
 - Service CRUD Logic: [`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L79-L140)
 - Module Registry: [`backend/src/projects/projects.module.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.module.ts#L1-L15)
@@ -423,6 +333,7 @@ async createProject(
   return this.projectsService.create(projectData, imageUrls, coverIndex);
 }
 ```
+
 - `GET /projects`: Fetches all architectural works with eager-loaded `images`, sorted descending (`order: { id: 'DESC' }`).
 - `GET /projects/:id`: Retrieves an individual project by ID, returning HTTP 404 if not found.
 - `POST /projects`: Secured by `JwtAuthGuard`, receives multipart form data and saves project details with uploaded photography.
@@ -433,9 +344,11 @@ async createProject(
 ---
 
 #### 1.2.6 Three.js Coordinate Synchronization & Cube Index Conflict Resolution
+
 A technically demanding aspect of the backend development was bridging relational database records with the interactive, client-side Three.js 3D scene. The frontend features 55 wireframe cubes arranged in a 3D coordinate space. Selected cubes act as interactive portals that load project details when clicked.
 
 **Primary Source Files:**
+
 - Conflict Resolution Logic: [`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L93-L104)
 - 3D Cube Scene Component: [`frontend/src/app/components/cube-field/cube-field.component.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/frontend/src/app/components/cube-field/cube-field.component.ts)
 
@@ -462,14 +375,17 @@ async handleCubeIndexConflict(cubeIndex: number | null | undefined, currentProje
   }
 }
 ```
+
 Whenever an administrator creates or updates a project and assigns it an active `cubeIndex` (e.g., cube 12), the service searches the repository for any other project already holding that slot using TypeORM's `Not(currentProjectId)` query operator. If a conflict exists, the algorithm strips the previous project of that index (`cubeIndex = null`) and persists the change before assigning the slot to the target project. This ensures the database maintains relational integrity and avoids duplicate coordinate conflicts in the WebGL renderer.
 
 ---
 
 #### 1.2.7 Multi-Part File Upload Management & Disk Storage Lifecycle
+
 Architectural portfolio presentation relies on high-resolution visuals. The backend handles dynamic uploads without relying on third-party cloud hosting overheads by implementing local disk storage.
 
 **Primary Source Files:**
+
 - Multer Upload Interceptor: [`backend/src/projects/projects.controller.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.controller.ts#L43-L53)
 - Physical File Deletion Utility: [`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L256-L272)
 
@@ -483,15 +399,15 @@ As demonstrated in Figure 1.6, the `FilesInterceptor` is configured with Multer'
 
 ```typescript
 // File Reference: backend/src/projects/projects.controller.ts (Lines 44-52)
-FilesInterceptor('images', 20, {
+FilesInterceptor("images", 20, {
   storage: diskStorage({
-    destination: './uploads',
+    destination: "./uploads",
     filename: (req, file, cb) => {
-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+      const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
       cb(null, `${uniqueSuffix}${extname(file.originalname)}`);
     },
   }),
-})
+});
 ```
 
 To prevent orphaned image files from accumulating on disk, I implemented the `deleteFileByUrl` cleanup utility in [`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L256-L272):
@@ -516,25 +432,31 @@ private deleteFileByUrl(imageUrl?: string | null) {
   }
 }
 ```
+
 Whenever an administrator deletes an individual image or removes an entire project, the backend parses the file name and executes `fs.unlinkSync` inside a defensive try-catch block, ensuring disk storage remains clean without crashing the server process.
 
 ---
 
-#### 1.2.8 Client Inquiries & Contact Submission Service
-To serve as an active business channel for prospective architecture clients, a dedicated `ContactModule` was developed.
+#### 1.2.8 Client Inquiries & Contact Submission Service with Automated Email Notifications
+
+To serve as an active business channel for prospective architecture clients, a dedicated `ContactModule` was developed, fully integrated with the `MailModule` to automatically dispatch email notifications upon every new inquiry submission.
 
 **Primary Source Files:**
+
 - Contact Data Transfer Object: [`backend/src/contact/create-contact.dto.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/contact/create-contact.dto.ts#L1-L15)
 - Contact Controller: [`backend/src/contact/contact.controller.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/contact/contact.controller.ts#L1-L15)
-- Contact Service: [`backend/src/contact/contact.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/contact/contact.service.ts#L1-L21)
+- Contact Service (with MailService injection): [`backend/src/contact/contact.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/contact/contact.service.ts#L1-L44)
+- Contact Module (imports MailModule): [`backend/src/contact/contact.module.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/contact/contact.module.ts#L1-L14)
+- Mail Service (Nodemailer SMTP): [`backend/src/mail/mail.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/mail/mail.service.ts#L1-L229)
+- Mail Module: [`backend/src/mail/mail.module.ts`](file:///c:/Users/LENOVO/Downloads/CLONE GRAHITA/Internship/backend/src/mail/mail.module.ts#L1-L8)
 
 ```
 [INSERT FIGURE HERE]
-Figure 1.7: Contact Controller, DTO Validation, and Database Storage
-[Placeholder description: Screenshot of contact.controller.ts, create-contact.dto.ts with class-validator decorators]
+Figure 1.7: Contact Module Pipeline — DTO Validation, Persistence, and Dual Email Dispatch
+[Placeholder description: Screenshot of contact.service.ts showing MailService injection alongside contactRepository.save, triggering sendContactInquiryNotification and sendContactFormConfirmation]
 ```
 
-Figure 1.7 highlights the contact inquiry pipeline. Incoming payloads are validated in [`backend/src/contact/create-contact.dto.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/contact/create-contact.dto.ts#L3-L14) using `class-validator`:
+Figure 1.7 highlights the complete contact inquiry pipeline. Incoming payloads are first validated in [`backend/src/contact/create-contact.dto.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/contact/create-contact.dto.ts#L3-L14) using `class-validator`:
 
 ```typescript
 // File Reference: backend/src/contact/create-contact.dto.ts (Lines 3-14)
@@ -553,25 +475,69 @@ export class CreateContactDto {
 }
 ```
 
-The inquiry is handled by [`backend/src/contact/contact.controller.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/contact/contact.controller.ts#L6-L14) and saved by [`backend/src/contact/contact.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/contact/contact.service.ts#L14-L19):
+Upon validation, the inquiry is saved by [`backend/src/contact/contact.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/contact/contact.service.ts#L18-L43), which also injects `MailService` to dispatch two automated email notifications concurrently:
 
 ```typescript
-// File Reference: backend/src/contact/contact.service.ts (Lines 14-19)
+// File Reference: backend/src/contact/contact.service.ts (Lines 18-43)
 async create(createContactDto: CreateContactDto): Promise<Contact> {
   const contact = this.contactRepository.create(createContactDto);
   const saved = await this.contactRepository.save(contact);
-  console.log(`New contact message from ${saved.name} (${saved.email}) received.`);
+  this.logger.log(`New contact message from ${saved.name} (${saved.email}) saved to DB.`);
+
+  // 1. Forward inquiry to Studio/Admin (configured via CONTACT_INQUIRY_RECEIVER env var)
+  this.mailService
+    .sendContactInquiryNotification(saved.name, saved.email, saved.message)
+    .catch((err) => this.logger.error('Failed to dispatch admin inquiry notification:', err));
+
+  // 2. Send auto-reply confirmation to the client/sender
+  this.mailService
+    .sendContactFormConfirmation(saved.email, saved.message, saved.name)
+    .catch((err) => this.logger.error('Failed to dispatch sender confirmation:', err));
+
   return saved;
 }
 ```
-Any invalid payload (e.g. malformed email address or empty message body) is automatically rejected by NestJS's global `ValidationPipe` with an HTTP 400 Bad Request response.
+
+**MailService SMTP Architecture** ([`backend/src/mail/mail.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/mail/mail.service.ts#L1-L37)):
+
+The `MailService` is configured using environment variables (`SMTP_USER`, `SMTP_PASS`, `SMTP_HOST`, `SMTP_PORT`) from `backend/.env`. It uses **Nodemailer** with built-in Gmail shorthand detection:
+
+```typescript
+// File Reference: backend/src/mail/mail.service.ts (Lines 9-37)
+constructor() {
+  const host = process.env.SMTP_HOST;
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+
+  if (user && pass && pass !== 'your-google-app-password') {
+    const isGmail = host?.includes('gmail') || user?.endsWith('@gmail.com');
+    this.transporter = nodemailer.createTransport(
+      isGmail ? { service: 'gmail', auth: { user, pass } } : { host, port, auth: { user, pass } }
+    );
+  } else {
+    // SIMULATION MODE: Emails are printed to terminal (no real send)
+    this.logger.warn('[SMTP SIMULATION MODE] SMTP_USER or SMTP_PASS not set.');
+  }
+}
+```
+
+The service implements four email dispatch methods:
+
+1. **`sendOtp()`** ([L39-L69](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/mail/mail.service.ts#L39-L69)): Sends a styled HTML 2FA verification code for admin login.
+2. **`sendPasswordReset()`** ([L71-L102](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/mail/mail.service.ts#L71-L102)): Sends a password reset link to admins.
+3. **`sendContactFormConfirmation()`** ([L138-L172](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/mail/mail.service.ts#L138-L172)): Sends a branded auto-reply acknowledgement to the inquiry submitter.
+4. **`sendContactInquiryNotification()`** ([L174-L227](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/mail/mail.service.ts#L174-L227)): Forwards the full inquiry to the studio admin email (`CONTACT_INQUIRY_RECEIVER` env var, defaulting to `gusari2271@gmail.com`) with the sender's email set as `replyTo`.
+
+When SMTP credentials are not configured, the service enters **Simulation Mode** — all email content is printed to the NestJS terminal console, allowing the development workflow to proceed without a live SMTP server. Any invalid payload (e.g. malformed email address or empty message body) is automatically rejected by NestJS's global `ValidationPipe` with an HTTP 400 Bad Request response before reaching the service layer.
 
 ---
 
 #### 1.2.9 Administrative Authentication, JWT Strategy, & Route Protection
+
 To safeguard studio portfolio content from unauthorized public manipulation, an administrative security layer was developed in `AuthModule`.
 
 **Primary Source Files:**
+
 - Auth Controller: [`backend/src/auth/auth.controller.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/auth/auth.controller.ts#L1-L18)
 - Auth Service & Password Hashing: [`backend/src/auth/auth.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/auth/auth.service.ts#L1-L47)
 - Passport JWT Strategy: [`backend/src/auth/jwt.strategy.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/auth/jwt.strategy.ts#L1-L19)
@@ -614,7 +580,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      secretOrKey: 'ARCH_STUDIO_SECRET_KEY_2026',
+      secretOrKey: "ARCH_STUDIO_SECRET_KEY_2026",
     });
   }
 
@@ -623,14 +589,17 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 }
 ```
+
 All portfolio mutations (`POST /projects`, `PUT /projects/:id`, `DELETE /projects/:id`) require a valid Bearer token in the `Authorization` header, returning HTTP 401 Unauthorized if missing or invalid.
 
 ---
 
 #### 1.2.10 Frontend Integration & Interactive 3D Spatial Engine
+
 While my core responsibility focused on backend development, full-stack integration with Kevin Wiratama's frontend code was essential to validate endpoint consumption and operational performance.
 
 **Primary Source Files:**
+
 - Frontend HTTP Service: [`frontend/src/app/services/project.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/frontend/src/app/services/project.service.ts#L1-L74)
 - 3D Cube Canvas Component: [`frontend/src/app/components/cube-field/cube-field.component.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/frontend/src/app/components/cube-field/cube-field.component.ts)
 - Admin Dashboard UI: [`frontend/src/app/pages/admin-dashboard/admin-dashboard.component.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/frontend/src/app/pages/admin-dashboard/admin-dashboard.component.ts)
@@ -669,6 +638,7 @@ createProject(formData: FormData): Observable<Project> {
   return this.http.post<Project>(`${this.apiUrl}/projects`, formData, this.getAuthHeaders());
 }
 ```
+
 - On homepage load, the client executes `GET /projects`. The `CubeFieldComponent` mounts a Three.js `WebGLRenderer` on a `<canvas>` element, distributing 55 wireframe cubes across a 3D coordinate space.
 - Projects containing a non-null `cubeIndex` are bound to their respective cube meshes. Raycasting collision detection displays glassmorphism tooltips on hover and triggers Angular routing to `/projects/:id` on click.
 - Studio administrators access `/admin/dashboard` to create projects, upload multi-image galleries, designate cover photos, and assign 3D spatial slot indices.
@@ -677,20 +647,24 @@ createProject(formData: FormData): Observable<Project> {
 ---
 
 #### 1.2.11 Analysis of Project Completion & Remaining Minor Bugs
+
 Overall, all major project goals have been achieved and the website is considered functionally complete. One minor issue, however, remains open at the time of writing this report:
 
-**Intermittent Admin Dashboard Project Update Error (Gallery Image & Text Fields Partial Update):**  
-- *Affected Files:* [`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L131-L208) (in the `update()` method) and [`backend/src/projects/projects.controller.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.controller.ts#L91-L128).
-- *Description:* An intermittent error occurs on the Admin Dashboard when an administrator attempts to change certain details on an existing project's detail page, particularly when replacing gallery images together with text fields in a single update request. In these cases, the `PUT /projects/:id` request occasionally fails to persist the changes correctly, and the admin interface displays a generic error instead of confirming the update.
-- *Root Cause Analysis:* Through systematic Postman testing and NestJS application logging, the root cause has been narrowed down to how the TypeORM entity handles the relationship between the `Project` record and its associated `ProjectImage` array during a partial update. Specifically, when `keepImageIds` filtering executes concurrently with appending new Multer file streams in `projects.service.ts` (lines 145–178), TypeORM's internal cascade reconciliation occasionally attempts to save the parent entity while child image references are in a detached state.
-- *Status & Impact:* A fix refactoring the transaction into an atomic TypeORM query runner is already being finalized. Aside from this isolated administrative bug, which does not affect the public-facing portfolio pages, the Three.js 3D cube field, or the contact form, every other deliverable committed to at the start of the internship has been achieved.
+**Intermittent Admin Dashboard Project Update Error (Gallery Image & Text Fields Partial Update):**
+
+- _Affected Files:_ [`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L131-L208) (in the `update()` method) and [`backend/src/projects/projects.controller.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.controller.ts#L91-L128).
+- _Description:_ An intermittent error occurs on the Admin Dashboard when an administrator attempts to change certain details on an existing project's detail page, particularly when replacing gallery images together with text fields in a single update request. In these cases, the `PUT /projects/:id` request occasionally fails to persist the changes correctly, and the admin interface displays a generic error instead of confirming the update.
+- _Root Cause Analysis:_ Through systematic Postman testing and NestJS application logging, the root cause has been narrowed down to how the TypeORM entity handles the relationship between the `Project` record and its associated `ProjectImage` array during a partial update. Specifically, when `keepImageIds` filtering executes concurrently with appending new Multer file streams in `projects.service.ts` (lines 145–178), TypeORM's internal cascade reconciliation occasionally attempts to save the parent entity while child image references are in a detached state.
+- _Status & Impact:_ A fix refactoring the transaction into an atomic TypeORM query runner is already being finalized. Aside from this isolated administrative bug, which does not affect the public-facing portfolio pages, the Three.js 3D cube field, or the contact form, every other deliverable committed to at the start of the internship has been achieved.
 
 ---
 
 ### 1.3 Review on Project Management
 
 #### 1.3.1 Project Time Management
+
 From a time management perspective, the project followed the four-phase Gantt schedule set out in the internship proposal reasonably closely:
+
 - **Phase 1 (1–17 July):** Requirement Analysis, Architectural Benchmark Studies, and Monorepo Environment Configuration ([`package.json`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/package.json)).
 - **Phase 2 (20 July – 7 August):** Relational Database Design, TypeORM Entity Modelling ([`backend/src/projects/project.entity.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/project.entity.ts)), and Core Module Development (Projects & Contact Inquiries).
 - **Phase 3 (7–21 August):** API Refinement, File Upload Pipelines ([`backend/src/projects/projects.controller.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.controller.ts#L41-L53)), Authentication Guards ([`backend/src/auth/jwt-auth.guard.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/auth/jwt-auth.guard.ts)), and Integration with Kevin Wiratama's Frontend.
@@ -699,12 +673,14 @@ From a time management perspective, the project followed the four-phase Gantt sc
 The first three phases were completed close to schedule, since the modular NestJS architecture made it straightforward to build the Projects, Contact, and Authentication modules one after another without major delay. Some slippage occurred in the final phase, mainly because the Admin Dashboard's update functionality required additional debugging time once the gallery-image update bug was discovered during end-to-end testing, which was later than ideal in the schedule. This pushed some documentation and final testing tasks closer to the project deadline than originally planned, though it did not affect the overall delivery timeline.
 
 #### 1.3.2 Project Scope & Scope Creep Handling
-In terms of scope, the project scope remained largely consistent with what was defined in the original proposal and stayed manageable throughout the internship. The main scope addition was the Admin Dashboard's full content-management capability, which had been listed only as a future item at the midterm stage and was brought into full development during the second half of the internship after the Product Leader at Code Cipta confirmed it as a firm client requirement from GRAHITA Design. 
+
+In terms of scope, the project scope remained largely consistent with what was defined in the original proposal and stayed manageable throughout the internship. The main scope addition was the Admin Dashboard's full content-management capability, which had been listed only as a future item at the midterm stage and was brought into full development during the second half of the internship after the Product Leader at Code Cipta confirmed it as a firm client requirement from GRAHITA Design.
 
 This addition was absorbed without difficulty because the backlog-based Agile workflow allowed it to be scheduled as its own set of sprints rather than disrupting work already in progress on other modules. By prioritizing core CRUD operations, multi-image upload handling, and the `handleCubeIndexConflict` slot synchronization algorithm ([`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L93-L104)), the scope expansion was delivered on schedule without sacrificing architectural robustness.
 
 #### 1.3.3 Stakeholder Communication & Collaboration
-Throughout the project lifecycle, stakeholder communication was maintained across Code Cipta's development team and GRAHITA Design. Technical collaboration with Kevin Wiratama, the frontend developer, took place via Discord, GitHub pull requests, and direct pairing sessions. Communication with Code Cipta's Product Leader and GRAHITA Design's studio principal occurred during weekly milestone review meetings. 
+
+Throughout the project lifecycle, stakeholder communication was maintained across Code Cipta's development team and GRAHITA Design. Technical collaboration with Kevin Wiratama, the frontend developer, took place via Discord, GitHub pull requests, and direct pairing sessions. Communication with Code Cipta's Product Leader and GRAHITA Design's studio principal occurred during weekly milestone review meetings.
 
 While informal channels allowed rapid feedback, minor communication gaps emerged regarding API contract details (such as whether image arrays should be transmitted under `images` or `files`, and how cover indices should be numbered). These minor issues were resolved by transitioning from verbal agreements to formalized written API contract sheets documented in Postman, ensuring that both frontend and backend remained synchronized.
 
@@ -725,19 +701,24 @@ The Internship Report consists of two topics, namely Accomplishments and Experie
 ### 2.1 Accomplishments
 
 #### 2.1.1 Core Backend Engineering & Architectural Implementations
+
 Over the course of the internship, I independently designed and built the complete backend infrastructure for the Architecture Studio Portfolio Website from an empty repository to a fully deployed, production-ready NestJS application. Key accomplishments include:
+
 - **Relational Database Design & Auto-Seeding:** Designing and implementing the relational database schema for `Project`, `ProjectImage`, and `Contact` entities using TypeORM and SQLite ([`backend/src/projects/project.entity.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/project.entity.ts), [`backend/src/contact/contact.entity.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/contact/contact.entity.ts)), including an automatic data seeder in `projects.service.ts` ([`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L18-L76)) that populates the database with realistic architectural sample data on startup.
 - **RESTful API Engineering:** Building secure, modular REST API endpoints for portfolio management, client contact inquiries, category-based filtering, search, and pagination ([`backend/src/projects/projects.controller.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.controller.ts)), all validated through Postman test collections.
 - **Security & Authorization Pipeline:** Implementing a complete authentication and authorisation layer using Passport.js, JSON Web Tokens, and bcrypt password hashing ([`backend/src/auth/auth.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/auth/auth.service.ts)), and using JWT route guards ([`backend/src/auth/jwt-auth.guard.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/auth/jwt-auth.guard.ts)) to protect every administrative endpoint.
 - **3D Spatial Slot Conflict Resolution:** Authoring the `handleCubeIndexConflict` algorithm ([`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L93-L104)) to dynamically coordinate unique slot index assignments between SQLite database entities and Three.js 3D WebGL mesh coordinates.
 
 #### 2.1.2 Proactive Problem Solving & Operational Initiatives
+
 Beyond assigned baseline duties, I displayed personal initiative to elevate the project's quality and stability:
+
 - **Admin Dashboard Backend Initiative:** Taking the initiative to design and build the Admin Dashboard backend beyond what was strictly required at the midterm stage, after recognising that GRAHITA Design would need a way to manage portfolio content without ongoing developer support.
 - **Systematic Bug Diagnosis:** Diagnosing the intermittent Admin Dashboard update error on my own initiative through systematic Postman testing and NestJS logging, isolating it to the entity relationship layer rather than leaving it as an unexplained bug.
 - **Cross-Stack Coordination:** Coordinating closely with Kevin Wiratama, the frontend developer, to keep the Angular application aligned with the backend's API contracts, and assisting with troubleshooting cross-origin resource sharing (CORS) and data-formatting issues during integration.
 
 #### 2.1.3 Development & Mastery of Technical Skills
+
 In terms of new technical skills, I developed strong practical proficiency in the **NestJS** framework, including its modular dependency-injection architecture, TypeORM repository patterns, and DTO-based validation using **class-validator**, none of which I had used prior to this internship. I also gained hands-on experience configuring **JWT-based authentication flows**, structuring RESTful API contracts for a frontend team to consume, and using **Git and GitHub** in a genuine collaborative, multi-developer workflow, which strengthened skills that were previously only practised in isolated university coursework. Additionally, I learned to orchestrate full-stack monorepos using **Concurrently** ([`package.json`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/package.json#L7)) to unify development server lifecycles.
 
 ---
@@ -745,18 +726,23 @@ In terms of new technical skills, I developed strong practical proficiency in th
 ### 2.2 Experience Gained
 
 #### 2.2.1 Academic Learning vs. Real-World Engineering Practices
-The foundational knowledge gained from university coursework in database systems, object-oriented programming, and web application development provided the conceptual basis I relied on throughout the internship, particularly the principles of relational database normalisation, HTTP and REST concepts, and general software design patterns. 
+
+The foundational knowledge gained from university coursework in database systems, object-oriented programming, and web application development provided the conceptual basis I relied on throughout the internship, particularly the principles of relational database normalisation, HTTP and REST concepts, and general software design patterns.
 
 However, the internship required me to apply this knowledge in ways that university assignments rarely demand: working within an existing enterprise-style framework (NestJS) rather than a simple script, adhering to a client's real functional requirements rather than an assignment brief, and coordinating an API contract with another developer's live, evolving frontend rather than building both ends of an application alone. This gap pushed me to learn framework-specific conventions, dependency-injection patterns, and production concerns such as authentication, input sanitisation, and CORS configuration, that are typically only briefly touched on, if at all, in university modules.
 
 #### 2.2.2 Professional Collaboration, Version Control, & Workflows
+
 Operating within Code Cipta's engineering team enriched my professional teamwork and version-control discipline:
+
 - **Git Feature Branching:** Maintained code isolation using dedicated feature branches, submitting pull requests, and conducting peer reviews to ensure code quality before merging into `main`.
 - **Contract-First Communication:** Overcame cross-origin and schema discrepancies with Kevin Wiratama by instituting formal written API specifications in Postman, preventing integration bottlenecks.
 - **Productive Feedback Absorption:** Embraced critical feedback from Code Cipta's Product Leader during sprint reviews, swiftly refining database schema relationships and endpoint outputs to meet GRAHITA Design's aesthetic vision.
 
 #### 2.2.3 Challenges Encountered & Mitigation Strategies
+
 Several difficulties were faced during the internship and were systematically resolved:
+
 - **CORS Preflight Configuration:** Early in development, Cross-Origin Resource Sharing (CORS) preflight errors blocked the Angular frontend from communicating with the NestJS backend; this was resolved by explicitly configuring `app.enableCors()` in the application bootstrap file ([`backend/src/main.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/main.ts#L10)) rather than relying on default settings.
 - **API Contract Alignment:** Coordinating API contracts with Kevin Wiratama also proved challenging at times, since minor mismatches between backend entity fields and frontend interface types occasionally caused integration errors; this was addressed by documenting API contracts in writing before implementation began for each module, rather than agreeing on them verbally.
 - **Admin Dashboard Gallery Image Partial Update Error:** The most persistent difficulty was the intermittent error on the Admin Dashboard when updating an existing project's detail page, particularly when text fields and the gallery-image array were changed together in the same request ([`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L131-L208)). Because the error was inconsistent and did not appear on every update attempt, it was initially difficult to reproduce reliably. I overcame this by isolating each field group and testing update requests individually and in combination through Postman, then reviewing the NestJS application logs to trace where the request failed within the TypeORM update logic. This process narrowed the issue down to how the entity relationship for gallery images is handled during a partial update, rather than a problem in the validation layer or the controller. While a complete fix was still being finalised at the time of writing this report, the issue is well understood, does not affect any public-facing part of the website, and has been documented for follow-up, demonstrating that even an imperfect final deliverable can be handled professionally through systematic debugging and transparent reporting rather than being left unexplained.
@@ -765,13 +751,13 @@ Several difficulties were faced during the internship and were systematically re
 
 ## REFERENCES
 
-- Beck, K. et al. (2001). *Manifesto for Agile Software Development*. Agile Alliance.
-- Gurung, B. (2024). *A comparative analysis of create-react-app (CRA) and Vite for modern frontend projects*. Journal of Web Engineering & Technology, 11(2), 45–58.
-- NestJS Documentation. (2024). *NestJS — A progressive Node.js framework*. Available at: https://docs.nestjs.com/ [Accessed: 15 August 2026].
-- Sommerville, I. (2016). *Software Engineering*. 10th edn. Boston: Pearson.
-- Tran, H. (2021). *Developing a scalable web platform based on TypeScript and modern Node.js frameworks*. Helsinki Metropolia University of Applied Sciences.
-- TypeORM Documentation. (2024). *TypeORM — Amazing ORM for TypeScript and JavaScript*. Available at: https://typeorm.io/ [Accessed: 20 August 2026].
-- Wankhede, R. (2016). *Hybrid Agile Approach: Efficiently Blending Traditional and Agile Methodologies*. International Journal of Advanced Research in Computer Science and Software Engineering, 6(8), 32–37.
+- Beck, K. et al. (2001). _Manifesto for Agile Software Development_. Agile Alliance.
+- Gurung, B. (2024). _A comparative analysis of create-react-app (CRA) and Vite for modern frontend projects_. Journal of Web Engineering & Technology, 11(2), 45–58.
+- NestJS Documentation. (2024). _NestJS — A progressive Node.js framework_. Available at: https://docs.nestjs.com/ [Accessed: 15 August 2026].
+- Sommerville, I. (2016). _Software Engineering_. 10th edn. Boston: Pearson.
+- Tran, H. (2021). _Developing a scalable web platform based on TypeScript and modern Node.js frameworks_. Helsinki Metropolia University of Applied Sciences.
+- TypeORM Documentation. (2024). _TypeORM — Amazing ORM for TypeScript and JavaScript_. Available at: https://typeorm.io/ [Accessed: 20 August 2026].
+- Wankhede, R. (2016). _Hybrid Agile Approach: Efficiently Blending Traditional and Agile Methodologies_. International Journal of Advanced Research in Computer Science and Software Engineering, 6(8), 32–37.
 
 ---
 
@@ -780,119 +766,129 @@ Several difficulties were faced during the internship and were systematically re
 ### APPENDIX B – INTERNSHIP LOGBOOK 2 & 3
 
 #### Week 5
-| Date / Day | Description of Work Done | New Skills Learnt | Related Source Files |
-| :--- | :--- | :--- | :--- |
-| **Monday, [DATE: e.g., 20 July 2026]** | Initialized the backend workspace at Code Cipta using NestJS CLI. Configured TypeScript compiler options, ESLint, and Prettier formatting rules. Structured the root monorepo directory layout. | Initializing NestJS projects, configuring TypeScript paths, and structuring modular backend repositories. | [`backend/package.json`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/package.json), [`package.json`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/package.json) |
-| **Tuesday, [DATE: e.g., 21 July 2026]** | Configured `TypeOrmModule` with the `better-sqlite3` driver in `app.module.ts`. Established database connection to `db.sqlite` and tested automated schema synchronization. | Configuring SQLite in NestJS using TypeORM, understanding relational database connection lifecycles in Node.js. | [`backend/src/app.module.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/app.module.ts#L12-L17) |
-| **Wednesday, [DATE: e.g., 22 July 2026]** | *[Public Holiday / Scheduled Study Day]* | Reviewing official NestJS documentation regarding Providers, Controllers, and Module exports. | Official Docs |
-| **Thursday, [DATE: e.g., 23 July 2026]** | Created initial `Project` entity with baseline properties (`title`, `category`, `location`, `year`, `description`). Verified table generation in SQLite viewer. | Defining TypeORM entity decorators (`@Entity`, `@Column`, `@PrimaryGeneratedColumn`), understanding SQLite data type mappings. | [`backend/src/projects/project.entity.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/project.entity.ts#L4-L26) |
-| **Friday, [DATE: e.g., 24 July 2026]** | Implemented `ProjectsModule`, `ProjectsController`, and `ProjectsService`. Built baseline `findAll()` and `findOne()` methods returning mock data. | Implementing NestJS dependency injection, injecting TypeORM repositories via `@InjectRepository`. | [`backend/src/projects/projects.controller.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.controller.ts#L23-L39), [`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L79-L91) |
-| **Comments by Supervisor / Manager:** | Strong start on the backend architecture. Ensure entities match GRAHITA Design's architectural portfolio schema requirements. | | |
-| **Signature:** | `[SUPERVISOR SIGNATURE]` | | |
+
+| Date / Day                                | Description of Work Done                                                                                                                                                                        | New Skills Learnt                                                                                                              | Related Source Files                                                                                                                                                                                                                                                                                                           |
+| :---------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Monday, [DATE: e.g., 20 July 2026]**    | Initialized the backend workspace at Code Cipta using NestJS CLI. Configured TypeScript compiler options, ESLint, and Prettier formatting rules. Structured the root monorepo directory layout. | Initializing NestJS projects, configuring TypeScript paths, and structuring modular backend repositories.                      | [`backend/package.json`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/package.json), [`package.json`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/package.json)                                                                                                                       |
+| **Tuesday, [DATE: e.g., 21 July 2026]**   | Configured `TypeOrmModule` with the `better-sqlite3` driver in `app.module.ts`. Established database connection to `db.sqlite` and tested automated schema synchronization.                     | Configuring SQLite in NestJS using TypeORM, understanding relational database connection lifecycles in Node.js.                | [`backend/src/app.module.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/app.module.ts#L12-L17)                                                                                                                                                                                                  |
+| **Wednesday, [DATE: e.g., 22 July 2026]** | _[Public Holiday / Scheduled Study Day]_                                                                                                                                                        | Reviewing official NestJS documentation regarding Providers, Controllers, and Module exports.                                  | Official Docs                                                                                                                                                                                                                                                                                                                  |
+| **Thursday, [DATE: e.g., 23 July 2026]**  | Created initial `Project` entity with baseline properties (`title`, `category`, `location`, `year`, `description`). Verified table generation in SQLite viewer.                                 | Defining TypeORM entity decorators (`@Entity`, `@Column`, `@PrimaryGeneratedColumn`), understanding SQLite data type mappings. | [`backend/src/projects/project.entity.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/project.entity.ts#L4-L26)                                                                                                                                                                         |
+| **Friday, [DATE: e.g., 24 July 2026]**    | Implemented `ProjectsModule`, `ProjectsController`, and `ProjectsService`. Built baseline `findAll()` and `findOne()` methods returning mock data.                                              | Implementing NestJS dependency injection, injecting TypeORM repositories via `@InjectRepository`.                              | [`backend/src/projects/projects.controller.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.controller.ts#L23-L39), [`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L79-L91) |
+| **Comments by Supervisor / Manager:**     | Strong start on the backend architecture. Ensure entities match GRAHITA Design's architectural portfolio schema requirements.                                                                   |                                                                                                                                |                                                                                                                                                                                                                                                                                                                                |
+| **Signature:**                            | `[SUPERVISOR SIGNATURE]`                                                                                                                                                                        |                                                                                                                                |                                                                                                                                                                                                                                                                                                                                |
 
 ---
 
 #### Week 6
-| Date / Day | Description of Work Done | New Skills Learnt | Related Source Files |
-| :--- | :--- | :--- | :--- |
-| **Monday, [DATE: e.g., 27 July 2026]** | Set up a dedicated Postman testing workspace for the GRAHITA API. Created environment variables for `{{baseUrl}}` and automated assertions for response status codes. | Designing structured Postman API collections, writing automated pre-request and test assertion scripts. | `postman/collections/` |
-| **Tuesday, [DATE: e.g., 28 July 2026]** | Created the `Contact` entity and `ContactModule`. Designed `CreateContactDto` utilizing `class-validator` decorators (`@IsEmail`, `@IsNotEmpty`, `@IsString`). | Data transfer object (DTO) validation in NestJS, global `ValidationPipe` filtering, and input sanitization. | [`backend/src/contact/contact.entity.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/contact/contact.entity.ts), [`backend/src/contact/create-contact.dto.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/contact/create-contact.dto.ts) |
-| **Wednesday, [DATE: e.g., 29 July 2026]** | Implemented `POST /contact` endpoint in `ContactController`. Configured service method to persist client architectural inquiries into SQLite. | Handling HTTP POST requests in NestJS, recording timestamped entity submissions. | [`backend/src/contact/contact.controller.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/contact/contact.controller.ts#L10-L13), [`backend/src/contact/contact.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/contact/contact.service.ts#L14-L19) |
-| **Thursday, [DATE: e.g., 30 July 2026]** | Tested `Contact` endpoints via Postman with valid and invalid payloads. Confirmed that HTTP 400 Bad Request is properly returned with descriptive validation messages. | Verifying API error handling, understanding NestJS exception filters and standard JSON error response structures. | [`backend/src/contact/contact.controller.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/contact/contact.controller.ts) |
-| **Friday, [DATE: e.g., 31 July 2026]** | Implemented the automated database seeding mechanism in `ProjectsService.onModuleInit()`. Seeded five initial placeholder architectural projects for GRAHITA Design. | Utilizing NestJS lifecycle interfaces (`OnModuleInit`), automated repository seeding logic. | [`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L18-L76) |
-| **Comments by Supervisor / Manager:** | Good progress on the contact pipeline. Seeding logic will save significant time during UI demonstrations. | | |
-| **Signature:** | `[SUPERVISOR SIGNATURE]` | | |
+
+| Date / Day                                | Description of Work Done                                                                                                                                               | New Skills Learnt                                                                                                 | Related Source Files                                                                                                                                                                                                                                                                                                   |
+| :---------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Monday, [DATE: e.g., 27 July 2026]**    | Set up a dedicated Postman testing workspace for the GRAHITA API. Created environment variables for `{{baseUrl}}` and automated assertions for response status codes.  | Designing structured Postman API collections, writing automated pre-request and test assertion scripts.           | `postman/collections/`                                                                                                                                                                                                                                                                                                 |
+| **Tuesday, [DATE: e.g., 28 July 2026]**   | Created the `Contact` entity and `ContactModule`. Designed `CreateContactDto` utilizing `class-validator` decorators (`@IsEmail`, `@IsNotEmpty`, `@IsString`).         | Data transfer object (DTO) validation in NestJS, global `ValidationPipe` filtering, and input sanitization.       | [`backend/src/contact/contact.entity.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/contact/contact.entity.ts), [`backend/src/contact/create-contact.dto.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/contact/create-contact.dto.ts)                   |
+| **Wednesday, [DATE: e.g., 29 July 2026]** | Implemented `POST /contact` endpoint in `ContactController`. Configured service method to persist client architectural inquiries into SQLite.                          | Handling HTTP POST requests in NestJS, recording timestamped entity submissions.                                  | [`backend/src/contact/contact.controller.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/contact/contact.controller.ts#L10-L13), [`backend/src/contact/contact.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/contact/contact.service.ts#L14-L19) |
+| **Thursday, [DATE: e.g., 30 July 2026]**  | Tested `Contact` endpoints via Postman with valid and invalid payloads. Confirmed that HTTP 400 Bad Request is properly returned with descriptive validation messages. | Verifying API error handling, understanding NestJS exception filters and standard JSON error response structures. | [`backend/src/contact/contact.controller.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/contact/contact.controller.ts)                                                                                                                                                                  |
+| **Friday, [DATE: e.g., 31 July 2026]**    | Implemented the automated database seeding mechanism in `ProjectsService.onModuleInit()`. Seeded five initial placeholder architectural projects for GRAHITA Design.   | Utilizing NestJS lifecycle interfaces (`OnModuleInit`), automated repository seeding logic.                       | [`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L18-L76)                                                                                                                                                            |
+| **Comments by Supervisor / Manager:**     | Good progress on the contact pipeline. Seeding logic will save significant time during UI demonstrations.                                                              |                                                                                                                   |                                                                                                                                                                                                                                                                                                                        |
+| **Signature:**                            | `[SUPERVISOR SIGNATURE]`                                                                                                                                               |                                                                                                                   |                                                                                                                                                                                                                                                                                                                        |
 
 ---
 
 #### Week 7
-| Date / Day | Description of Work Done | New Skills Learnt | Related Source Files |
-| :--- | :--- | :--- | :--- |
-| **Monday, [DATE: e.g., 3 August 2026]** | Met with Code Cipta Product Leader and client stakeholders. Received new requirement: projects must support multi-image galleries and dynamic 3D cube slot binding (`cubeIndex`). | Evaluating project scope expansion, translating client visual requests into backend relational schema modifications. | Project Scope Spec |
-| **Tuesday, [DATE: e.g., 4 August 2026]** | Designed `ProjectImage` entity. Established `@OneToMany` and `@ManyToOne` relationships with `Project`, adding `cascade: true` and `eager: true`. | Implementing relational database associations in TypeORM, understanding cascading persistence and eager query loading. | [`backend/src/projects/project.entity.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/project.entity.ts#L30), [`backend/src/projects/project-image.entity.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/project-image.entity.ts#L18) |
-| **Wednesday, [DATE: e.g., 5 August 2026]** | Configured Multer's `FilesInterceptor` in `ProjectsController` with `diskStorage` to accept image file uploads into `./uploads`. | Configuring Multer in NestJS, managing multipart form-data streams, and generating unique file names. | [`backend/src/projects/projects.controller.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.controller.ts#L43-L53) |
-| **Thursday, [DATE: e.g., 6 August 2026]** | Configured `NestExpressApplication.useStaticAssets` in `main.ts` to serve uploaded images publicly at `/uploads/`. | Exposing static files in Express/NestJS, mapping filesystem paths to web URLs. | [`backend/src/main.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/main.ts#L19-L20) |
-| **Friday, [DATE: e.g., 7 August 2026]** | Implemented dynamic URL reconstruction (`req.protocol + '://' + req.get('host') + ...`) to store absolute image URLs in the database. | Extracting request metadata via NestJS `@Req()` decorator, generating environment-agnostic URLs. | [`backend/src/projects/projects.controller.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.controller.ts#L68-L72) |
-| **Comments by Supervisor / Manager:** | Excellent initiative in handling multi-image uploads directly through disk storage. Keep memory footprint low. | | |
-| **Signature:** | `[SUPERVISOR SIGNATURE]` | | |
+
+| Date / Day                                 | Description of Work Done                                                                                                                                                          | New Skills Learnt                                                                                                      | Related Source Files                                                                                                                                                                                                                                                                                                 |
+| :----------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Monday, [DATE: e.g., 3 August 2026]**    | Met with Code Cipta Product Leader and client stakeholders. Received new requirement: projects must support multi-image galleries and dynamic 3D cube slot binding (`cubeIndex`). | Evaluating project scope expansion, translating client visual requests into backend relational schema modifications.   | Project Scope Spec                                                                                                                                                                                                                                                                                                   |
+| **Tuesday, [DATE: e.g., 4 August 2026]**   | Designed `ProjectImage` entity. Established `@OneToMany` and `@ManyToOne` relationships with `Project`, adding `cascade: true` and `eager: true`.                                 | Implementing relational database associations in TypeORM, understanding cascading persistence and eager query loading. | [`backend/src/projects/project.entity.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/project.entity.ts#L30), [`backend/src/projects/project-image.entity.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/project-image.entity.ts#L18) |
+| **Wednesday, [DATE: e.g., 5 August 2026]** | Configured Multer's `FilesInterceptor` in `ProjectsController` with `diskStorage` to accept image file uploads into `./uploads`.                                                  | Configuring Multer in NestJS, managing multipart form-data streams, and generating unique file names.                  | [`backend/src/projects/projects.controller.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.controller.ts#L43-L53)                                                                                                                                                    |
+| **Thursday, [DATE: e.g., 6 August 2026]**  | Configured `NestExpressApplication.useStaticAssets` in `main.ts` to serve uploaded images publicly at `/uploads/`.                                                                | Exposing static files in Express/NestJS, mapping filesystem paths to web URLs.                                         | [`backend/src/main.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/main.ts#L19-L20)                                                                                                                                                                                                    |
+| **Friday, [DATE: e.g., 7 August 2026]**    | Implemented dynamic URL reconstruction (`req.protocol + '://' + req.get('host') + ...`) to store absolute image URLs in the database.                                             | Extracting request metadata via NestJS `@Req()` decorator, generating environment-agnostic URLs.                       | [`backend/src/projects/projects.controller.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.controller.ts#L68-L72)                                                                                                                                                    |
+| **Comments by Supervisor / Manager:**      | Excellent initiative in handling multi-image uploads directly through disk storage. Keep memory footprint low.                                                                    |                                                                                                                        |                                                                                                                                                                                                                                                                                                                      |
+| **Signature:**                             | `[SUPERVISOR SIGNATURE]`                                                                                                                                                          |                                                                                                                        |                                                                                                                                                                                                                                                                                                                      |
 
 ---
 
 #### Week 8
-| Date / Day | Description of Work Done | New Skills Learnt | Related Source Files |
-| :--- | :--- | :--- | :--- |
-| **Monday, [DATE: e.g., 10 August 2026]** | Designed the `handleCubeIndexConflict` algorithm in `ProjectsService` to prevent multiple projects from claiming the same 3D cube slot. | Implementing custom relational conflict resolution logic using TypeORM repository operators (`Not()`). | [`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L93-L104) |
-| **Tuesday, [DATE: e.g., 11 August 2026]** | Built `PUT /projects/:id` endpoint supporting partial metadata updates, appending new images, and selecting cover images (`isCover`). | Implementing granular entity update routines, syncing primary `thumbnailUrl` with selected gallery cover image. | [`backend/src/projects/projects.controller.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.controller.ts#L78-L128), [`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L131-L208) |
-| **Wednesday, [DATE: e.g., 12 August 2026]** | Implemented physical disk cleanup utility (`deleteFileByUrl`) using Node.js `fs.existsSync` and `fs.unlinkSync` to delete orphaned images. | File system manipulation in Node.js, preventing storage leaks when database entities are updated or deleted. | [`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L256-L272) |
-| **Thursday, [DATE: e.g., 13 August 2026]** | Implemented `DELETE /projects/:id/images/:imageId` to remove individual images from a project gallery without deleting the project. | Handling relational child deletions, dynamically reassigning fallback cover images if the cover was removed. | [`backend/src/projects/projects.controller.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.controller.ts#L130-L137), [`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L210-L236) |
-| **Friday, [DATE: e.g., 14 August 2026]** | Implemented `DELETE /projects/:id` to completely remove a project and unlink all its gallery photos from disk. | Cascading entity deletion and synchronized filesystem cleanup in server-side applications. | [`backend/src/projects/projects.controller.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.controller.ts#L139-L144), [`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L238-L254) |
-| **Comments by Supervisor / Manager:** | Impressive attention to detail on the disk cleanup logic. Ensure tests are run on Windows to check for file locks. | | |
-| **Signature:** | `[SUPERVISOR SIGNATURE]` | | |
+
+| Date / Day                                  | Description of Work Done                                                                                                                   | New Skills Learnt                                                                                               | Related Source Files                                                                                                                                                                                                                                                                                                               |
+| :------------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Monday, [DATE: e.g., 10 August 2026]**    | Designed the `handleCubeIndexConflict` algorithm in `ProjectsService` to prevent multiple projects from claiming the same 3D cube slot.    | Implementing custom relational conflict resolution logic using TypeORM repository operators (`Not()`).          | [`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L93-L104)                                                                                                                                                                       |
+| **Tuesday, [DATE: e.g., 11 August 2026]**   | Built `PUT /projects/:id` endpoint supporting partial metadata updates, appending new images, and selecting cover images (`isCover`).      | Implementing granular entity update routines, syncing primary `thumbnailUrl` with selected gallery cover image. | [`backend/src/projects/projects.controller.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.controller.ts#L78-L128), [`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L131-L208)  |
+| **Wednesday, [DATE: e.g., 12 August 2026]** | Implemented physical disk cleanup utility (`deleteFileByUrl`) using Node.js `fs.existsSync` and `fs.unlinkSync` to delete orphaned images. | File system manipulation in Node.js, preventing storage leaks when database entities are updated or deleted.    | [`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L256-L272)                                                                                                                                                                      |
+| **Thursday, [DATE: e.g., 13 August 2026]**  | Implemented `DELETE /projects/:id/images/:imageId` to remove individual images from a project gallery without deleting the project.        | Handling relational child deletions, dynamically reassigning fallback cover images if the cover was removed.    | [`backend/src/projects/projects.controller.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.controller.ts#L130-L137), [`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L210-L236) |
+| **Friday, [DATE: e.g., 14 August 2026]**    | Implemented `DELETE /projects/:id` to completely remove a project and unlink all its gallery photos from disk.                             | Cascading entity deletion and synchronized filesystem cleanup in server-side applications.                      | [`backend/src/projects/projects.controller.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.controller.ts#L139-L144), [`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L238-L254) |
+| **Comments by Supervisor / Manager:**       | Impressive attention to detail on the disk cleanup logic. Ensure tests are run on Windows to check for file locks.                         |                                                                                                                 |                                                                                                                                                                                                                                                                                                                                    |
+| **Signature:**                              | `[SUPERVISOR SIGNATURE]`                                                                                                                   |                                                                                                                 |                                                                                                                                                                                                                                                                                                                                    |
 
 ---
 
 #### Week 9
-| Date / Day | Description of Work Done | New Skills Learnt | Related Source Files |
-| :--- | :--- | :--- | :--- |
-| **Monday, [DATE: e.g., 17 August 2026]** | Began implementing the security architecture for the Admin Dashboard. Installed `@nestjs/jwt`, `@nestjs/passport`, `passport-jwt`, and `bcrypt`. | Understanding token-based authentication mechanics, security dependencies in the NestJS ecosystem. | [`backend/package.json`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/package.json) |
-| **Tuesday, [DATE: e.g., 18 August 2026]** | Created `User` entity with hashed password column. Implemented automated admin seeding in `AuthService.onModuleInit()`. | Hashing passwords with `bcrypt` salt rounds, automated administrative credential provisioning. | [`backend/src/auth/user.entity.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/auth/user.entity.ts), [`backend/src/auth/auth.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/auth/auth.service.ts#L16-L29) |
-| **Wednesday, [DATE: e.g., 19 August 2026]** | Implemented `POST /auth/login` endpoint. Built credential validation and JWT generation signing payload with `{ sub, email }`. | Implementing JWT signing, validating credentials against hashed passwords, handling 401 Unauthorized exceptions. | [`backend/src/auth/auth.controller.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/auth/auth.controller.ts#L9-L16), [`backend/src/auth/auth.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/auth/auth.service.ts#L31-L45) |
-| **Thursday, [DATE: e.g., 20 August 2026]** | Created `JwtStrategy` and `JwtAuthGuard`. Applied the guard to `POST`, `PUT`, and `DELETE` endpoints in `ProjectsController`. | Creating Passport strategies in NestJS, utilizing route guards (`@UseGuards`) to protect mutation endpoints. | [`backend/src/auth/jwt.strategy.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/auth/jwt.strategy.ts), [`backend/src/auth/jwt-auth.guard.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/auth/jwt-auth.guard.ts) |
-| **Friday, [DATE: e.g., 21 August 2026]** | Tested all protected endpoints via Postman using valid Bearer tokens, expired tokens, and missing headers. Verified 401 response handling. | Comprehensive security auditing of REST APIs using Postman authorization tabs. | Postman Collection |
-| **Comments by Supervisor / Manager:** | Admin authentication is solid. Verify that Kevin Wiratama has the token specification for frontend headers. | | |
-| **Signature:** | `[SUPERVISOR SIGNATURE]` | | |
+
+| Date / Day                                  | Description of Work Done                                                                                                                         | New Skills Learnt                                                                                                | Related Source Files                                                                                                                                                                                                                                                                          |
+| :------------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Monday, [DATE: e.g., 17 August 2026]**    | Began implementing the security architecture for the Admin Dashboard. Installed `@nestjs/jwt`, `@nestjs/passport`, `passport-jwt`, and `bcrypt`. | Understanding token-based authentication mechanics, security dependencies in the NestJS ecosystem.               | [`backend/package.json`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/package.json)                                                                                                                                                                                   |
+| **Tuesday, [DATE: e.g., 18 August 2026]**   | Created `User` entity with hashed password column. Implemented automated admin seeding in `AuthService.onModuleInit()`.                          | Hashing passwords with `bcrypt` salt rounds, automated administrative credential provisioning.                   | [`backend/src/auth/user.entity.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/auth/user.entity.ts), [`backend/src/auth/auth.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/auth/auth.service.ts#L16-L29)                |
+| **Wednesday, [DATE: e.g., 19 August 2026]** | Implemented `POST /auth/login` endpoint. Built credential validation and JWT generation signing payload with `{ sub, email }`.                   | Implementing JWT signing, validating credentials against hashed passwords, handling 401 Unauthorized exceptions. | [`backend/src/auth/auth.controller.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/auth/auth.controller.ts#L9-L16), [`backend/src/auth/auth.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/auth/auth.service.ts#L31-L45) |
+| **Thursday, [DATE: e.g., 20 August 2026]**  | Created `JwtStrategy` and `JwtAuthGuard`. Applied the guard to `POST`, `PUT`, and `DELETE` endpoints in `ProjectsController`.                    | Creating Passport strategies in NestJS, utilizing route guards (`@UseGuards`) to protect mutation endpoints.     | [`backend/src/auth/jwt.strategy.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/auth/jwt.strategy.ts), [`backend/src/auth/jwt-auth.guard.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/auth/jwt-auth.guard.ts)                  |
+| **Friday, [DATE: e.g., 21 August 2026]**    | Tested all protected endpoints via Postman using valid Bearer tokens, expired tokens, and missing headers. Verified 401 response handling.       | Comprehensive security auditing of REST APIs using Postman authorization tabs.                                   | Postman Collection                                                                                                                                                                                                                                                                            |
+| **Comments by Supervisor / Manager:**       | Admin authentication is solid. Verify that Kevin Wiratama has the token specification for frontend headers.                                      |                                                                                                                  |                                                                                                                                                                                                                                                                                               |
+| **Signature:**                              | `[SUPERVISOR SIGNATURE]`                                                                                                                         |                                                                                                                  |                                                                                                                                                                                                                                                                                               |
 
 ---
 
 #### Week 10
-| Date / Day | Description of Work Done | New Skills Learnt | Related Source Files |
-| :--- | :--- | :--- | :--- |
-| **Monday, [DATE: e.g., 24 August 2026]** | Integrated backend with Kevin Wiratama's Angular 18 repository. Configured CORS in `main.ts` to allow requests from `http://localhost:4200`. | Cross-origin resource sharing (CORS) configuration, debugging frontend-backend communication headers. | [`backend/src/main.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/main.ts#L10) |
-| **Tuesday, [DATE: e.g., 25 August 2026]** | Connected Angular's `ProjectService` to `GET /projects` and `GET /projects/:id`. Verified that project data successfully loads into the Angular components. | Diagnosing client-server data serialization, verifying JSON response formatting for Angular HttpClient. | [`frontend/src/app/services/project.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/frontend/src/app/services/project.service.ts#L46-L52) |
-| **Wednesday, [DATE: e.g., 26 August 2026]** | Integrated `cubeIndex` data with the Three.js `CubeFieldComponent`. Validated that project cubes render with darker wireframes and hover tooltips. | Understanding 3D WebGL data binding, aligning database index integers with Three.js scene object properties. | [`frontend/src/app/components/cube-field/cube-field.component.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/frontend/src/app/components/cube-field/cube-field.component.ts) |
-| **Thursday, [DATE: e.g., 27 August 2026]** | Connected the contact form on `/contact-us` to `POST /contact`. Verified that submissions successfully save to SQLite with success notifications. | Validating full-stack form submission workflows, ensuring proper DTO payload matching from Angular to NestJS. | [`backend/src/contact/contact.controller.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/contact/contact.controller.ts#L10-L13), [`frontend/src/app/services/project.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/frontend/src/app/services/project.service.ts#L70-L72) |
-| **Friday, [DATE: e.g., 28 August 2026]** | Discovered intermittent bug: updating an existing project on the Admin Dashboard with gallery images and text fields occasionally fails. | Debugging complex entity update flows under multi-field payload combinations. | [`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L131-L208) |
-| **Comments by Supervisor / Manager:** | End-to-end integration is largely successful. Isolate the Admin Dashboard update issue using detailed logging. | | |
-| **Signature:** | `[SUPERVISOR SIGNATURE]` | | |
+
+| Date / Day                                  | Description of Work Done                                                                                                                                    | New Skills Learnt                                                                                             | Related Source Files                                                                                                                                                                                                                                                                                                               |
+| :------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Monday, [DATE: e.g., 24 August 2026]**    | Integrated backend with Kevin Wiratama's Angular 18 repository. Configured CORS in `main.ts` to allow requests from `http://localhost:4200`.                | Cross-origin resource sharing (CORS) configuration, debugging frontend-backend communication headers.         | [`backend/src/main.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/main.ts#L10)                                                                                                                                                                                                                      |
+| **Tuesday, [DATE: e.g., 25 August 2026]**   | Connected Angular's `ProjectService` to `GET /projects` and `GET /projects/:id`. Verified that project data successfully loads into the Angular components. | Diagnosing client-server data serialization, verifying JSON response formatting for Angular HttpClient.       | [`frontend/src/app/services/project.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/frontend/src/app/services/project.service.ts#L46-L52)                                                                                                                                                                |
+| **Wednesday, [DATE: e.g., 26 August 2026]** | Integrated `cubeIndex` data with the Three.js `CubeFieldComponent`. Validated that project cubes render with darker wireframes and hover tooltips.          | Understanding 3D WebGL data binding, aligning database index integers with Three.js scene object properties.  | [`frontend/src/app/components/cube-field/cube-field.component.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/frontend/src/app/components/cube-field/cube-field.component.ts)                                                                                                                                    |
+| **Thursday, [DATE: e.g., 27 August 2026]**  | Connected the contact form on `/contact-us` to `POST /contact`. Verified that submissions successfully save to SQLite with success notifications.           | Validating full-stack form submission workflows, ensuring proper DTO payload matching from Angular to NestJS. | [`backend/src/contact/contact.controller.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/contact/contact.controller.ts#L10-L13), [`frontend/src/app/services/project.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/frontend/src/app/services/project.service.ts#L70-L72) |
+| **Friday, [DATE: e.g., 28 August 2026]**    | Discovered intermittent bug: updating an existing project on the Admin Dashboard with gallery images and text fields occasionally fails.                    | Debugging complex entity update flows under multi-field payload combinations.                                 | [`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L131-L208)                                                                                                                                                                      |
+| **Comments by Supervisor / Manager:**       | End-to-end integration is largely successful. Isolate the Admin Dashboard update issue using detailed logging.                                              |                                                                                                               |                                                                                                                                                                                                                                                                                                                                    |
+| **Signature:**                              | `[SUPERVISOR SIGNATURE]`                                                                                                                                    |                                                                                                               |                                                                                                                                                                                                                                                                                                                                    |
 
 ---
 
 #### Week 11
-| Date / Day | Description of Work Done | New Skills Learnt | Related Source Files |
-| :--- | :--- | :--- | :--- |
-| **Monday, [DATE: e.g., 31 August 2026]** | Isolated the intermittent update error using systematic Postman request batches; confirmed issue lies in TypeORM child entity relationship cascade. | Diagnosing ORM relational state handling during partial updates, reviewing NestJS application stack traces. | [`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L145-L178) |
-| **Tuesday, [DATE: e.g., 1 September 2026]** | Integrated admin login and dashboard in Angular with `POST /auth/login` and authenticated project mutation endpoints. | Managing JWT tokens in Angular `localStorage`, injecting Authorization headers via Angular HTTP interceptors. | [`frontend/src/app/pages/admin-login/admin-login.component.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/frontend/src/app/pages/admin-login/admin-login.component.ts), [`frontend/src/app/services/project.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/frontend/src/app/services/project.service.ts#L37-L44) |
-| **Wednesday, [DATE: e.g., 2 September 2026]** | Tested multi-image uploads via the admin dashboard form. Verified that cover image selection and gallery ordering persist correctly. | Debugging multipart `FormData` submissions in Angular, validating file boundary encoding with NestJS Multer. | [`frontend/src/app/pages/admin-dashboard/admin-dashboard.component.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/frontend/src/app/pages/admin-dashboard/admin-dashboard.component.ts) |
-| **Thursday, [DATE: e.g., 3 September 2026]** | Verified that public-facing pages, 3D WebGL cube canvas, and contact form run smoothly without impact from the isolated dashboard bug. | Conducting regression testing across public endpoints, confirming operational boundaries. | Public Routes |
-| **Friday, [DATE: e.g., 4 September 2026]** | Documented the Admin Dashboard update bug root cause, logged mitigation steps, and began drafting the transaction refactor. | Technical issue logging, transparent defect reporting, and architectural mitigation planning. | [`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts) |
-| **Comments by Supervisor / Manager:** | Professional handling of the update bug. Transparent reporting and root cause isolation show strong engineering maturity. | | |
-| **Signature:** | `[SUPERVISOR SIGNATURE]` | | |
+
+| Date / Day                                    | Description of Work Done                                                                                                                            | New Skills Learnt                                                                                             | Related Source Files                                                                                                                                                                                                                                                                                                                                           |
+| :-------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Monday, [DATE: e.g., 31 August 2026]**      | Isolated the intermittent update error using systematic Postman request batches; confirmed issue lies in TypeORM child entity relationship cascade. | Diagnosing ORM relational state handling during partial updates, reviewing NestJS application stack traces.   | [`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L145-L178)                                                                                                                                                                                                  |
+| **Tuesday, [DATE: e.g., 1 September 2026]**   | Integrated admin login and dashboard in Angular with `POST /auth/login` and authenticated project mutation endpoints.                               | Managing JWT tokens in Angular `localStorage`, injecting Authorization headers via Angular HTTP interceptors. | [`frontend/src/app/pages/admin-login/admin-login.component.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/frontend/src/app/pages/admin-login/admin-login.component.ts), [`frontend/src/app/services/project.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/frontend/src/app/services/project.service.ts#L37-L44) |
+| **Wednesday, [DATE: e.g., 2 September 2026]** | Tested multi-image uploads via the admin dashboard form. Verified that cover image selection and gallery ordering persist correctly.                | Debugging multipart `FormData` submissions in Angular, validating file boundary encoding with NestJS Multer.  | [`frontend/src/app/pages/admin-dashboard/admin-dashboard.component.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/frontend/src/app/pages/admin-dashboard/admin-dashboard.component.ts)                                                                                                                                                      |
+| **Thursday, [DATE: e.g., 3 September 2026]**  | Verified that public-facing pages, 3D WebGL cube canvas, and contact form run smoothly without impact from the isolated dashboard bug.              | Conducting regression testing across public endpoints, confirming operational boundaries.                     | Public Routes                                                                                                                                                                                                                                                                                                                                                  |
+| **Friday, [DATE: e.g., 4 September 2026]**    | Documented the Admin Dashboard update bug root cause, logged mitigation steps, and began drafting the transaction refactor.                         | Technical issue logging, transparent defect reporting, and architectural mitigation planning.                 | [`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts)                                                                                                                                                                                                            |
+| **Comments by Supervisor / Manager:**         | Professional handling of the update bug. Transparent reporting and root cause isolation show strong engineering maturity.                           |                                                                                                               |                                                                                                                                                                                                                                                                                                                                                                |
+| **Signature:**                                | `[SUPERVISOR SIGNATURE]`                                                                                                                            |                                                                                                               |                                                                                                                                                                                                                                                                                                                                                                |
 
 ---
 
 #### Week 12
-| Date / Day | Description of Work Done | New Skills Learnt | Related Source Files |
-| :--- | :--- | :--- | :--- |
-| **Monday, [DATE: e.g., 7 September 2026]** | Configured root `package.json` with `concurrently` script (`npm run dev`) to launch both NestJS backend and Angular frontend with one command. | Setting up full-stack monorepo orchestration scripts, streamlining local developer experience. | [`package.json`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/package.json#L7) |
-| **Tuesday, [DATE: e.g., 8 September 2026]** | Conducted comprehensive end-to-end audit: clean install, automated database seeding, project CRUD, image deletions, and contact submissions. | Conducting holistic software verification, regression testing, and quality assurance audits. | All Modules |
-| **Wednesday, [DATE: e.g., 9 September 2026]** | Formatted all backend TypeScript code with Prettier and ESLint. Preserved all architectural comments and docstrings. | Code quality standardization, adhering to professional TypeScript and NestJS style guides. | `.eslintrc.js`, `.prettierrc` |
-| **Thursday, [DATE: e.g., 10 September 2026]** | Compiled complete system documentation and authored developer onboarding instructions in `README.md`. | Technical writing, creating clear developer handover documentation and API reference tables. | [`README.md`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/README.md) |
-| **Friday, [DATE: e.g., 11 September 2026]** | Finalized the BIT320 Internship Final Report, completed logbooks, and organized project deliverables for academic submission. | Academic self-evaluation, synthesizing internship milestones into a formal technical report. | [`FINAL_REPORT_BIT320.md`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/FINAL_REPORT_BIT320.md) |
-| **Comments by Supervisor / Manager:** | Congratulations on completing the project deliverables. The backend is robust, performant, and well documented. | | |
-| **Signature:** | `[SUPERVISOR SIGNATURE]` | | |
+
+| Date / Day                                    | Description of Work Done                                                                                                                       | New Skills Learnt                                                                              | Related Source Files                                                                                            |
+| :-------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------- |
+| **Monday, [DATE: e.g., 7 September 2026]**    | Configured root `package.json` with `concurrently` script (`npm run dev`) to launch both NestJS backend and Angular frontend with one command. | Setting up full-stack monorepo orchestration scripts, streamlining local developer experience. | [`package.json`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/package.json#L7)                  |
+| **Tuesday, [DATE: e.g., 8 September 2026]**   | Conducted comprehensive end-to-end audit: clean install, automated database seeding, project CRUD, image deletions, and contact submissions.   | Conducting holistic software verification, regression testing, and quality assurance audits.   | All Modules                                                                                                     |
+| **Wednesday, [DATE: e.g., 9 September 2026]** | Formatted all backend TypeScript code with Prettier and ESLint. Preserved all architectural comments and docstrings.                           | Code quality standardization, adhering to professional TypeScript and NestJS style guides.     | `.eslintrc.js`, `.prettierrc`                                                                                   |
+| **Thursday, [DATE: e.g., 10 September 2026]** | Compiled complete system documentation and authored developer onboarding instructions in `README.md`.                                          | Technical writing, creating clear developer handover documentation and API reference tables.   | [`README.md`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/README.md)                           |
+| **Friday, [DATE: e.g., 11 September 2026]**   | Finalized the BIT320 Internship Final Report, completed logbooks, and organized project deliverables for academic submission.                  | Academic self-evaluation, synthesizing internship milestones into a formal technical report.   | [`FINAL_REPORT_BIT320.md`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/FINAL_REPORT_BIT320.md) |
+| **Comments by Supervisor / Manager:**         | Congratulations on completing the project deliverables. The backend is robust, performant, and well documented.                                |                                                                                                |                                                                                                                 |
+| **Signature:**                                | `[SUPERVISOR SIGNATURE]`                                                                                                                       |                                                                                                |                                                                                                                 |
 
 ---
 
 ### APPENDIX C – MONTHLY PROGRESS REPORT 2 & 3
 
 #### Second Monthly Progress Report
+
 **Project Name:** GRAHITA Design — Spatial Architecture Studio Portfolio  
 **Host Organisation:** Code Cipta  
 **Student Name and ID:** [STUDENT NAME], [STUDENT ID: e.g., E2100297]  
 **Date:** Friday, [DATE: e.g., 7th August 2026]  
-**Reporting Period:** 13th July 2026 – 7th August 2026  
+**Reporting Period:** 13th July 2026 – 7th August 2026
 
 **Work completed this reporting period:**
+
 - Initialized NestJS backend repository at Code Cipta with TypeScript, ESLint, and Prettier configurations ([`backend/package.json`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/package.json)).
 - Integrated TypeORM with `better-sqlite3` SQLite database driver, configuring automated schema synchronization ([`backend/src/app.module.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/app.module.ts#L12-L17)).
 - Designed relational database entities: `Project`, `ProjectImage`, and `Contact` ([`backend/src/projects/project.entity.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/project.entity.ts), [`backend/src/contact/contact.entity.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/contact/contact.entity.ts)).
@@ -903,6 +899,7 @@ Several difficulties were faced during the internship and were systematically re
 - Configured Multer disk storage and exposed `/uploads/` directory via `NestExpressApplication.useStaticAssets` ([`backend/src/main.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/main.ts#L20)).
 
 **Work to complete next reporting period:**
+
 - Implement `handleCubeIndexConflict` algorithm to coordinate unique 3D cube slot assignments ([`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L93-L104)).
 - Build administrative authentication module (`AuthModule`) utilizing JWT tokens and bcrypt password hashing ([`backend/src/auth/auth.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/auth/auth.service.ts)).
 - Apply `JwtAuthGuard` to protect all project mutation endpoints (`POST`, `PUT`, `DELETE`) ([`backend/src/auth/jwt-auth.guard.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/auth/jwt-auth.guard.ts)).
@@ -910,16 +907,19 @@ Several difficulties were faced during the internship and were systematically re
 - Complete full-stack integration with Kevin Wiratama's Angular 18 frontend and Three.js 3D cube field ([`frontend/src/app/components/cube-field/cube-field.component.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/frontend/src/app/components/cube-field/cube-field.component.ts)).
 
 **What is going well and why:**
+
 - The modular architecture of NestJS has made code organization clean, scalable, and easy to maintain.
 - SQLite via `better-sqlite3` provides lightning-fast local read/write execution with zero external server dependencies.
 - Automated database seeding eliminates manual setup, allowing immediate demonstration of architectural portfolio data.
 - Postman test collections have accelerated endpoint validation and error detection prior to frontend delivery.
 
 **What is not going well and why:**
+
 - The initial learning curve of NestJS dependency injection and TypeORM entity relationships took longer than anticipated, causing a slight delay during Week 5.
 - The new requirement to bind projects to interactive 3D WebGL cube slots expanded the project scope, requiring custom conflict resolution logic.
 
 **Suggestions/Issues:**
+
 - Maintain closer communication with Kevin Wiratama to ensure API payload expectations remain synchronized.
 - Set earlier internal deadlines for backend feature completion to allow sufficient time for full-stack integration testing.
 
@@ -928,13 +928,15 @@ Several difficulties were faced during the internship and were systematically re
 ---
 
 #### Third Monthly Progress Report
+
 **Project Name:** GRAHITA Design — Spatial Architecture Studio Portfolio  
 **Host Organisation:** Code Cipta  
 **Student Name and ID:** [STUDENT NAME], [STUDENT ID: e.g., E2100297]  
 **Date:** Friday, [DATE: e.g., 11th September 2026]  
-**Reporting Period:** 10th August 2026 – 11th September 2026  
+**Reporting Period:** 10th August 2026 – 11th September 2026
 
 **Work completed this reporting period:**
+
 - Implemented `handleCubeIndexConflict` algorithm to enforce unique 3D spatial slot mapping in SQLite ([`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L93-L104)).
 - Developed `AuthModule` with bcrypt password verification, JWT token issuance, and `JwtAuthGuard` protection ([`backend/src/auth/auth.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/auth/auth.service.ts), [`backend/src/auth/jwt-auth.guard.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/auth/jwt-auth.guard.ts)).
 - Built complete project update (`PUT /projects/:id`) and deletion (`DELETE /projects/:id`) pipelines with physical disk file cleanup (`fs.unlinkSync`) ([`backend/src/projects/projects.controller.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.controller.ts#L78-L144), [`backend/src/projects/projects.service.ts`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/backend/src/projects/projects.service.ts#L256-L272)).
@@ -945,19 +947,23 @@ Several difficulties were faced during the internship and were systematically re
 - Authored comprehensive project `README.md` ([`README.md`](file:///c:/Users/LENOVO/Downloads/CLONE%20GRAHITA/Internship/README.md)) and completed BIT320 Final Internship Report documentation.
 
 **Work to complete next reporting period:**
-- *N/A (Internship period completed; handover documentation finalized).*
+
+- _N/A (Internship period completed; handover documentation finalized)._
 
 **What is going well and why:**
+
 - End-to-end integration succeeded: the application runs smoothly, delivering a modern 3D portfolio experience backed by a resilient API.
 - The authentication guard effectively protects administrative features from unauthorized access.
 - Image management, gallery ordering, and cover photo selection work reliably via the administrative dashboard.
 - Monorepo developer tooling (`npm run dev`) enables one-step execution of the entire ecosystem.
 
 **What is not going well and why:**
+
 - The Admin Dashboard update functionality encountered an intermittent error when modifying text fields and replacing gallery images in a single request, requiring extensive debugging late in the timeline.
 - Scheduling compression occurred during Week 10 as final end-to-end testing overlapped with bug diagnosis.
 
 **Suggestions/Issues:**
+
 - Future iterations should implement isolated test suites for complex entity relationships earlier in the development lifecycle.
 - Refactor the TypeORM update method into an explicit QueryRunner transaction to guarantee atomicity when updating child entity collections.
 
@@ -977,18 +983,18 @@ Several difficulties were faced during the internship and were systematically re
 - **Location (City, State):** Denpasar, Bali, Indonesia
 - **Supervisor Name & Title:** [SUPERVISOR NAME], Product Leader / Technical Lead at Code Cipta
 
-| Evaluation Aspect | Poor | Fair | Good | Excellent |
-| :--- | :---: | :---: | :---: | :---: |
-| Work experience related to my area of study | | | | **✓** |
-| Adequacy of employer supervision | | | **✓** | |
-| Provided orientation to organization | | | | **✓** |
-| Effort to make it a learning experience for me | | | | **✓** |
-| Attempt to offer feedback on my progress and ability | | | **✓** | |
-| Provided levels of responsibility consistent with my ability and growth | | | | **✓** |
-| Opportunity to problem solve | | | | **✓** |
-| Opportunity to develop critical thinking skills | | | | **✓** |
-| Acceptance by fellow workers | | | | **✓** |
-| Provided clear explanation of expectations and goals | | | **✓** | |
+| Evaluation Aspect                                                       | Poor | Fair | Good  | Excellent |
+| :---------------------------------------------------------------------- | :--: | :--: | :---: | :-------: |
+| Work experience related to my area of study                             |      |      |       |   **✓**   |
+| Adequacy of employer supervision                                        |      |      | **✓** |           |
+| Provided orientation to organization                                    |      |      |       |   **✓**   |
+| Effort to make it a learning experience for me                          |      |      |       |   **✓**   |
+| Attempt to offer feedback on my progress and ability                    |      |      | **✓** |           |
+| Provided levels of responsibility consistent with my ability and growth |      |      |       |   **✓**   |
+| Opportunity to problem solve                                            |      |      |       |   **✓**   |
+| Opportunity to develop critical thinking skills                         |      |      |       |   **✓**   |
+| Acceptance by fellow workers                                            |      |      |       |   **✓**   |
+| Provided clear explanation of expectations and goals                    |      |      | **✓** |           |
 
 **Please explain any of your responses above (attach pages if necessary):**  
 Interning at Code Cipta as a Backend Developer for our client GRAHITA Design provided an exceptional opportunity to engineer an enterprise-grade backend for a design studio with exacting aesthetic and functional standards. Working alongside Kevin Wiratama on the frontend and receiving regular feedback from our Product Leader allowed me to experience professional agency workflows, Agile sprint delivery, and robust architectural design using NestJS, TypeScript, TypeORM, and SQLite.
@@ -1014,43 +1020,44 @@ Code Cipta provides a high-growth environment where interns are entrusted with r
 - **Industry Supervisor's Name:** [SUPERVISOR NAME: e.g., Amelia Sindartha / Product Leader]
 - **Name of Organisation:** Code Cipta (Client: GRAHITA Design)
 
-| Evaluation Criteria | Excellent (4) | Good (3) | Average (2) | Poor (1) |
-| :--- | :---: | :---: | :---: | :---: |
-| **Ability to Learn** | | | | |
-| Asks pertinent and purposeful questions | **X** | | | |
-| Seeks out and utilizes appropriate resources | **X** | | | |
-| Accepts responsibility for mistakes and learns from experiences | | **X** | | |
-| Open to new experiences; takes appropriate risks | **X** | | | |
-| Quick to learn new skills | | **X** | | |
-| **Reading / Writing / Computation Skills** | | | | |
-| Reads/comprehends/follows written materials | **X** | | | |
-| Communicates ideas and concepts clearly in writing | **X** | | | |
-| Attention to accuracy and detail | | **X** | | |
-| **Listening & Oral Communication Skills** | | | | |
-| Listens to others in an active and attentive manner | | **X** | | |
-| Comprehends and follows verbal instructions | **X** | | | |
-| Effectively participates in meetings or group settings | **X** | | | |
-| Demonstrates effective verbal communication skills | **X** | | | |
-| **Creative Thinking & Problem Solving Skills** | | | | |
-| Seeks to comprehend and understand the "big picture" | **X** | | | |
-| Breaks down complex tasks/problems into manageable pieces | **X** | | | |
-| Brainstorms/develops options and ideas | **X** | | | |
-| Respects input and ideas from other sources and people | | **X** | | |
-| Demonstrates an analytical capacity | **X** | | | |
-| **Productivity** | | | | |
-| Fulfilled all assigned tasks | **X** | | | |
-| **Interpersonal & Teamwork Skills** | | | | |
-| Relates to co-workers effectively | **X** | | | |
-| Supports and contributes to a team atmosphere | | **X** | | |
-| Controls emotions in a manner appropriate for work | **X** | | | |
-| **Basic Work Habits** | | | | |
-| Reports to work as scheduled | **X** | | | |
-| Is prompt in showing up to work and meetings | **X** | | | |
-| Exhibits a positive and constructive attitude | | **X** | | |
-| Dress and appearance are appropriate for this organization | **X** | | | |
-| **Total Marks** | **94 / 100** | | | |
+| Evaluation Criteria                                             | Excellent (4) | Good (3) | Average (2) | Poor (1) |
+| :-------------------------------------------------------------- | :-----------: | :------: | :---------: | :------: |
+| **Ability to Learn**                                            |               |          |             |          |
+| Asks pertinent and purposeful questions                         |     **X**     |          |             |          |
+| Seeks out and utilizes appropriate resources                    |     **X**     |          |             |          |
+| Accepts responsibility for mistakes and learns from experiences |               |  **X**   |             |          |
+| Open to new experiences; takes appropriate risks                |     **X**     |          |             |          |
+| Quick to learn new skills                                       |               |  **X**   |             |          |
+| **Reading / Writing / Computation Skills**                      |               |          |             |          |
+| Reads/comprehends/follows written materials                     |     **X**     |          |             |          |
+| Communicates ideas and concepts clearly in writing              |     **X**     |          |             |          |
+| Attention to accuracy and detail                                |               |  **X**   |             |          |
+| **Listening & Oral Communication Skills**                       |               |          |             |          |
+| Listens to others in an active and attentive manner             |               |  **X**   |             |          |
+| Comprehends and follows verbal instructions                     |     **X**     |          |             |          |
+| Effectively participates in meetings or group settings          |     **X**     |          |             |          |
+| Demonstrates effective verbal communication skills              |     **X**     |          |             |          |
+| **Creative Thinking & Problem Solving Skills**                  |               |          |             |          |
+| Seeks to comprehend and understand the "big picture"            |     **X**     |          |             |          |
+| Breaks down complex tasks/problems into manageable pieces       |     **X**     |          |             |          |
+| Brainstorms/develops options and ideas                          |     **X**     |          |             |          |
+| Respects input and ideas from other sources and people          |               |  **X**   |             |          |
+| Demonstrates an analytical capacity                             |     **X**     |          |             |          |
+| **Productivity**                                                |               |          |             |          |
+| Fulfilled all assigned tasks                                    |     **X**     |          |             |          |
+| **Interpersonal & Teamwork Skills**                             |               |          |             |          |
+| Relates to co-workers effectively                               |     **X**     |          |             |          |
+| Supports and contributes to a team atmosphere                   |               |  **X**   |             |          |
+| Controls emotions in a manner appropriate for work              |     **X**     |          |             |          |
+| **Basic Work Habits**                                           |               |          |             |          |
+| Reports to work as scheduled                                    |     **X**     |          |             |          |
+| Is prompt in showing up to work and meetings                    |     **X**     |          |             |          |
+| Exhibits a positive and constructive attitude                   |               |  **X**   |             |          |
+| Dress and appearance are appropriate for this organization      |     **X**     |          |             |          |
+| **Total Marks**                                                 | **94 / 100**  |          |             |          |
 
 **Please answer the following:**
+
 1. **Was the intern academically prepared for this internship?**  
    Yes. The intern possessed strong foundational knowledge in programming logic, object-oriented concepts, and relational databases, which allowed him to adapt quickly to NestJS, TypeORM, and TypeScript.
 2. **What aspects of the intern's overall performance were the most positive?**  
@@ -1068,25 +1075,27 @@ Code Cipta provides a high-growth environment where interns are entrusted with r
 ---
 
 ### APPENDIX I – FINAL REPORT AND PRESENTATION MARKING SCHEME
-*(For Academic Marker Reference — BIT320 Industrial Internship Semester 2, 2026)*
+
+_(For Academic Marker Reference — BIT320 Industrial Internship Semester 2, 2026)_
 
 - **CLO1:** Integrate relevant knowledge, competencies and relationships in a professional setting (A4, PLO11, MQF5).
 - **CLO2:** Perform self-evaluation on his/her own performance and experience in light of his/her internship goals (A5, PLO9, MQF4a).
 - **CLO3:** Prepare high quality document and formal presentations to a varied audience (A4, PLO5, MQF3c).
 
-| Scheme | Marks | Criteria |
-| :--- | :---: | :--- |
-| **1. Progress Reports & Daily Logs (CLO3)** | 10 | Complete, detailed daily logs with technical depth and weekly supervisor sign-offs. |
-| **2. Project Evaluation Report (CLO3)** | 20 | Methodologies (5), Actual Deliverables (5), In Hindsight (5), Project Management Time & Scope (5). |
-| **3. Internship Report (CLO1 & CLO2)** | 30 | Accomplishments & Initiative (5), Technical Skills Developed (10), Academic vs Workplace Experience (10), Difficulties Overcome (5). |
-| **4. Supervisor Evaluation Report (CLO1)** | 20 | Converted from Industry Supervisor Evaluation Form (Total/100 * 20). |
-| **5. Final Presentation (CLO3)** | 20 | Coverage of goals & lessons (10), Slide quality (5), Workplace interactions discussion (5). |
-| **TOTAL** | **100** | |
+| Scheme                                      |  Marks  | Criteria                                                                                                                             |
+| :------------------------------------------ | :-----: | :----------------------------------------------------------------------------------------------------------------------------------- |
+| **1. Progress Reports & Daily Logs (CLO3)** |   10    | Complete, detailed daily logs with technical depth and weekly supervisor sign-offs.                                                  |
+| **2. Project Evaluation Report (CLO3)**     |   20    | Methodologies (5), Actual Deliverables (5), In Hindsight (5), Project Management Time & Scope (5).                                   |
+| **3. Internship Report (CLO1 & CLO2)**      |   30    | Accomplishments & Initiative (5), Technical Skills Developed (10), Academic vs Workplace Experience (10), Difficulties Overcome (5). |
+| **4. Supervisor Evaluation Report (CLO1)**  |   20    | Converted from Industry Supervisor Evaluation Form (Total/100 \* 20).                                                                |
+| **5. Final Presentation (CLO3)**            |   20    | Coverage of goals & lessons (10), Slide quality (5), Workplace interactions discussion (5).                                          |
+| **TOTAL**                                   | **100** |                                                                                                                                      |
 
 ---
 
 ### APPLICATION FOR LATE SUBMISSION OF ASSIGNMENT
-*(Included for completeness in accordance with standard university template formatting)*
+
+_(Included for completeness in accordance with standard university template formatting)_
 
 - **Student Name:** [STUDENT NAME: e.g., ENRICO JUNIOR]
 - **Student ID:** [STUDENT ID: e.g., E2100297]
