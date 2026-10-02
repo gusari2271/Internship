@@ -60,10 +60,11 @@ export class MailService {
       } catch (err: any) {
         this.logger.error(`[EMAIL ERROR] Failed to send OTP email to ${to}: ${err.message}`);
       }
-    } else {
+    }
+
+    if (!this.transporter || process.env.NODE_ENV !== 'production') {
       console.log('\n========================================');
-      console.log(`[DEV MODE - OTP SIMULATION] 2FA OTP for ${to}: [ ${otp} ]`);
-      console.log('(To send real email, configure SMTP credentials in backend/.env)');
+      console.log(`[2FA OTP CODE] Verification code for ${to}: [ ${otp} ]`);
       console.log('========================================\n');
     }
   }
@@ -93,9 +94,11 @@ export class MailService {
       } catch (err: any) {
         this.logger.error(`[EMAIL ERROR] Failed to send password reset email to ${to}: ${err.message}`);
       }
-    } else {
+    }
+
+    if (!this.transporter || process.env.NODE_ENV !== 'production') {
       console.log('\n========================================');
-      console.log(`[DEV MODE - RESET LINK] Password Reset Link for ${to}:`);
+      console.log(`[PASSWORD RESET LINK] Reset URL for ${to}:`);
       console.log(resetLink);
       console.log('========================================\n');
     }

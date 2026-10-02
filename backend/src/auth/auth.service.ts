@@ -50,7 +50,7 @@ export class AuthService implements OnModuleInit {
       process.env.SUPERADMIN_PASSWORD || 'SuperAdminGrahita2026!';
 
     let superadmin = await this.userRepository.findOne({
-      where: { email: superadminEmail },
+      where: [{ email: superadminEmail }, { role: 'superadmin' }],
     });
 
     if (!superadmin) {
@@ -62,12 +62,39 @@ export class AuthService implements OnModuleInit {
         name: 'Master Superadmin',
         role: 'superadmin',
         isActive: true,
-        mustChangePassword: true,
+        mustChangePassword: false,
       });
       await this.userRepository.save(superadmin);
       this.logger.log(
-        `Superadmin account initialized: ${superadminEmail} / ${superadminPassword} (mustChangePassword: true)`,
+        `Superadmin account initialized: ${superadminEmail} / ${superadminPassword}`,
       );
+    } else {
+      // Auto-sync email and password from .env if changed
+      let needsSave = false;
+      if (superadmin.email !== superadminEmail) {
+        this.logger.log(`Syncing superadmin email: ${superadmin.email} -> ${superadminEmail}`);
+        superadmin.email = superadminEmail;
+        needsSave = true;
+      }
+      const isPasswordMatching =
+        superadmin.password &&
+        (await bcrypt.compare(superadminPassword, superadmin.password));
+      if (!isPasswordMatching) {
+        this.logger.log(
+          `Syncing superadmin password from .env for ${superadminEmail}...`,
+        );
+        superadmin.password = await bcrypt.hash(superadminPassword, 10);
+        superadmin.mustChangePassword = false;
+        needsSave = true;
+      }
+      if (needsSave) {
+        await this.userRepository.save(superadmin);
+        // Clear old failed attempts so admin is never locked out after changing credentials
+        await this.loginAttemptRepository.delete({ email: superadminEmail });
+        this.logger.log(
+          `Superadmin credentials successfully synchronized with .env!`,
+        );
+      }
     }
 
     // 2. Ensure existing admin@example.com is retained as admin
@@ -397,7 +424,11 @@ export class AuthService implements OnModuleInit {
       where: { resetPasswordTokenHash: tokenHash },
     });
 
-    if (!user || !user.resetPasswordExpiresAt || new Date() > user.resetPasswordExpiresAt) {
+    const expiresAt = user?.resetPasswordExpiresAt
+      ? new Date(user.resetPasswordExpiresAt)
+      : null;
+
+    if (!user || !expiresAt || isNaN(expiresAt.getTime()) || new Date() > expiresAt) {
       throw new BadRequestException('Password reset token is invalid or has expired.');
     }
 
@@ -408,8 +439,9 @@ export class AuthService implements OnModuleInit {
     user.mustChangePassword = false;
     await this.userRepository.save(user);
 
-    // Invalidate all active sessions
+    // Invalidate all active sessions & clear rate limit failed attempts
     await this.revokeAllUserTokens(user.id);
+    await this.loginAttemptRepository.delete({ email: user.email });
 
     await this.auditLogService.record('PASSWORD_RESET_COMPLETED', {
       adminId: user.id,
