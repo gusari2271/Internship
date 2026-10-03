@@ -712,10 +712,15 @@
     white-space: nowrap;
     vertical-align: middle;
 
-    // Fixed width for cover column
-    &:first-child {
+  }
+
+  // Fixed width for cover column only in catalog table
+  &:not(.admin-table):not(.log-table) {
+    th:first-child,
+    td:first-child {
       width: 80px;
       min-width: 80px;
+      max-width: 80px;
     }
   }
 
@@ -728,13 +733,6 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.04);
     color: #333333;
     vertical-align: middle;
-
-    // Fixed width for cover column td
-    &:first-child {
-      width: 80px;
-      min-width: 80px;
-      max-width: 80px;
-    }
   }
 
   // ★ KEY FIX: Thumbnail in Cover column — constrained to 64×64px
@@ -1041,10 +1039,17 @@
 
 /* Admin Table Styles */
 .admin-table {
+  th:first-child,
+  td:first-child {
+    width: auto;
+    min-width: 220px;
+    max-width: none;
+  }
+
   .admin-profile-cell {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 3px;
 
     .admin-name {
       font-weight: 600;
@@ -1063,7 +1068,7 @@
     font-weight: 700;
     letter-spacing: 0.05em;
     padding: 3px 8px;
-    border-radius: 4px;
+    border-radius: 10px;
     text-transform: uppercase;
 
     &.active {
@@ -1129,46 +1134,177 @@
 
 /* Activity Log Styles */
 .log-table {
-  .timestamp-cell {
-    font-family: monospace;
-    font-size: 11.5px;
-    color: #555555;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+
+  th {
+    padding: 14px 20px;
+    background: #fbfbfc;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.06);
+    color: #666666;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 11px;
     white-space: nowrap;
+
+    &.col-timestamp {
+      width: 160px;
+      min-width: 150px;
+    }
+
+    &.col-account {
+      width: 260px;
+      min-width: 230px;
+    }
+
+    &.col-action {
+      width: 220px;
+      min-width: 200px;
+    }
+
+    &.col-details {
+      min-width: 260px;
+    }
   }
 
-  .action-badge {
-    font-size: 10.5px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    padding: 3px 8px;
-    border-radius: 4px;
-    display: inline-block;
-    background: rgba(0, 0, 0, 0.05);
-    color: #333333;
+  td {
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    vertical-align: middle;
+  }
 
-    &.act-success {
-      background: rgba(40, 167, 69, 0.1);
-      color: #1e7e34;
+  // Ensure first-child column reset for timestamp
+  th:first-child,
+  td:first-child {
+    width: 160px !important;
+    min-width: 150px !important;
+    max-width: 190px !important;
+    padding-left: 20px;
+  }
+
+  .timestamp-cell {
+    .timestamp-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+
+      .ts-date {
+        font-size: 12.5px;
+        font-weight: 600;
+        color: #1e293b;
+        letter-spacing: 0.01em;
+        white-space: nowrap;
+      }
+
+      .ts-time {
+        font-size: 11px;
+        font-family: 'SF Mono', 'Roboto Mono', Menlo, Consolas, monospace;
+        color: #64748b;
+        white-space: nowrap;
+        letter-spacing: 0.03em;
+      }
     }
+  }
 
-    &.act-danger {
-      background: rgba(209, 26, 42, 0.1);
-      color: #d11a2a;
+  .account-cell {
+    min-width: 230px;
+
+    .account-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .account-avatar {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: #f1f5f9;
+        color: #334155;
+        font-size: 11px;
+        font-weight: 700;
+        flex-shrink: 0;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+
+        &.is-system {
+          background: #f8fafc;
+          color: #94a3b8;
+          font-size: 12px;
+        }
+      }
+
+      .account-email {
+        font-size: 12.5px;
+        font-weight: 500;
+        color: #0f172a;
+        word-break: break-all;
+
+        &.is-system {
+          color: #64748b;
+          font-style: italic;
+          font-weight: 400;
+        }
+      }
     }
+  }
 
-    &.act-warning {
-      background: rgba(255, 193, 7, 0.15);
-      color: #856404;
+  .action-cell {
+    min-width: 200px;
+    white-space: nowrap;
+
+    .action-badge {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 4px 10px;
+      border-radius: 5px;
+      display: inline-flex;
+      align-items: center;
+      background: #f1f5f9;
+      color: #334155;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      white-space: nowrap;
+
+      &.act-success {
+        background: #ecfdf5;
+        color: #047857;
+        border-color: #a7f3d0;
+      }
+
+      &.act-danger {
+        background: #fef2f2;
+        color: #b91c1c;
+        border-color: #fecaca;
+      }
+
+      &.act-warning {
+        background: #fffbeb;
+        color: #b45309;
+        border-color: #fde68a;
+      }
     }
   }
 
   .details-cell {
-    max-width: 320px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-size: 11.5px;
-    color: #666666;
+    min-width: 260px;
+    color: #475569;
+    font-size: 12px;
+    line-height: 1.45;
+
+    .details-text {
+      display: inline-block;
+      word-break: break-word;
+    }
+  }
+
+  .empty-cell {
+    padding: 36px 16px;
+    color: #94a3b8;
+    font-size: 13px;
   }
 }
 

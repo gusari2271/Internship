@@ -434,7 +434,10 @@
           <!-- Project Photos Management -->
           <div class="form-group photos-mgmt-group photos-preview-container">
             <!-- A. Existing Photos -->
-            <div *ngIf="existingImages.length > 0" class="existing-section photos-preview-section">
+            <div
+              *ngIf="existingImages.length > 0"
+              class="existing-section photos-preview-section"
+            >
               <div class="section-header-flex">
                 <label class="section-label"
                   >Existing Project Photos ({{
@@ -459,7 +462,12 @@
                     [src]="img.imageUrl"
                     alt="Existing project photo"
                     class="preview-thumbnail"
-                    style="width: 100%; height: 100%; object-fit: cover; display: block;"
+                    style="
+                      width: 100%;
+                      height: 100%;
+                      object-fit: cover;
+                      display: block;
+                    "
                   />
                   <span
                     *ngIf="
@@ -497,7 +505,9 @@
 
             <!-- B. Add New Photos -->
             <div class="new-section photos-preview-section">
-              <label for="photos" class="section-label">Add New Photos (Multiple)</label>
+              <label for="photos" class="section-label"
+                >Add New Photos (Multiple)</label
+              >
               <input
                 type="file"
                 id="photos"
@@ -526,7 +536,12 @@
                     [src]="file.previewUrl"
                     alt="New upload preview"
                     class="preview-thumbnail"
-                    style="width: 100%; height: 100%; object-fit: cover; display: block;"
+                    style="
+                      width: 100%;
+                      height: 100%;
+                      object-fit: cover;
+                      display: block;
+                    "
                   />
                   <span
                     *ngIf="
@@ -627,7 +642,10 @@
                 </td>
                 <td class="actions-cell">
                   <div class="actions-wrapper">
-                    <button (click)="editProject(project)" class="btn-table-edit">
+                    <button
+                      (click)="editProject(project)"
+                      class="btn-table-edit"
+                    >
                       Edit
                     </button>
                     <button
@@ -879,24 +897,32 @@
           <table class="project-table log-table">
             <thead>
               <tr>
-                <th>Timestamp</th>
-                <th>Admin Account</th>
-                <th>Action Event</th>
-                <th>IP Address</th>
-                <th>Audit Details</th>
+                <th class="col-timestamp">Timestamp</th>
+                <th class="col-account">Admin Account</th>
+                <th class="col-action">Action Event</th>
+                <!-- <th>IP Address</th> -->
+                <th class="col-details">Audit Details</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let log of auditLogs()">
                 <td class="timestamp-cell">
-                  {{ log.createdAt | date: "yyyy-MM-dd HH:mm:ss" }}
+                  <div class="timestamp-wrap">
+                    <span class="ts-date">{{ log.createdAt | date: "yyyy-MM-dd" }}</span>
+                    <span class="ts-time">{{ log.createdAt | date: "HH:mm:ss" }}</span>
+                  </div>
                 </td>
-                <td>
-                  <span class="font-medium">{{
-                    log.adminEmail || "System / Unauthenticated"
-                  }}</span>
+                <td class="account-cell">
+                  <div class="account-wrap">
+                    <span class="account-avatar" [class.is-system]="!log.adminEmail">
+                      {{ log.adminEmail ? log.adminEmail.charAt(0).toUpperCase() : '⚙' }}
+                    </span>
+                    <span class="account-email" [class.is-system]="!log.adminEmail">
+                      {{ log.adminEmail || "System / Unauthenticated" }}
+                    </span>
+                  </div>
                 </td>
-                <td>
+                <td class="action-cell">
                   <span
                     class="action-badge"
                     [class.act-success]="
@@ -917,15 +943,15 @@
                     {{ log.action }}
                   </span>
                 </td>
-                <td>
+                <!-- <td>
                   <code>{{ log.ipAddress || "127.0.0.1" }}</code>
-                </td>
+                </td> -->
                 <td class="details-cell">
-                  <span>{{ log.details || "-" }}</span>
+                  <span class="details-text">{{ log.details || "-" }}</span>
                 </td>
               </tr>
               <tr *ngIf="auditLogs().length === 0 && !isLoadingLogs()">
-                <td colspan="5" class="text-center empty-cell">
+                <td colspan="4" class="text-center empty-cell">
                   No activity logs recorded yet.
                 </td>
               </tr>
