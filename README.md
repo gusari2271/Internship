@@ -97,7 +97,7 @@ The application includes an enterprise-grade, hardened authentication and admini
 On initial startup, the backend automatically seeds a default master administrator:
 
 - **Email**: `superadmin@grahita.id` (customizable via `SUPERADMIN_EMAIL` in `.env`)
-- **Initial Password**: `SuperAdminGrahita2026!` (customizable via `SUPERADMIN_PASSWORD` in `.env`)
+- **Initial Password**: Configured via `SUPERADMIN_PASSWORD` in `.env` (refer to `.env.example`)
 - **Role**: `superadmin`
 - **First-Time Password Change**: Marked with `mustChangePassword: true`. Upon logging in for the first time, an obligatory modal will enforce changing this temporary password to a personal secure password before unlocking dashboard controls.
 

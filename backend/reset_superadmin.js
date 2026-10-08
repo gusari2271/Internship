@@ -7,12 +7,12 @@ const fs = require('fs');
 //  BACA NILAI DEFAULT DARI .env ATAU ARGUMEN COMMAND LINE
 //  Contoh penggunaan:
 //    node reset_superadmin.js
-//    node reset_superadmin.js dolongkatanya@gmail.com SuperAdmin2026
+//    node reset_superadmin.js admin@example.com <NewPassword>
 // ============================================================
 
 const envPath = path.join(__dirname, '.env');
-let envEmail = 'dolongkatanya@gmail.com';
-let envPassword = 'SuperAdmin2026';
+let envEmail = 'superadmin@grahita.id';
+let envPassword = '';
 
 if (fs.existsSync(envPath)) {
   const content = fs.readFileSync(envPath, 'utf8');
@@ -24,6 +24,12 @@ if (fs.existsSync(envPath)) {
 
 const NEW_EMAIL = process.argv[2] || envEmail;
 const NEW_PASSWORD = process.argv[3] || envPassword;
+
+if (!NEW_PASSWORD) {
+  console.error('❌ Password tidak ditemukan di .env (SUPERADMIN_PASSWORD) dan tidak ada argumen password.');
+  console.log('   Gunakan: node reset_superadmin.js <email> <password>');
+  process.exit(1);
+}
 
 async function main() {
   const db = new Database(path.join(__dirname, 'db.sqlite'));

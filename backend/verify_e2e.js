@@ -30,10 +30,19 @@ async function main() {
   const superadmin = db.prepare("SELECT email FROM users WHERE role = 'superadmin' LIMIT 1").get();
   db.close();
 
-  const email = superadmin?.email;
-  const password = 'SuperAdmin2026'; // must match NEW_PASSWORD in reset_superadmin.js
+  const fs = require('fs');
+  const envPath = path.join(__dirname, '.env');
+  let envPassword = '';
+  if (fs.existsSync(envPath)) {
+    const content = fs.readFileSync(envPath, 'utf8');
+    const passMatch = content.match(/SUPERADMIN_PASSWORD\s*=\s*(.+)/);
+    if (passMatch && passMatch[1]) envPassword = passMatch[1].trim();
+  }
 
-  console.log(`Testing with: ${email} / ${password}`);
+  const email = superadmin?.email;
+  const password = process.env.SUPERADMIN_PASSWORD || process.argv[2] || envPassword;
+
+  console.log(`Testing with email: ${email}`);
 
   // Step 1: Login
   const loginRes = await request('POST', '/auth/login', { email, password });

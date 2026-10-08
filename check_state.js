@@ -15,6 +15,6 @@ if (u) {
 }
 
 db.close();
-console.log('\nCredentials to use:');
+console.log('\nSuperadmin Status:');
 console.log('  Email   :', u?.email);
-console.log('  Password: SuperAdmin2026  (as set in reset_superadmin.js)');
+console.log('  Password: [Configured via SUPERADMIN_PASSWORD in backend/.env]');

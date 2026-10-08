@@ -47,7 +47,8 @@ export class AuthService implements OnModuleInit {
       process.env.SUPERADMIN_EMAIL || 'superadmin@grahita.id'
     ).toLowerCase();
     const superadminPassword =
-      process.env.SUPERADMIN_PASSWORD || 'SuperAdminGrahita2026!';
+      process.env.SUPERADMIN_PASSWORD ||
+      crypto.randomBytes(16).toString('hex');
 
     let superadmin = await this.userRepository.findOne({
       where: [{ email: superadminEmail }, { role: 'superadmin' }],
@@ -66,9 +67,9 @@ export class AuthService implements OnModuleInit {
       });
       await this.userRepository.save(superadmin);
       this.logger.log(
-        `Superadmin account initialized: ${superadminEmail} / ${superadminPassword}`,
+        `Superadmin account initialized: ${superadminEmail}`,
       );
-    } else {
+    } else if (process.env.SUPERADMIN_PASSWORD) {
       // Auto-sync email and password from .env if changed
       let needsSave = false;
       if (superadmin.email !== superadminEmail) {
@@ -97,13 +98,17 @@ export class AuthService implements OnModuleInit {
       }
     }
 
-    // 2. Ensure existing admin@example.com is retained as admin
-    const defaultAdminEmail = 'admin@example.com';
+    // 2. Ensure existing default sub-admin is retained if configured
+    const defaultAdminEmail =
+      process.env.DEFAULT_ADMIN_EMAIL || 'admin@example.com';
     let defaultAdmin = await this.userRepository.findOne({
       where: { email: defaultAdminEmail },
     });
     if (!defaultAdmin) {
-      const hashedPassword = await bcrypt.hash('password123', 10);
+      const defaultAdminPassword =
+        process.env.DEFAULT_ADMIN_PASSWORD ||
+        crypto.randomBytes(16).toString('hex');
+      const hashedPassword = await bcrypt.hash(defaultAdminPassword, 10);
       defaultAdmin = this.userRepository.create({
         email: defaultAdminEmail,
         password: hashedPassword,
@@ -113,7 +118,7 @@ export class AuthService implements OnModuleInit {
         mustChangePassword: false,
       });
       await this.userRepository.save(defaultAdmin);
-      this.logger.log('Default sub-admin created: admin@example.com');
+      this.logger.log(`Default sub-admin created: ${defaultAdminEmail}`);
     }
   }
 
